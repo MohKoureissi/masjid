@@ -42,7 +42,23 @@ const routes: Routes = [
   {
     path: 'player',
     loadChildren: () => import('./player/player.module').then( m => m.PlayerPageModule)
+  },  {
+    path: 'coran-display',
+    loadChildren: () => import('./coran-display/coran-display.module').then( m => m.CoranDisplayPageModule)
   },
+  {
+    path: 'list-coran',
+    loadChildren: () => import('./list-coran/list-coran.module').then( m => m.ListCoranPageModule)
+  },
+  {
+    path: 'p-player',
+    loadChildren: () => import('./p-player/p-player.module').then( m => m.PPlayerPageModule)
+  },
+  {
+    path: 'list-preche',
+    loadChildren: () => import('./list-preche/list-preche.module').then( m => m.ListPrechePageModule)
+  },
+
 ];
 @NgModule({
   imports: [

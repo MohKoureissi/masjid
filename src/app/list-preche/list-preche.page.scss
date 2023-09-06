@@ -1,10 +1,7 @@
 .container{
-  width: 96%;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: #008000;
+    width: 96%;
+    margin: auto;
+    margin-top: 25px;
   }
 
   .container ion-card {
@@ -24,44 +21,48 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    height: 16vh;
+    height: 30vh;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: flex-end;;
     color: #FFF;
     border-radius: 0px 0px 40px 40px;
     background-color: #2C6632;
-    padding: 20px;
   }
   ion-card-content h2{
     font-weight: bold;
     color: #000;
-    
+    margin-bottom: 10px;
   }
-  .player-card{
-    height: 280px;
-    width: 280px;
+  .radio-card{
+    display: flex;
+    justify-content: space-between;
     padding: 10px 20px;
-    background-size: cover;
+    align-items: center;
   }
   .container ion-card{
     height: initial;
     border-radius: 30px;
     border: 1px solid #ddd;
-    margin: 5px;
   }
   ion-card .text{
     flex-grow: 1;
     text-align: left;
     padding-left: 10px;
+    display: flex;
+    align-items: center;
+    color: #2C6632;
+  }
+  ion-card .text span{
+    margin-right: 5px;
   }
  .frequence{
     text-decoration: none;
     color: #008000;
   }
   .card-content-ios p {
-    font-size: 30px;
+    font-size: 10px;
     text-align: right;
     position: absolute;
     bottom: 0px;
@@ -75,30 +76,16 @@
 .thumb ion-thumbnail img{
     border-radius: 50%;
 }
-
-h2,h4{
-  margin-bottom: 0px;
+.thumb h2{
+    margin-bottom: 10px;
 }
-.container p{
-  display: flex;
-  justify-content: space-around;
-  flex-direction: row;
-  width: 100%;
-  align-items: center;
+.thumb{
+    position: relative;
 }
-.controls ion-icon{
-  width: 50px;
-  height: 50px;
-  background-color: #2C6632;
-  border-radius: 50%;
-  color: #FFF;
-  padding: 5px;
-}
-.controls .play{
-  width: 80px;
-  height: 80px;
-}
-.controls ion-icon .icon-inner{
-  width: 60%;
-  height: 60%;
+.thumb span {
+    position: absolute;
+    left: 40%;
+    TOP: 30%;
+    font-weight: bold;
+    font-size: 23px;
 }

@@ -9,29 +9,19 @@
 <ion-content [fullscreen]="true">
     <div class="parallax-img">  
   <h1><ion-icon name="chevron-back-outline"></ion-icon></h1>
-   <h1><ion-icon name="musical-notes-outline"></ion-icon></h1>
+   <h1>Al-Fatiha</h1>
    <h1><ion-icon name="volume-mute-outline"></ion-icon></h1>
   </div>
       <div class="container">
-        <h1>Al Quran</h1>
         <ion-card>
           <ion-card-content class="player-card" [style.background-image]=
           "'url(../../assets/illustrations/coran.jpg)'">
           </ion-card-content>
         </ion-card>
-        <h4>الفاتحة</h4>
-        <h4>Al-Fatiha</h4>
-        <h6 style="color: black;">Prologue</h6>
-        <p>
-          <ion-icon name="download-outline"></ion-icon>
-          <ion-icon routerLink="/coran-display" name="book-outline"></ion-icon>
-          <ion-icon  routerLink="/list-coran" name="musical-note-outline"></ion-icon>
-        </p>
-        <ion-progress-bar [value]=""></ion-progress-bar>
+        
         <p class="controls">
-          <ion-icon  name="play-back-outline"></ion-icon>
           <ion-icon class="play" name="play-outline"></ion-icon>
-          <ion-icon name="play-forward-outline"></ion-icon>
+          <ion-progress-bar class="progress" [value]="0.5" color="success"></ion-progress-bar>
         </p>
       </div>
 </ion-content>
