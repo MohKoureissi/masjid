@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 @Injectable({
   providedIn: 'root'
@@ -6,4 +7,20 @@ import { Injectable } from '@angular/core';
 export class UserService {
 
   constructor() { }
+
+  register(email:string, password:string) {
+    const auth = getAuth();
+    createUserWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    // Signed in
+    const user = userCredential.user;
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // ..
+  });
+  }
+
 }
