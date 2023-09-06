@@ -1,0 +1,44 @@
+.container{
+    text-align: center;
+    margin-top: 30px
+}
+.logo{
+width: 130px;
+height: 112px;
+flex-shrink: 0;
+// margin-left: 35%;
+margin: auto;
+margin-top: 30px;
+margin-top: 30px
+}
+h1{
+
+color: #000;
+text-align: center;
+font-family: Inter;
+font-size: 27px;
+font-style: normal;
+font-weight: 700;
+line-height: 130%; /* 35.1px */
+letter-spacing: -0.27px;
+}
+span{
+    color: #2C6632;
+}
+.titre{
+    
+    margin-bottom: 20px
+}
+
+.ipt{
+    width: 80%;
+    height: 40px;
+    margin-bottom: 20px;
+    border-radius: 20PX;
+    background-color: #7f747410;
+}
+
+.formctn{
+    margin-bottom: 50%;
+    margin-bottom: 50px
+}
