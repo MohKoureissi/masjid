@@ -58,6 +58,10 @@ const routes: Routes = [
     path: 'list-preche',
     loadChildren: () => import('./list-preche/list-preche.module').then( m => m.ListPrechePageModule)
   },
+  {
+    path: 'edit-mosquee',
+    loadChildren: () => import('./edit-mosquee/edit-mosquee.module').then( m => m.EditMosqueePageModule)
+  },
 
 ];
 @NgModule({
