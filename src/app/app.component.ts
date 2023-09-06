@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
     //   location: 'Emplacement de la mosquée',
     //   quartier: 'Quartier de la mosquée',
     // };
-   
+
   //  this.userService.loginUser('ayaya6436@gmail.com','0987654');
   //  this.userService.logoutUser();
   // this.userService.forgotPassword('ayaya6436@gmail.com');
