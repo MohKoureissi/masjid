@@ -15,17 +15,17 @@ export class AppComponent implements OnInit {
 
   constructor(private MosqueService:MosqueService, private UserService:UserService) {}
   ngOnInit(): void {
-    const mosque: Mosque = {
-      id:"njs",
-      name: 'Nom de la mosquée',
-      imanName: 'Nom de l\'iman',
-      description: 'Description de la mosquée',
-      donation: 'Informations sur les dons',
-      location: 'Emplacement de la mosquée',
-      quartier: 'Quartier de la mosquée',
-    };
-    this.UserService.subscribeToMosque("",mosque)
-   this.UserService.loginUser('ayaya6436@gmail.com','0987654')
+    // const mosque: Mosque = {
+    //   id:null,
+    //   name: 'Nom de la mosquée',
+    //   imanName: 'Nom de l\'iman',
+    //   description: 'Description de la mosquée',
+    //   donation: 'Informations sur les dons',
+    //   location: 'Emplacement de la mosquée',
+    //   quartier: 'Quartier de la mosquée',
+    // };
+    // this.UserService.abonneMosque("PtLvGxAOJl2fWzfTEMCT","5wAxEAuQ2uUkwGBBwz6C")
+  //  this.UserService.loginUser('ayaya6436@gmail.com','0987654')
   //  this.userService.loginUser('ayaya6436@gmail.com','0987654');
   //  this.userService.logoutUser();
   // this.userService.forgotPassword('ayaya6436@gmail.com');

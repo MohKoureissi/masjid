@@ -155,74 +155,69 @@ signInWithPopup(auth, provider)
   //   });
   // }
   //abonnement user a mosque
-  async subscribeToMosque(userId: string, mosque: Mosque): Promise<void> {
+  async abonneMosque(userId: string, mosqueId: string): Promise<void> {
     try {
       const db = getFirestore();
       const userDocRef = doc(db, 'users', userId);
 
-      // Vérifiez si l'utilisateur existe dans la base de données
+
+      // Récupérer les données de l'utilisateur
       const userSnap = await getDoc(userDocRef);
 
       if (userSnap.exists()) {
-        // L'utilisateur existe, récupérez ses données
-        const userData: Users = userSnap.data() as Users;
+        const userData: any = userSnap.data();
 
-        // Vérifiez si l'utilisateur est déjà abonné à cette mosquée
-        const isAlreadySubscribed = userData.subscribedMosques.some(
-          (m) => m.id === mosque.id
-        );
+        // Vérifier si l'utilisateur est déjà abonné à la mosquée
+        if (!userData.mosques.includes(mosqueId)) {
+          // Si l'utilisateur n'est pas déjà abonné, ajoutez l'ID de la mosquée à son tableau d'abonnements
+          userData.mosques.push(mosqueId);
 
-        if (!isAlreadySubscribed) {
-          // Si l'utilisateur n'est pas déjà abonné, ajoutez la mosquée à sa liste d'abonnements
-          userData.subscribedMosques.push(mosque);
-
-          // Mettez à jour les données de l'utilisateur dans la base de données
+          // Mettez à jour le document de l'utilisateur dans Firestore
           await setDoc(userDocRef, userData);
 
-          console.log(`L'utilisateur ${userId} s'est abonné à la mosquée ${mosque.name}`);
+          console.log(`L'utilisateur ${userId} s'est abonné à la mosquée ${mosqueId}`);
         } else {
-          console.log(`L'utilisateur ${userId} est déjà abonné à la mosquée ${mosque.name}`);
+          console.log(`L'utilisateur ${userId} est déjà abonné à la mosquée ${mosqueId}`);
         }
       } else {
-        console.log(`L'utilisateur avec l'ID ${userId} n'existe pas.`);
+        console.log('L\'utilisateur n\'existe pas.');
       }
     } catch (error) {
-      console.error('Erreur lors de l\'abonnement à la mosquée :', error);
-      throw error; // Vous pouvez gérer l'erreur de manière appropriée ici
+      console.error('Erreur lors de l\'abonnement de l\'utilisateur à la mosquée :', error);
+      throw error;
     }
-  }
-
+  } 
   //methode desabonne
-  async unsubscribeFromMosque(userId: string, mosque: Mosque): Promise<void> {
+  async desabonneMosque(userId: string, mosqueId: string): Promise<void> {
     try {
       const db = getFirestore();
       const userDocRef = doc(db, 'users', userId);
 
-      // Récupérez l'utilisateur actuel depuis la base de données
+      // Récupérer les données de l'utilisateur
       const userSnap = await getDoc(userDocRef);
 
       if (userSnap.exists()) {
-        const userData: Users = userSnap.data() as Users;
+        const userData: any = userSnap.data();
 
-        // Vérifiez si l'utilisateur est abonné à cette mosquée
-        const isSubscribed = userData.mosques.some((m) => m.id === mosque.id);
+        // Vérifier si l'utilisateur est abonné à la mosquée
+        if (userData.mosques.includes(mosqueId)) {
+          // Si l'utilisateur est abonné, retirez l'ID de la mosquée de son tableau d'abonnements
+          userData.mosques = userData.mosques.filter((id: string) => id !== mosqueId);
 
-        if (isSubscribed) {
-          // Si l'utilisateur est abonné, supprimez la mosquée de sa liste d'abonnements
-          const updatedMosques = userData.mosques.filter((m) => m.id !== mosque.id);
-          await updateDoc(userDocRef, {
-            mosques: updatedMosques
-          });
+          // Mettez à jour le document de l'utilisateur dans Firestore
+          await setDoc(userDocRef, userData);
 
-          console.log(`L'utilisateur ${userId} s'est désabonné de la mosquée ${mosque.id}`);
+          console.log(`L'utilisateur ${userId} s'est désabonné de la mosquée ${mosqueId}`);
         } else {
-          console.log(`L'utilisateur ${userId} n'est pas abonné à la mosquée ${mosque.id}`);
+          console.log(`L'utilisateur ${userId} n'est pas abonné à la mosquée ${mosqueId}`);
         }
       } else {
-        console.log(`L'utilisateur avec l'ID ${userId} n'existe pas.`);
+        console.log('L\'utilisateur n\'existe pas.');
       }
     } catch (error) {
-      console.error('Erreur lors de la désinscription de la mosquée :', error);
+      console.error('Erreur lors de la désinscription de l\'utilisateur à la mosquée :', error);
+      throw error;
     }
   }
+
 }
