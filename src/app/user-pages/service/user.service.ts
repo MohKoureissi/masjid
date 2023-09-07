@@ -1,6 +1,7 @@
-import { getDoc } from '@angular/fire/firestore/firebase';
+import { getDoc } from 'firebase/firestore';
 import { Users } from './../../model/user.model';
 import { Injectable } from '@angular/core';
+
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -159,31 +160,35 @@ signInWithPopup(auth, provider)
       const db = getFirestore();
       const userDocRef = doc(db, 'users', userId);
 
-      // Récupérez l'utilisateur actuel depuis la base de données
+      // Vérifiez si l'utilisateur existe dans la base de données
       const userSnap = await getDoc(userDocRef);
 
       if (userSnap.exists()) {
+        // L'utilisateur existe, récupérez ses données
         const userData: Users = userSnap.data() as Users;
 
         // Vérifiez si l'utilisateur est déjà abonné à cette mosquée
-        const isAlreadySubscribed = userData.mosques.some((m) => m.id === mosque.id);
+        const isAlreadySubscribed = userData.subscribedMosques.some(
+          (m) => m.id === mosque.id
+        );
 
         if (!isAlreadySubscribed) {
           // Si l'utilisateur n'est pas déjà abonné, ajoutez la mosquée à sa liste d'abonnements
-          userData.mosques.push(mosque);
+          userData.subscribedMosques.push(mosque);
 
           // Mettez à jour les données de l'utilisateur dans la base de données
           await setDoc(userDocRef, userData);
 
-          console.log(`L'utilisateur ${userId} s'est abonné à la mosquée ${mosque.id}`);
+          console.log(`L'utilisateur ${userId} s'est abonné à la mosquée ${mosque.name}`);
         } else {
-          console.log(`L'utilisateur ${userId} est déjà abonné à la mosquée ${mosque.id}`);
+          console.log(`L'utilisateur ${userId} est déjà abonné à la mosquée ${mosque.name}`);
         }
       } else {
         console.log(`L'utilisateur avec l'ID ${userId} n'existe pas.`);
       }
     } catch (error) {
       console.error('Erreur lors de l\'abonnement à la mosquée :', error);
+      throw error; // Vous pouvez gérer l'erreur de manière appropriée ici
     }
   }
 
