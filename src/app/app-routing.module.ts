@@ -70,6 +70,18 @@ const routes: Routes = [
     path: 'infos-horaires',
     loadChildren: () => import('./infos-horaires/infos-horaires.module').then( m => m.InfosHorairesPageModule)
   },
+  {
+    path: 'list-programmes',
+    loadChildren: () => import('./list-programmes/list-programmes.module').then( m => m.ListProgrammesPageModule)
+  },
+  {
+    path: 'dons',
+    loadChildren: () => import('./dons/dons.module').then( m => m.DonsPageModule)
+  },
+  {
+    path: 'annonces',
+    loadChildren: () => import('./annonces/annonces.module').then( m => m.AnnoncesPageModule)
+  },
 
 ];
 @NgModule({
