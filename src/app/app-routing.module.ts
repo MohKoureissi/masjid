@@ -62,6 +62,14 @@ const routes: Routes = [
     path: 'edit-mosquee',
     loadChildren: () => import('./edit-mosquee/edit-mosquee.module').then( m => m.EditMosqueePageModule)
   },
+  {
+    path: 'mosquee-details',
+    loadChildren: () => import('./mosquee-details/mosquee-details.module').then( m => m.MosqueeDetailsPageModule)
+  },
+  {
+    path: 'infos-horaires',
+    loadChildren: () => import('./infos-horaires/infos-horaires.module').then( m => m.InfosHorairesPageModule)
+  },
 
 ];
 @NgModule({

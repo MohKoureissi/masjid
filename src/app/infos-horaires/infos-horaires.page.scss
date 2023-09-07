@@ -21,7 +21,7 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    height: 30vh;
+    height: 16vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -29,20 +29,6 @@
     color: #FFF;
     border-radius: 0px 0px 40px 40px;
     background-color: #2C6632;
-    position: relative;
-  }
-  .op{
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: rgba(0, 0, 0, 0.4);
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    flex-direction: column;
-    border-radius: 0px 0px 40px 40px;
   }
   ion-card-content h2{
     font-weight: bold;
@@ -53,7 +39,6 @@
     display: flex;
     justify-content: space-between;
     padding: 10px 20px;
-    align-items: center;
   }
   .container ion-card{
     height: initial;
@@ -70,12 +55,11 @@
     color: #008000;
   }
   .card-content-ios p {
-    font-size: 20px;
+    font-size: 30px;
     text-align: right;
     position: absolute;
     bottom: 0px;
     right: 30px;
-    color: #2C6632;
 }
 .thumb ion-thumbnail{
     height: 75px;
@@ -85,7 +69,52 @@
 .thumb ion-thumbnail img{
     border-radius: 50%;
 }
+.thumb{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.photo{
+    border: 1px solid #ddd;
+    padding: 60px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+.input-container .input,.input-horaire .horaire input{
+    width: 98%;
+    margin: 10px 5px;
+    margin: auto;
+    padding-left: 10px;
+    margin-top: 10px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    box-shadow: 1px 1px 7px #ddd;
+}
+.input-container .input div{
+    display: flex;
+    align-items: center;
+    h2{
+        font-size: 18px;
+        color: #008000;
+        font-weight: bold;
+    }
+    h3{
+        font-size: 16px;
+    }
+}
 
-ion-fab-button {
-  --background: #2C6632
+
+.input-horaire .horaire{
+    display: flex;
+    align-items: center;
+    justify-content: space-around
+}
+.input-horaire .horaire input{
+    width: initial;
+    margin: initial;
+    flex-grow: 0.7;
+}
+ion-button{
+    --background:#2C6632
 }
