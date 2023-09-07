@@ -1,7 +1,19 @@
+#arrow-left {
+    position: absolute;
+    left: 20px; 
+    top: -2px; /* Déplacez la flèche vers le haut de 20 pixels (valeur négative) */
+    transform: translateY(0); /* Réinitialisez la transformation Y */
+    font-size: 40px; 
+    cursor: pointer; 
+
+}
+
+
 .container{
     text-align: center;
     margin-top: 30px
 }
+
 .logo{
 width: 130px;
 height: 112px;
@@ -9,10 +21,11 @@ flex-shrink: 0;
 // margin-left: 35%;
 margin: auto;
 margin-top: 30px;
-margin-top: 30px
+margin-top: 30px;
+margin-bottom: 20%;
 }
 h1{
-
+// margin-bottom: 30%;
 color: #000;
 text-align: center;
 font-family: Inter;
@@ -31,14 +44,35 @@ span{
 }
 
 .ipt{
-    width: 80%;
-    height: 40px;
+    width: 75%;
+    height: 45px;
     margin-bottom: 20px;
     border-radius: 20PX;
     background-color: #7f747410;
+    border-color: white;
 }
 
 .formctn{
     margin-bottom: 50%;
     margin-bottom: 50px
+}
+
+button{
+width: 300px;
+height: 56px;
+flex-shrink: 0;
+border-radius: 30px;
+background: #2C6632;
+color: #FFF;
+font-weight: bold;
+font-size: 20px;
+}
+
+p{
+color: var(--Dark-Gray, #6A707C);
+font-family: Urbanist;
+font-size: 14px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
 }

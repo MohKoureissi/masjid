@@ -16,6 +16,14 @@ const routes: Routes = [
   {
     path: 'inscriptionuser',
     loadChildren: () => import('./inscriptionuser/inscriptionuser.module').then( m => m.InscriptionuserPageModule)
+  },
+  {
+    path: 'motdepasse',
+    loadChildren: () => import('./motdepasse/motdepasse.module').then( m => m.MotdepassePageModule)
+  },
+  {
+    path: 'profiladmin',
+    loadChildren: () => import('./profiladmin/profiladmin.module').then( m => m.ProfiladminPageModule)
   }
 
 ];
