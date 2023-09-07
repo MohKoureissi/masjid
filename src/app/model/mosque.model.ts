@@ -1,4 +1,5 @@
 export interface Mosque{
+  id: any;
   name: string;
   imanName: string;
   description: string;
