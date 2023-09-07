@@ -1,7 +1,7 @@
 #arrow-left {
     position: absolute;
     left: 20px; 
-    top: -2px; /* Déplacez la flèche vers le haut de 20 pixels (valeur négative) */
+    top: 30px; /* Déplacez la flèche vers le haut de 20 pixels (valeur négative) */
     transform: translateY(0); /* Réinitialisez la transformation Y */
     font-size: 40px; 
     cursor: pointer; 
@@ -44,12 +44,14 @@ span{
 }
 
 .ipt{
-    width: 75%;
-    height: 45px;
     margin-bottom: 20px;
-    border-radius: 20PX;
-    background-color: #7f747410;
-    border-color: white;
+    // border-radius: 20PX;
+    width: 330px;
+    height: 56px;
+    flex-shrink: 0;
+    border-radius: 28px;
+    border: 1px solid #DADADA;
+   background: #F7F8F9;
 }
 
 .formctn{
@@ -76,3 +78,22 @@ font-style: normal;
 font-weight: 600;
 line-height: normal;
 }
+
+.icon {
+    display: flex;
+    justify-content: center;
+  }
+
+  .carrer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 105px;
+    height: 56px;
+    padding: 15px 0px;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    border-radius: 8px;
+    border: 1px solid #DADADA;
+  }

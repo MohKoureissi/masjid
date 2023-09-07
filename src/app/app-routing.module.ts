@@ -25,6 +25,10 @@ const routes: Routes = [
   {
     path: 'profiladmin',
     loadChildren: () => import('./profiluser/profiladmin.module').then( m => m.ProfiladminPageModule)
+  },
+  {
+    path: 'nouveau-mot-de-passe',
+    loadChildren: () => import('./nouveau-mot-de-passe/nouveau-mot-de-passe.module').then( m => m.NouveauMotDePassePageModule)
   }
 
 ];

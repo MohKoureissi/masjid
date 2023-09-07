@@ -1,7 +1,7 @@
 #arrow-left {
     position: absolute;
     left: 20px; 
-    top: -2px;
+    top: 20px;
     transform: translateY(0); 
     font-size: 40px; 
     cursor: pointer; 
@@ -14,7 +14,7 @@
 
 .ipt {
     width: 75%;
-    height: 45px;
+    height: 50px;
     margin-bottom: 20px;
     border-radius: 20PX;
     background-color: #7f747410;
@@ -36,13 +36,13 @@ button {
    margin-bottom: 20%;
 }
 h1{
-color: var(--Dark, #1E232C);
-font-family: Inter;
-font-size: 35px;
-font-style: normal;
-font-weight: 700;
-line-height: 130%; /* 39px */
-letter-spacing: -0.3px;
+    color: var(--Dark, #1E232C);
+    font-family: Inter;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 130%; /* 39px */
+    letter-spacing: -0.3px;
 }
 
 p{
@@ -63,6 +63,7 @@ margin: auto;
     bottom: 0; 
     left: 50%; 
     transform: translateX(-50%);
+    width: 114px;
 }
 .corps{
     margin-top: 30%;
