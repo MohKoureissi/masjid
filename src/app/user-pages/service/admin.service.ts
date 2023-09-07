@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import {
   getAuth, createUserWithEmailAndPassword,
   signInWithEmailAndPassword, signOut, updateEmail,
-  updatePassword, updateProfile, sendPasswordResetEmail, deleteUser, reauthenticateWithCredential } from "firebase/auth";
-import { addDoc, collection, getFirestore, query, where, getDocs, getDoc, setDoc, doc } from 'firebase/firestore';
-import { Firestore, updateDoc} from "@angular/fire/firestore";
+  updatePassword, updateProfile, sendPasswordResetEmail, deleteUser } from "firebase/auth";
+import { getFirestore, setDoc, doc } from 'firebase/firestore';
+import { Firestore} from "@angular/fire/firestore";
+import {AdminModel} from "../../model/admin.model";
 
 @Injectable({
   providedIn: 'root'
@@ -16,15 +17,16 @@ export class AdminService {
   getNewEmailCode() {
     let combination = '';
     for (let i = 0; i < 4; i++) {
-      const randomDigit = Math.floor(Math.random() * 10); // Génère un chiffre aléatoire de 0 à 9
+      const randomDigit = Math.floor(Math.random() * 10); // Génère un chiffre aléatoire entre 0 à 9
       combination += randomDigit.toString(); // Ajoute le chiffre à la combinaison en tant que chaîne de caractères
     }
     return combination+='_';
   }
-  signUpAdmin(fullName: string, email:string, numTel:string, password:string) {
+  signUpAdmin(newAdmin: AdminModel) {
+    //fullName: string, email:string, numTel:string, password:string, recupEmail:string
     const auth = getAuth();
-    createUserWithEmailAndPassword(auth, email, password)
-      .then(async(userCredential) => {
+    createUserWithEmailAndPassword(auth, newAdmin.email, newAdmin.password)
+      .then((userCredential) => {
         // Signed in
         const admin = userCredential.user;
         const db = getFirestore();
@@ -34,13 +36,14 @@ export class AdminService {
         const passwordCode = this.getNewEmailCode();
 
         // Création du nouvel administrateur avec comme nom de document de l'admin sont identifiant
-        await setDoc(doc(db, "admins", admin.uid), {
+        setDoc(doc(db, "admins", admin.uid), {
           id:admin.uid,
-          fullName:fullName,
-          numTel:numTel,
-          email:email,
+          fullName: newAdmin.fullName,
+          numTel: newAdmin.numTel,
+          email: newAdmin.email,
           emailCode:emailCode,
-          passwordCode:passwordCode
+          passwordCode:passwordCode,
+          recupEmail: newAdmin.recupEmail
         });
 
         console.log('Administrateur enregistré avec succès avec ');
@@ -55,7 +58,7 @@ export class AdminService {
   signInAdmin(email: string, password: string) {
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
-      .then(async (userCredential) => {
+      .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
         console.log("Connexion reussi !");
@@ -84,17 +87,22 @@ export class AdminService {
     });
   }
 
-  updateAdmin(fullName: string, numTel: string, email: string, password: string, id: string) {
-    const adminDocRef = doc(this.firestore, `admins/${id}`);
-    this.updateEmail(email);
-    this.updatePassword(password);
-    this.updateBasicInfo(fullName);
-    return updateDoc(
-      adminDocRef,
-      {
-        fullName: fullName,
-        numTel: numTel
-      });
+  updateAdmin(updateAdmin: AdminModel) {
+    //fullName: string, numTel: string, email: string, password: string, id: string
+    const db = getFirestore();
+    //this.updateEmail(email);
+    //this.updatePassword(password);
+    //this.updateBasicInfo(fullName);
+    setDoc(doc(db, "admins", updateAdmin.id!), {
+      fullName: updateAdmin.fullName,
+      numTel: updateAdmin.numTel,
+      email: updateAdmin.email,
+      password: updateAdmin.password,
+      id: updateAdmin.id,
+      emailCode: updateAdmin.emailCode,
+      passwordCode: updateAdmin.passwordCode,
+      recupEmail: updateAdmin.recupEmail
+    });
   }
 
   updateEmail(newEmail: string) {
