@@ -18,17 +18,17 @@ export class AppComponent implements OnInit {
   constructor(private MosqueService:MosqueService, private UserService:UserService, private AnnouncementService:AnnouncementService) {}
   ngOnInit(): void {
 
-  // const annonce: Announcements = {
-    // title: "annonce2",
-    // description: "le rapel profite aux croyants",
-    // location: "hamadalaye",
-    // date: "22/02/2023",
-    // hour: "12h00mn",
-    // imageUrl: "img.png",
-    // organizer: "sidibe"
-    // };
+  // const mosque: Mosque = {
+  //   id: null,
+  //   name: "Mosque faissala",
+  //   imanName: "Koita",
+  //   description: "belle mosquee",
+  //   donation: "7218734",
+  //   location: "Bamako",
+  //   quartier: "Sebenikoro"
+  //   };
 
-
+this.MosqueService.deleteMosque("5wAxEAuQ2uUkwGBBwz6C")
     // this.AnnouncementService.updateAnnouncement("6kfsj8p2dl6gHP4mFQfp",annonce);
 
 // this.AnnouncementService.createAnnouncement();

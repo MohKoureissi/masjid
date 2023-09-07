@@ -24,28 +24,6 @@ export class AnnouncementService {
     }
   }
 
-// delete annonce
-  async deleteAnnouncement(announcementId: string): Promise<void> {
-    try {
-      const db = getFirestore();
-      const announcementDocRef = doc(db, 'announcements', announcementId);
-
-      // Vérifiez si l'annonce existe dans la base de données
-      const announcementSnap = await getDoc(announcementDocRef);
-
-      if (announcementSnap.exists()) {
-        // L'annonce existe, supprimez-la
-        await deleteDoc(announcementDocRef);
-
-        console.log(`Annonce avec l'ID ${announcementId} supprimée avec succès`);
-      } else {
-        console.log(`L'annonce avec l'ID ${announcementId} n'existe pas.`);
-      }
-    } catch (error) {
-      console.error('Erreur lors de la suppression de l\'annonce :', error);
-      throw error; // Vous pouvez gérer l'erreur de manière appropriée ici
-    }
-  }
 
   //update annonce
 
@@ -70,6 +48,30 @@ export class AnnouncementService {
       throw error; // Vous pouvez gérer l'erreur de manière appropriée ici
     }
   }
+
+  // delete annonce
+  async deleteAnnouncement(announcementId: string): Promise<void> {
+    try {
+      const db = getFirestore();
+      const announcementDocRef = doc(db, 'announcements', announcementId);
+
+      // Vérifiez si l'annonce existe dans la base de données
+      const announcementSnap = await getDoc(announcementDocRef);
+
+      if (announcementSnap.exists()) {
+        // L'annonce existe, supprimez-la
+        await deleteDoc(announcementDocRef);
+
+        console.log(`Annonce avec l'ID ${announcementId} supprimée avec succès`);
+      } else {
+        console.log(`L'annonce avec l'ID ${announcementId} n'existe pas.`);
+      }
+    } catch (error) {
+      console.error('Erreur lors de la suppression de l\'annonce :', error);
+      throw error; // Vous pouvez gérer l'erreur de manière appropriée ici
+    }
+  }
+
 
 }
 
