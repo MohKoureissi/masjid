@@ -5,7 +5,8 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
-  },  {
+  },
+  {
     path: 'demarrage',
     loadChildren: () => import('./demarrage/demarrage.module').then( m => m.DemarragePageModule)
   },
@@ -23,7 +24,7 @@ const routes: Routes = [
   },
   {
     path: 'profiladmin',
-    loadChildren: () => import('./profiladmin/profiladmin.module').then( m => m.ProfiladminPageModule)
+    loadChildren: () => import('./profiluser/profiladmin.module').then( m => m.ProfiladminPageModule)
   }
 
 ];
