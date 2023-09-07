@@ -8,4 +8,6 @@ export interface Users{
   password: string;
   mosques: Mosque[];
   announcements: Announcements[];
+  subscribedMosques: Mosque[];
+
 }
