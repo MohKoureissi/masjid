@@ -1,9 +1,11 @@
+import { AnnouncementService } from './announcement-pages/service/announcement.service';
 import { MosqueService } from './mosque-pages/service/mosque.service';
 import { Component, OnInit } from '@angular/core';
 import { UserService } from './user-pages/service/user.service';
 import { Mosque } from './model/mosque.model';
 import {TimeService} from "./time-pages/service/time.service";
 import {TimeModel} from "./model/time.model";
+import { Announcements } from './model/announcement.model';
 
 
 @Component({
@@ -13,8 +15,23 @@ import {TimeModel} from "./model/time.model";
 })
 export class AppComponent implements OnInit {
 
-  constructor(private MosqueService:MosqueService, private UserService:UserService) {}
+  constructor(private MosqueService:MosqueService, private UserService:UserService, private AnnouncementService:AnnouncementService) {}
   ngOnInit(): void {
+
+  const annonce: Announcements = {
+    title: "annonce2",
+    description: "le rapel profite aux croyants",
+    location: "hamadalaye",
+    date: "22/02/2023",
+    hour: "12h00mn",
+    imageUrl: "img.png",
+    organizer: "sidibe"
+    };
+
+
+    this.AnnouncementService.updateAnnouncement("6kfsj8p2dl6gHP4mFQfp",annonce);
+
+// this.AnnouncementService.createAnnouncement();
     // const mosque: Mosque = {
     //   id:null,
     //   name: 'Nom de la mosquée',
