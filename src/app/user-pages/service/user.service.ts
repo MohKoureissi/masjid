@@ -70,6 +70,7 @@ export class UserService {
       // Connexion réussie
       const user = userCredential.user;
       console.log('Utilisateur connecté avec succès');
+      
 
       //si user est ok redirection
     } catch (error: any) {

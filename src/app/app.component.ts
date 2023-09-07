@@ -28,7 +28,7 @@ export class AppComponent implements OnInit {
   //   quartier: "Sebenikoro"
   //   };
 
-this.MosqueService.deleteMosque("5wAxEAuQ2uUkwGBBwz6C")
+// this.MosqueService.deleteMosque("5wAxEAuQ2uUkwGBBwz6C")
     // this.AnnouncementService.updateAnnouncement("6kfsj8p2dl6gHP4mFQfp",annonce);
 
 // this.AnnouncementService.createAnnouncement();
@@ -45,8 +45,7 @@ this.MosqueService.deleteMosque("5wAxEAuQ2uUkwGBBwz6C")
   //  this.UserService.loginUser('awa80598@gmail.com','123456')
   //  this.userService.loginUser('ayaya6436@gmail.com','0987654');
   //  this.userService.logoutUser();
-  // this.userService.forgotPassword('ayaya6436@gmail.com');
-
+  
   // ngOnInit(): void {
   //   const time: TimeModel = {
   //     id: null,

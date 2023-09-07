@@ -3,8 +3,8 @@ import {
   getAuth, createUserWithEmailAndPassword,
   signInWithEmailAndPassword, signOut, updateEmail,
   updatePassword, updateProfile, sendPasswordResetEmail, deleteUser, reauthenticateWithCredential } from "firebase/auth";
-import { addDoc, collection, getFirestore } from 'firebase/firestore';
-import {doc, Firestore, updateDoc} from "@angular/fire/firestore";
+import { addDoc, collection, getFirestore, query, where, getDocs, getDoc, setDoc, doc } from 'firebase/firestore';
+import { Firestore, updateDoc} from "@angular/fire/firestore";
 
 @Injectable({
   providedIn: 'root'
@@ -33,16 +33,17 @@ export class AdminService {
         const emailCode = this.getNewEmailCode();
         const passwordCode = this.getNewEmailCode();
 
-        //Création d'un nouveau document pour le nouveau administrateur
-        const adminAdd = await addDoc(collection(db, 'admins'),{
+        // Création du nouvel administrateur avec comme nom de document de l'admin sont identifiant
+        await setDoc(doc(db, "admins", admin.uid), {
           id:admin.uid,
           fullName:fullName,
           numTel:numTel,
           email:email,
           emailCode:emailCode,
           passwordCode:passwordCode
-        })
-        console.log('Administrateur enregistré avec succès avec l\'ID du document Firestore : ', adminAdd.id);
+        });
+
+        console.log('Administrateur enregistré avec succès avec ');
       })
       .catch((error) => {
 
