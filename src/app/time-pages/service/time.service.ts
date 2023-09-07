@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, DocumentReference } from '@angular/fire/compat/firestore'; // Importez AngularFirestore
-
+import { Firestore, doc, updateDoc } from '@angular/fire/firestore';
+import { collection, addDoc, setDoc, getFirestore,  } from 'firebase/firestore';
 import { TimeModel } from '../../model/time.model';
 
 @Injectable({
@@ -8,11 +8,18 @@ import { TimeModel } from '../../model/time.model';
 })
 export class TimeService {
 
-  constructor(private firestore: AngularFirestore) { } // Utilisez AngularFirestore ici
+  constructor(private firestore: Firestore) { } // Utilisez AngularFirestore ici
 
-  async addTime(time: TimeModel): Promise<DocumentReference<TimeModel>> {
-    const timesCollectionRef = this.firestore.collection<TimeModel>('times'); // Utilisez le type de modèle pour la collection
-    const docRef = await timesCollectionRef.add(time); // Utilisez add() pour ajouter un document à la collection
-    return docRef;
+  async addTime(time: TimeModel){
+    const db = getFirestore();
+    const timesCollectionRef = collection(db, 'times');
+    const docRef = await addDoc(timesCollectionRef, time);
+    time.id = docRef.id;
+    const timeDocRef = doc(this.firestore, `times/${time.id}`);
+    console.log(docRef.id);
+    updateDoc(
+      timeDocRef,
+      {id: time.id}
+    );
   }
 }
