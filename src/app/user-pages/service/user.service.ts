@@ -186,8 +186,8 @@ signInWithPopup(auth, provider)
       console.error('Erreur lors de l\'abonnement de l\'utilisateur à la mosquée :', error);
       throw error;
     }
-  } 
-  //methode desabonne
+  }
+  //methode desabonneMosque
   async desabonneMosque(userId: string, mosqueId: string): Promise<void> {
     try {
       const db = getFirestore();
@@ -216,6 +216,72 @@ signInWithPopup(auth, provider)
       }
     } catch (error) {
       console.error('Erreur lors de la désinscription de l\'utilisateur à la mosquée :', error);
+      throw error;
+    }
+  }
+
+//abonnement user a une annonce
+async abonneAnnonce(userId: string, announcementId: string): Promise<void> {
+  try {
+    const db = getFirestore();
+    const userDocRef = doc(db, 'users', userId);
+
+
+    // Récupérer les données de l'utilisateur
+    const userSnap = await getDoc(userDocRef);
+
+    if (userSnap.exists()) {
+      const userData: any = userSnap.data();
+
+      // Vérifier si l'utilisateur est déjà abonné à la mosquée
+      if (!userData.announcements.includes(announcementId)) {
+        // Si l'utilisateur n'est pas déjà abonné, ajoutez l'ID de la mosquée à son tableau d'abonnements
+        userData.announcements.push(announcementId);
+
+        // Mettez à jour le document de l'utilisateur dans Firestore
+        await setDoc(userDocRef, userData);
+
+        console.log(`L'utilisateur ${userId} s'est abonné à l'annonce ${announcementId}`);
+      } else {
+        console.log(`L'utilisateur ${userId} est déjà abonné à la l'annonce ${announcementId}`);
+      }
+    } else {
+      console.log('L\'utilisateur n\'existe pas.');
+    }
+  } catch (error) {
+    console.error('Erreur lors de l\'abonnement de l\'utilisateur à l\'annonce :', error);
+    throw error;
+  }
+}
+  //methode desabonneAnconne
+  async desabonneAnnonce(userId: string, announcementId: string): Promise<void> {
+    try {
+      const db = getFirestore();
+      const userDocRef = doc(db, 'users', userId);
+
+      // Récupérer les données de l'utilisateur
+      const userSnap = await getDoc(userDocRef);
+
+      if (userSnap.exists()) {
+        const userData: any = userSnap.data();
+
+        // Vérifier si l'utilisateur est abonné à la mosquée
+        if (userData.announcements.includes(announcementId)) {
+          // Si l'utilisateur est abonné, retirez l'ID de la mosquée de son tableau d'abonnements
+          userData.announcements = userData.announcements.filter((id: string) => id !== announcementId);
+
+          // Mettez à jour le document de l'utilisateur dans Firestore
+          await setDoc(userDocRef, userData);
+
+          console.log(`L'utilisateur ${userId} s'est désabonné  à l\'annonce ${announcementId}`);
+        } else {
+          console.log(`L'utilisateur ${userId} n'est pas abonné à  à l\'annonce ${announcementId}`);
+        }
+      } else {
+        console.log('L\'utilisateur n\'existe pas.');
+      }
+    } catch (error) {
+      console.error('Erreur lors de la désinscription de l\'utilisateur  à l\'annonce :', error);
       throw error;
     }
   }

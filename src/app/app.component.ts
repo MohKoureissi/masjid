@@ -18,18 +18,18 @@ export class AppComponent implements OnInit {
   constructor(private MosqueService:MosqueService, private UserService:UserService, private AnnouncementService:AnnouncementService) {}
   ngOnInit(): void {
 
-  const annonce: Announcements = {
-    title: "annonce2",
-    description: "le rapel profite aux croyants",
-    location: "hamadalaye",
-    date: "22/02/2023",
-    hour: "12h00mn",
-    imageUrl: "img.png",
-    organizer: "sidibe"
-    };
+  // const annonce: Announcements = {
+    // title: "annonce2",
+    // description: "le rapel profite aux croyants",
+    // location: "hamadalaye",
+    // date: "22/02/2023",
+    // hour: "12h00mn",
+    // imageUrl: "img.png",
+    // organizer: "sidibe"
+    // };
 
 
-    this.AnnouncementService.updateAnnouncement("6kfsj8p2dl6gHP4mFQfp",annonce);
+    // this.AnnouncementService.updateAnnouncement("6kfsj8p2dl6gHP4mFQfp",annonce);
 
 // this.AnnouncementService.createAnnouncement();
     // const mosque: Mosque = {
@@ -41,8 +41,8 @@ export class AppComponent implements OnInit {
     //   location: 'Emplacement de la mosquée',
     //   quartier: 'Quartier de la mosquée',
     // };
-    // this.UserService.abonneMosque("PtLvGxAOJl2fWzfTEMCT","5wAxEAuQ2uUkwGBBwz6C")
-  //  this.UserService.loginUser('ayaya6436@gmail.com','0987654')
+  //   this.UserService.desabonneAnnonce("PtLvGxAOJl2fWzfTEMCT","5wAxEAuQ2uUkwGBBwz6C")
+  //  this.UserService.loginUser('awa80598@gmail.com','123456')
   //  this.userService.loginUser('ayaya6436@gmail.com','0987654');
   //  this.userService.logoutUser();
   // this.userService.forgotPassword('ayaya6436@gmail.com');
