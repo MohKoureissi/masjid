@@ -29,6 +29,10 @@ const routes: Routes = [
   {
     path: 'nouveau-mot-de-passe',
     loadChildren: () => import('./nouveau-mot-de-passe/nouveau-mot-de-passe.module').then( m => m.NouveauMotDePassePageModule)
+  },
+  {
+    path: 'changer',
+    loadChildren: () => import('./changer/changer.module').then( m => m.ChangerPageModule)
   }
 
 ];
