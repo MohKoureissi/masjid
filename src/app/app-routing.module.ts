@@ -42,26 +42,47 @@ const routes: Routes = [
   {
     path: 'player',
     loadChildren: () => import('./player/player.module').then( m => m.PlayerPageModule)
-  },  {
+  },
+  {
     path: 'coran-display',
     loadChildren: () => import('./coran-display/coran-display.module').then( m => m.CoranDisplayPageModule)
   },
   {
-    path: 'list-coran',
-    loadChildren: () => import('./list-coran/list-coran.module').then( m => m.ListCoranPageModule)
+    path: '',
+    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
   },
   {
-    path: 'p-player',
-    loadChildren: () => import('./p-player/p-player.module').then( m => m.PPlayerPageModule)
+    path: 'demarrage',
+    loadChildren: () => import('./demarrage/demarrage.module').then( m => m.DemarragePageModule)
   },
   {
-    path: 'list-preche',
-    loadChildren: () => import('./list-preche/list-preche.module').then( m => m.ListPrechePageModule)
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   },
   {
-    path: 'edit-mosquee',
-    loadChildren: () => import('./edit-mosquee/edit-mosquee.module').then( m => m.EditMosqueePageModule)
+    path: 'inscriptionuser',
+    loadChildren: () => import('./inscriptionuser/inscriptionuser.module').then( m => m.InscriptionuserPageModule)
   },
+  {
+    path: 'motdepasse',
+    loadChildren: () => import('./motdepasse/motdepasse.module').then( m => m.MotdepassePageModule)
+  },
+  {
+    path: 'profiladmin',
+    loadChildren: () => import('./profiluser/profiladmin.module').then( m => m.ProfiladminPageModule)
+  },
+  {
+    path: 'nouveau-mot-de-passe',
+    loadChildren: () => import('./nouveau-mot-de-passe/nouveau-mot-de-passe.module').then( m => m.NouveauMotDePassePageModule)
+  },
+  {
+    path: 'changer',
+    loadChildren: () => import('./changer/changer.module').then( m => m.ChangerPageModule)
+  },
+  {
+    path: 'notification',
+    loadChildren: () => import('./notification/notification.module').then( m => m.NotificationPageModule)
+  }
 
 ];
 @NgModule({
@@ -71,3 +92,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule {}
+
