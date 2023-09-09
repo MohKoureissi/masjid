@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
   constructor(private timeService: TimeService, private adminService: AdminService , private UserService:UserService) {}
   ngOnInit(): void {
     this.test();
-    this.UserService.getUserById("fEUxk5kE21cyL5ZMpwacj1Vvjrh2")
+  
   }
 
   async test(){

@@ -6,10 +6,25 @@
       Tab 1
     </ion-title>
   </ion-toolbar>
-  <ion-buttons slot="end">
-    <ion-button (click)="shareRoute()">Partager l'itinéraire</ion-button>
-  </ion-buttons>
+
 </ion-header>
+
+
+<ion-fab bottom id="menuButtons" style="display: flex; justify-content: space-around;">
+  <ion-row text-center>
+    <ion-col>
+      <ion-fab-button>
+        <!-- <ion-icon name="home-outline" (click)="quitterItineraire()" >stop</ion-icon> -->
+        <ion-icon name='stop' (click)="quitterItineraire()">Stop</ion-icon>
+      </ion-fab-button>
+    </ion-col>
+    <ion-col>
+      <ion-fab-button>
+        <ion-icon  name='share-social-outline' (click)="partagerItineraire()"></ion-icon>
+      </ion-fab-button>
+    </ion-col>
+  </ion-row>
+</ion-fab>
 
 
 <ion-content [fullscreen]="true">

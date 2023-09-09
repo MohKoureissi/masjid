@@ -19,7 +19,7 @@ export class Tab1Page implements OnInit {
   async ngOnInit() {
     await this.initMap();
     const mosques = await this.mosqueService.filter();
-    await this.displayAllMosques(mosques);
+    await this.afiicherMosques(mosques);
   }
 //pour avoir la poistion de USERS
   async initMap() {
@@ -38,7 +38,7 @@ export class Tab1Page implements OnInit {
     marker.bindPopup('Vous êtes ici !').openPopup();
   }
 
-  async displayAllMosques(mosques: any[]) {
+  async afiicherMosques(mosques: any[]) {
     const imageMosque = L.icon({
       iconUrl: '/assets/logo.png', // URL de votre image personnalisée
       iconSize: [32, 32], // Taille de l'icône en pixels
@@ -57,7 +57,7 @@ export class Tab1Page implements OnInit {
 
       // Attachez un gestionnaire d'événements de clic au marqueur pour lancer l'itinéraire
       mosqueMarker.on('click', () => {
-        this.launchRouteToMosque(mosque);
+        this.lancerItineraireVersMosque(mosque);
       });
     });
   }
@@ -78,7 +78,7 @@ export class Tab1Page implements OnInit {
     }).addTo(this.map);
   }
 
-  async launchRouteToMosque(mosque: any) {
+  async lancerItineraireVersMosque(mosque: any) {
     // Obtenez les coordonnées de la mosquée
     const mosqueLocation = L.latLng(mosque.lat, mosque.lng);
 
@@ -89,8 +89,7 @@ export class Tab1Page implements OnInit {
     // Créez un itinéraire depuis la position actuelle vers la mosquée
     this.createRoute(currentLocation, mosqueLocation);
   }
-
-  async shareRoute() {
+  async partagerItineraire() {
     // Vérifiez d'abord si un itinéraire est actuellement tracé
     if (this.currentRoute) {
       const route = this.currentRoute.getPlan();
@@ -104,12 +103,31 @@ export class Tab1Page implements OnInit {
         // Générer un lien vers l'itinéraire en utilisant les coordonnées de départ et d'arrivée
         const routeLink = `https://www.google.com/maps/dir/${startCoords.lat},${startCoords.lng}/${endCoords.lat},${endCoords.lng}/`;
 
-        // Vous pouvez maintenant utiliser ce lien pour partager l'itinéraire
-        // Par exemple, vous pouvez l'ouvrir dans le navigateur ou le partager via une application de messagerie
-        console.log('Lien vers l\'itinéraire:', routeLink);
+        // Générer un lien WhatsApp
+        const whatsappLink = `https://api.whatsapp.com/send?text=${encodeURIComponent('Check out this route: ' + routeLink)}`;
+
+        // Ouvrir le lien WhatsApp dans une nouvelle fenêtre ou un nouvel onglet
+        window.open(whatsappLink);
+
       } else {
         console.error('L\'itinéraire ne contient pas suffisamment de waypoints pour le partager.');
       }
+    } else {
+      console.error('Aucun itinéraire actuellement tracé.');
+    }
+  }
+
+//methode pour quitter l'itineraire
+  async quitterItineraire() {
+    // Vérifiez d'abord si un itinéraire est actuellement tracé
+    if (this.currentRoute) {
+      // Supprimez l'itinéraire de la carte
+      this.map.removeControl(this.currentRoute);
+
+      // Réinitialisez la variable de l'itinéraire actuel
+      this.currentRoute = null;
+
+      console.log('Itinéraire quitté.');
     } else {
       console.error('Aucun itinéraire actuellement tracé.');
     }
