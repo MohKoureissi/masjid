@@ -1,0 +1,61 @@
+.container{
+    width: 96%;
+    margin: auto;
+    margin-top: 25px;
+  }
+
+  .container ion-card {
+    flex: 1 1 28%;
+    background-size: cover;
+    height: 110px;
+    margin: 10px 5px;
+    text-align: center;
+  }
+
+  .card-custom{
+    padding: 5px;
+    /* box-shadow: 0px 0; */
+    box-shadow: 10px 10px 5px #aaaaaa;
+    border-radius: 10px;
+  }
+  .parallax-img{
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 30vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;;
+    color: #FFF;
+    border-radius: 0px 0px 40px 40px;
+    background-color: #2C6632;
+    position: relative;
+  }
+  .op{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-direction: column;
+    border-radius: 0px 0px 40px 40px;
+  }
+  ion-card-content h2{
+    font-weight: bold;
+    color: #000;
+    
+  }
+
+  .container ion-card{
+    height: initial;
+    border-radius: 30px;
+    border: 1px solid #ddd;
+  }
+.annonces .bottom{
+    font-size: 14px;
+}
