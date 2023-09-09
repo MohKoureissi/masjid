@@ -5,7 +5,7 @@ import { InfosHorairesPage } from './infos-horaires.page';
 
 const routes: Routes = [
   {
-    path: '',
+    path: ':id',
     component: InfosHorairesPage
   }
 ];

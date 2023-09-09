@@ -1,6 +1,9 @@
 import { Injectable, OnInit } from '@angular/core';
 import { getFirestore, doc, setDoc,getDocs,where, query, collection ,getDoc,updateDoc,deleteDoc,QuerySnapshot} from 'firebase/firestore';
 import { Mosque } from 'src/app/model/mosque.model';
+import {TimeModel} from "../../app/model/time.model";
+import {from, Observable, of} from "rxjs";
+import { catchError, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +24,10 @@ export class MosqueService implements OnInit {
       // Ajoutez la nouvelle mosquée à la collection "mosques"
       const newMosqueRef = doc(mosqueCollectionRef);
       await setDoc(newMosqueRef, mosque);
+      updateDoc(
+        newMosqueRef,
+        {id: newMosqueRef.id}
+      );
 
       console.log(`Mosquée créée avec succès avec l'ID : ${newMosqueRef.id}`);
     } catch (error) {
@@ -113,7 +120,7 @@ async filter(name?: string, location?: string): Promise<Mosque[]> {
 
 
 // Fonction pour récupérer les informations d'une mosquée spécifique par son ID
-async getDetailsMosque(mosqueId: string): Promise<Mosque | null> {
+async getDetailsMosque(mosqueId: string): Promise<Observable<Mosque | null>> {
   try {
     const db = getFirestore();
     const mosqueDocRef = doc(db, 'mosques', mosqueId);
@@ -124,19 +131,41 @@ async getDetailsMosque(mosqueId: string): Promise<Mosque | null> {
     if (docSnapshot.exists()) {
       // Le document de la mosquée existe, vous pouvez récupérer ses données
       const mosqueData = docSnapshot.data() as Mosque;
-      console.log(mosqueData)
-      return mosqueData;
+      return of(mosqueData);
     } else {
       // La mosquée n'a pas été trouvée
       console.log("mosque non trouve")
 
-      return null;
+      return of(null);
     }
   } catch (error) {
     console.error('Erreur lors de la récupération de la mosquée :', error);
     throw error; // Vous pouvez gérer l'erreur de manière appropriée ici
   }
 }
+
+
+  // Récupération de la liste des mosquées
+  async getAllMosques(): Promise<Observable<Mosque[]>> {
+    const db = getFirestore();
+    const mosquesCollectionRef = collection(db, `mosques`);
+
+    try {
+      const mosquesSnap = await getDocs(mosquesCollectionRef);
+      const mosques: Mosque[] = [];
+
+      mosquesSnap.forEach((doc) => {
+        mosques.push(doc.data() as Mosque);
+      });
+
+      // Utilisez l'opérateur RxJS 'of' pour transformer le tableau en un observable
+      return of(mosques);
+    } catch (error) {
+      console.log(error);
+      return of([]); // Vous pouvez également retourner un tableau vide en cas d'erreur
+    }
+  }
+
 
 
 

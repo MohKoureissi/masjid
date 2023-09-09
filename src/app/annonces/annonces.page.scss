@@ -48,7 +48,7 @@
   ion-card-content h2{
     font-weight: bold;
     color: #000;
-    
+
   }
 
   .container ion-card{
@@ -58,4 +58,14 @@
   }
 .annonces .bottom{
     font-size: 14px;
+}
+.description{
+  margin: 0;
+  text-align: start;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
 }

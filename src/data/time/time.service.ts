@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {doc, Firestore, updateDoc, getDoc, deleteDoc} from '@angular/fire/firestore';
 import {addDoc, collection, getFirestore, getDocs} from 'firebase/firestore';
-import {get} from "@angular/fire/database";
 import {TimeModel} from "../../app/model/time.model";
+import {Observable, of} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -42,7 +42,7 @@ export class TimeService {
    return null;
   }
 
-  async getAllTimes(mosqueId: string) {
+  async getAllTimes(mosqueId: string): Promise<Observable<TimeModel[]|null>> {
     const db = getFirestore();
     const timesCollectionRef = collection(db, `times/${mosqueId}/times`);
 
@@ -52,17 +52,17 @@ export class TimeService {
       timesSnap.forEach((doc) => {
         times.push(doc.data() as TimeModel);
       });
-      return times;
+      return of(times);
     }catch (error){
       console.log(error);
     }
-    return null;
+    return of(null);
   }
 
   updateTime(time: TimeModel){
     const db = getFirestore();
     const timesDocRef = doc(this.firestore, `${this.COLLECTION_NAME}/${time.mosqueId}/${this.COLLECTION_NAME}/${time.id}`);
-    updateDoc(timesDocRef, {name: time.name, hour: time.hour, minute: time.minute});
+    updateDoc(timesDocRef, {name: time.name, hour: time.hour});
 
     return this.getTime(time.mosqueId, time.id!);
   }

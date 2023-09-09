@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {RadioService} from "../../data/radio/radio.service";
+import {RadioModel} from "../model/radio.model";
 
 @Component({
   selector: 'app-radio',
@@ -6,10 +8,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./radio.page.scss'],
 })
 export class RadioPage implements OnInit {
-
-  constructor() { }
+  radios: RadioModel[] = [];
+  constructor(private radioService: RadioService) { }
 
   ngOnInit() {
+    this.radioService.getAllRadios().then(radios =>radios.subscribe(r =>{
+      this.radios = r;
+    }))
   }
 
 }

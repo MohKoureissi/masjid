@@ -4,6 +4,11 @@ import {TimeModel} from "./model/time.model";
 import {AdminModel} from "./model/admin.model";
 import {TimeService} from "../data/time/time.service";
 import {AdminService} from "../data/user/admin.service";
+import {MosqueService} from "../data/mosque/mosque.service";
+import {Announcement} from "./model/announcement.model";
+import {AnnouncementService} from "../data/announcement/announcement.service";
+import {RadioModel} from "./model/radio.model";
+import {RadioService} from "../data/radio/radio.service";
 
 @Component({
   selector: 'app-root',
@@ -12,43 +17,11 @@ import {AdminService} from "../data/user/admin.service";
 })
 export class AppComponent implements OnInit {
 
-  time: TimeModel|null = null;
-  constructor(private timeService: TimeService, private adminService: AdminService) {}
+  mosque: Mosque|null = null;
+  constructor(private radioService: RadioService) {}
   ngOnInit(): void {
     this.test();
   }
 
-  async test(){
-
-    /*const newTime: TimeModel = {
-      hour: 12,
-      minute: 30,
-      id: "VSgqKmiyyp4CZVKcx3Zn",
-      mosqueId: "5wAxEAuQ2uUkwGBBwz6C",
-      name: "Asr"
-    }*/
-    const newAdmin: AdminModel = {
-      id: "rD4pNgmArHNTbi2NAsweGaxXO5j1",
-      fullName: "Oumou Tankara",
-      email: "aicha@gmail.com",
-      numTel: "87 98 87 12",
-      password: "123456",
-      emailCode: "0974_",
-      passwordCode: "0866_",
-      recupEmail: "oumar@gmail.com"
-    }
-
-    //this.time = await this.timeService.getTime("5wAxEAuQ2uUkwGBBwz6C", "VSgqKmiyyp4CZVKcx3Zn");
-    //this.time = await this.timeService.getAllTimes("5wAxEAuQ2uUkwGBBwz6C");
-    //this.time = await this.timeService.updateTime(newTime)
-    //this.timeService.deleteTime("5wAxEAuQ2uUkwGBBwz6C", "VSgqKmiyyp4CZVKcx3Zn")
-
-    //this.adminService.signInAdmin("aicha@gmail.com", "123456");
-    //this.adminService.signOutAdmin();
-    //this.adminService.signUpAdmin(newAdmin);
-
-    //this.adminService.updateAdmin(newAdmin);
-    //console.log(this.time);
-
-  }
+  async test() {}
 }
