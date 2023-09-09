@@ -2,7 +2,7 @@ import { Announcements } from "./announcement.model";
 import { Mosque } from "./mosque.model";
 
 export interface Users{
- id:String;
+  id:String;
   fullName: string;
   numTel: string;
   email: string;
@@ -10,5 +10,6 @@ export interface Users{
   mosques: Mosque[];
   announcements: Announcements[];
   subscribedMosques: Mosque[];
+  // actions: ['itineraire', 'favoris', 'informations'],
 
 }
