@@ -1,3 +1,4 @@
+import { MosqueService } from 'src/data/mosque/mosque.service';
 import { UserService } from 'src/data/user/user.service';
 import { Component, OnInit } from '@angular/core';
 import { Mosque } from './model/mosque.model';
@@ -14,10 +15,10 @@ import {AdminService} from "../data/user/admin.service";
 export class AppComponent implements OnInit {
 
   time: TimeModel|null = null;
-  constructor(private timeService: TimeService, private adminService: AdminService , private UserService:UserService) {}
+  constructor(private timeService: TimeService, private adminService: AdminService , private UserService:UserService, private MosqueService:MosqueService) {}
   ngOnInit(): void {
     this.test();
-  
+this.MosqueService.getAllMosques();
   }
 
   async test(){

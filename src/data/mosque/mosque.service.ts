@@ -139,5 +139,31 @@ async getDetailsMosque(mosqueId: string): Promise<Mosque | null> {
 }
 
 
+// Fonction pour récupérer toutes les mosquées
+async getAllMosques(): Promise<Mosque[]> {
+  try {
+    const db = getFirestore();
+    const mosquesCollection = collection(db, 'mosques');
+
+    // Effectuez la requête pour récupérer tous les documents de la collection
+    const q = query(mosquesCollection);
+    const querySnapshot = await getDocs(q);
+
+    const mosques: Mosque[] = [];
+
+    // Parcourez les documents pour extraire les données des mosquées
+    querySnapshot.forEach((doc) => {
+      if (doc.exists()) {
+        const mosqueData = doc.data() as Mosque;
+        mosques.push(mosqueData);
+      }
+    });
+console.log(mosques);
+    return mosques;
+  } catch (error) {
+    console.error('Erreur lors de la récupération de toutes les mosquées :', error);
+    throw error; // Vous pouvez gérer l'erreur de manière appropriée ici
+  }
+}
 
 }
