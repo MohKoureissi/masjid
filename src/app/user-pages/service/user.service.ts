@@ -37,7 +37,8 @@ export class UserService {
         const user = userCredential.user;
         const db = getFirestore();
         //create doc for user in collection
-        const userAdd = await addDoc(collection(db, 'users'), {
+        await addDoc(collection(db, 'users',user.uid), {
+          id:user.uid,
           fullName: fullName,
           numTel: numTel,
           email: email,
@@ -46,7 +47,8 @@ export class UserService {
         });
         console.log(
           "Utilisateur enregistré avec succès avec l'ID du document Firestore : ",
-          userAdd.id
+          // userAdd.id
+          user.uid
         );
       })
       .catch((error) => {
@@ -69,8 +71,9 @@ export class UserService {
       );
       // Connexion réussie
       const user = userCredential.user;
-      console.log('Utilisateur connecté avec succès');
-      
+      console.log('Utilisateur connecté avec succès avec ');
+
+
 
       //si user est ok redirection
     } catch (error: any) {

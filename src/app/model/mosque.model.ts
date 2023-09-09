@@ -6,5 +6,7 @@ export interface Mosque{
   donation: string;
   location: string;
   quartier: string;
+  lat: number;
+  lng: number;
 
 }

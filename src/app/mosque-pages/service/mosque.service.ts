@@ -1,12 +1,17 @@
-import { Injectable } from '@angular/core';
-import { getFirestore, doc, setDoc,  collection ,getDoc,updateDoc,deleteDoc} from 'firebase/firestore';
+import { Injectable, OnInit } from '@angular/core';
+import { getFirestore, doc, setDoc,getDocs,where, query, collection ,getDoc,updateDoc,deleteDoc,QuerySnapshot} from 'firebase/firestore';
 import { Mosque } from 'src/app/model/mosque.model';
+
 @Injectable({
   providedIn: 'root'
 })
-export class MosqueService {
+export class MosqueService implements OnInit {
+
 
   constructor() { }
+  ngOnInit(): void {
+
+  }
 //Methode pour ajouter une mosque
   async createMosque(mosque: Mosque): Promise<void> {
     try {
@@ -67,5 +72,72 @@ export class MosqueService {
       throw error; // Vous pouvez gérer l'erreur de manière appropriée ici
     }
   }
+
+
+//filter mosque
+async filter(name?: string, location?: string): Promise<Mosque[]> {
+  try {
+    const db = getFirestore();
+    const mosqueCollectionRef = collection(db, 'mosques');
+
+    // Créez une requête pour filtrer les mosquées
+    let filteredQuery = query(mosqueCollectionRef);
+
+    // Ajoutez les critères de recherche si les paramètres sont définis
+    if (name) {
+      filteredQuery = query(filteredQuery, where('name', '==', name));
+    }
+    if (location) {
+      filteredQuery = query(filteredQuery, where('location', '==', location));
+    }
+
+    // Exécutez la requête
+    const querySnapshot: QuerySnapshot = await getDocs(filteredQuery);
+
+    // Parcourez les résultats de la requête et convertissez-les en tableau de mosquées
+    const mosques: Mosque[] = [];
+    querySnapshot.forEach((doc) => {
+      const mosqueData = doc.data() as Mosque;
+      mosques.push(mosqueData);
+    });
+
+    console.log(mosques)
+    return mosques;
+
+
+  } catch (error) {
+    console.error('Erreur lors de la recherche de mosquées :', error);
+    throw error; // Vous pouvez gérer l'erreur de manière appropriée ici
+  }
+}
+
+
+// Fonction pour récupérer les informations d'une mosquée spécifique par son ID
+async getDetailsMosque(mosqueId: string): Promise<Mosque | null> {
+  try {
+    const db = getFirestore();
+    const mosqueDocRef = doc(db, 'mosques', mosqueId);
+
+    // Récupérez le document de la mosquée spécifique
+    const docSnapshot = await getDoc(mosqueDocRef);
+
+    if (docSnapshot.exists()) {
+      // Le document de la mosquée existe, vous pouvez récupérer ses données
+      const mosqueData = docSnapshot.data() as Mosque;
+      console.log(mosqueData)
+      return mosqueData;
+    } else {
+      // La mosquée n'a pas été trouvée
+      console.log("mosque non trouve")
+
+      return null;
+    }
+  } catch (error) {
+    console.error('Erreur lors de la récupération de la mosquée :', error);
+    throw error; // Vous pouvez gérer l'erreur de manière appropriée ici
+  }
+}
+
+
 
 }
