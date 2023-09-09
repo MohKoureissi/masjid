@@ -13,6 +13,7 @@ export class Tab1Page implements OnInit {
   map!: L.Map;
   currentRoute: any;
 
+
   constructor(private mosqueService: MosqueService) {}
 
   async ngOnInit() {
@@ -20,7 +21,7 @@ export class Tab1Page implements OnInit {
     const mosques = await this.mosqueService.filter();
     await this.displayAllMosques(mosques);
   }
-
+//pour avoir la poistion de
   async initMap() {
     const { coords } = await Geolocation.getCurrentPosition();
     const lat = coords.latitude;
@@ -38,13 +39,21 @@ export class Tab1Page implements OnInit {
   }
 
   async displayAllMosques(mosques: any[]) {
+    const imageMosque = L.icon({
+      iconUrl: '/assets/logo.png', // URL de votre image personnalisée
+      iconSize: [32, 32], // Taille de l'icône en pixels
+      iconAnchor: [16, 32], // Point d'ancrage de l'icône par rapport à sa position
+    });
     mosques.forEach((mosque) => {
       const mosqueLocation = L.latLng(mosque.lat, mosque.lng);
 
       // Ajoutez un marqueur à la position de la mosquée
-      const mosqueMarker = L.marker(mosqueLocation)
+      const mosqueMarker = L.marker(mosqueLocation, { icon: imageMosque })
         .addTo(this.map)
-        .bindPopup(`Nom : ${mosque.name}<br>Quartier : ${mosque.quartier} <br>Quartier : ${mosque.imanName}`);
+        .bindPopup(`
+             Nom : ${mosque.name}<br>Quartier : ${mosque.quartier} <br>Quartier : ${mosque.imanName}
+
+        `);
 
       // Attachez un gestionnaire d'événements de clic au marqueur pour lancer l'itinéraire
       mosqueMarker.on('click', () => {
@@ -80,4 +89,31 @@ export class Tab1Page implements OnInit {
     // Créez un itinéraire depuis la position actuelle vers la mosquée
     this.createRoute(currentLocation, mosqueLocation);
   }
+
+  async shareRoute() {
+    // Vérifiez d'abord si un itinéraire est actuellement tracé
+    if (this.currentRoute) {
+      const route = this.currentRoute.getPlan();
+      const waypoints = route.getWaypoints();
+
+      if (waypoints.length >= 2) {
+        // Obtenez les coordonnées de départ et d'arrivée
+        const startCoords = waypoints[0].latLng;
+        const endCoords = waypoints[waypoints.length - 1].latLng;
+
+        // Générer un lien vers l'itinéraire en utilisant les coordonnées de départ et d'arrivée
+        const routeLink = `https://www.google.com/maps/dir/${startCoords.lat},${startCoords.lng}/${endCoords.lat},${endCoords.lng}/`;
+
+        // Vous pouvez maintenant utiliser ce lien pour partager l'itinéraire
+        // Par exemple, vous pouvez l'ouvrir dans le navigateur ou le partager via une application de messagerie
+        console.log('Lien vers l\'itinéraire:', routeLink);
+      } else {
+        console.error('L\'itinéraire ne contient pas suffisamment de waypoints pour le partager.');
+      }
+    } else {
+      console.error('Aucun itinéraire actuellement tracé.');
+    }
+  }
+
+
 }
