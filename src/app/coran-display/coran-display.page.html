@@ -1,0 +1,27 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Coran</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+    <div class="parallax-img">  
+  <h1><ion-icon name="chevron-back-outline"></ion-icon></h1>
+   <h1>Al-Fatiha</h1>
+   <h1><ion-icon name="volume-mute-outline"></ion-icon></h1>
+  </div>
+      <div class="container">
+        <ion-card>
+          <ion-card-content class="player-card" [style.background-image]=
+          "'url(../../assets/illustrations/coran.jpg)'">
+          </ion-card-content>
+        </ion-card>
+        
+        <p class="controls">
+          <ion-icon class="play" name="play-outline"></ion-icon>
+          <ion-progress-bar class="progress" [value]="0.5" color="success"></ion-progress-bar>
+        </p>
+      </div>
+</ion-content>

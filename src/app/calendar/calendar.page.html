@@ -1,0 +1,29 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Calendrier</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+    <div class="parallax-img" [style.background-image]=
+    "'url(../../assets/illustrations/calendar.jpg)'">  
+   <h1>Calendrier</h1>
+  </div>
+  <br>
+    <div class="calendar">
+      <ion-datetime color="danger" locale="es-ES"></ion-datetime>
+    </div>
+      <div class="container">
+        <ion-card *ngFor="let i of [].constructor(9)">
+          <ion-card-content class="radio-card">
+            <div class="text">
+                <h2><a>Nouvel an Islamique</a></h2>
+                <p><a>1 Muharram 1445</a></p>
+            </div>
+           <a class="frequence" href="#">19 July 2023</a>
+          </ion-card-content>
+        </ion-card>
+      </div>
+</ion-content>

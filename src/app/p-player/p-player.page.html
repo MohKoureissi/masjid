@@ -1,0 +1,35 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Coran</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+    <div class="parallax-img">  
+  <h1><ion-icon name="chevron-back-outline"></ion-icon></h1>
+   <h1><ion-icon name="musical-notes-outline"></ion-icon></h1>
+   <h1><ion-icon name="volume-mute-outline"></ion-icon></h1>
+  </div>
+      <div class="container">
+        <h1>Al Quran</h1>
+        <ion-card>
+          <ion-card-content class="player-card" [style.background-image]=
+          "'url(../../assets/illustrations/goita.jpg)'">
+          </ion-card-content>
+        </ion-card>
+        <h4>Imam Abdoulaye GOITA</h4>
+        <h6 style="color: black;">La prière de nuit</h6>
+        <p>
+          <ion-icon name="download-outline"></ion-icon>
+          <ion-icon  routerLink="/list-preche" name="musical-note-outline"></ion-icon>
+        </p>
+        <ion-progress-bar [value]=""></ion-progress-bar>
+        <p class="controls">
+          <ion-icon  name="play-back-outline"></ion-icon>
+          <ion-icon class="play" name="play-outline"></ion-icon>
+          <ion-icon name="play-forward-outline"></ion-icon>
+        </p>
+      </div>
+</ion-content>

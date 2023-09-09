@@ -1,0 +1,37 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Coran</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+    <div class="parallax-img" [style.background-image]="'url(../../assets/illustrations/mosquee.jpg)'">  
+   <h1>Coran</h1>
+  </div>
+      <div class="container">
+        <ion-card *ngFor="let i of [].constructor(9)">
+          <ion-card-content class="radio-card">
+            <div class="thumb">
+              <ion-thumbnail>
+                <img alt="Silhouette of mountains" src="../../assets/icon/Vector.svg"/>
+                <span>1</span>
+              </ion-thumbnail>
+            </div>
+            <div class="text">
+                <h1>Al-Fatiha</h1>
+                <h2>Prologue</h2>
+                <ion-progress-bar class="progress" [value]="0.5" color="success"></ion-progress-bar>
+            </div>
+            <div>
+              <ion-icon routerLink="/player" size="large" name="play-circle-outline"></ion-icon>
+            </div>
+            <div>
+              <ion-icon size="large" name="arrow-down-outline"></ion-icon>
+            </div>
+           
+          </ion-card-content>
+        </ion-card>
+      </div>
+</ion-content>

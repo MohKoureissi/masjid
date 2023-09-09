@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import * as L from 'leaflet';
 import { Geolocation } from '@capacitor/geolocation';
-import { MosqueService } from '../mosque-pages/service/mosque.service';
 import 'leaflet-routing-machine';
+import {MosqueService} from "../../data/mosque/mosque.service";
 
 @Component({
   selector: 'app-tab1',
