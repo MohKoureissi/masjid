@@ -3,10 +3,6 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: '',
-    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
-  },
-  {
     path: 'home',
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
@@ -42,7 +38,8 @@ const routes: Routes = [
   {
     path: 'player',
     loadChildren: () => import('./player/player.module').then( m => m.PlayerPageModule)
-  },  {
+  },
+  {
     path: 'coran-display',
     loadChildren: () => import('./coran-display/coran-display.module').then( m => m.CoranDisplayPageModule)
   },
@@ -82,6 +79,10 @@ const routes: Routes = [
     path: 'annonces',
     loadChildren: () => import('./annonces/annonces.module').then( m => m.AnnoncesPageModule)
   },
+  {
+    path: 'login',
+    loadChildren: () => import('./dashbord-page/login/login.module').then( m => m.LoginPageModule)
+  }
 
 ];
 @NgModule({

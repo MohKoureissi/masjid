@@ -1,11 +1,9 @@
-import { MosqueService } from './mosque-pages/service/mosque.service';
 import { Component, OnInit } from '@angular/core';
-import { UserService } from './user-pages/service/user.service';
 import { Mosque } from './model/mosque.model';
-import {TimeService} from "./time-pages/service/time.service";
 import {TimeModel} from "./model/time.model";
-import {AdminService} from "./user-pages/service/admin.service";
 import {AdminModel} from "./model/admin.model";
+import {TimeService} from "../data/time/time.service";
+import {AdminService} from "../data/user/admin.service";
 
 @Component({
   selector: 'app-root',

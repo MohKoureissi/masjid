@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {doc, Firestore, updateDoc, getDoc, deleteDoc} from '@angular/fire/firestore';
 import {addDoc, collection, getFirestore, getDocs} from 'firebase/firestore';
-import {TimeModel} from '../../model/time.model';
 import {get} from "@angular/fire/database";
+import {TimeModel} from "../../app/model/time.model";
 
 @Injectable({
   providedIn: 'root'
