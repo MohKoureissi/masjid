@@ -21,7 +21,7 @@ export class Tab1Page implements OnInit {
     const mosques = await this.mosqueService.filter();
     await this.displayAllMosques(mosques);
   }
-//pour avoir la poistion de
+//pour avoir la poistion de USERS
   async initMap() {
     const { coords } = await Geolocation.getCurrentPosition();
     const lat = coords.latitude;
