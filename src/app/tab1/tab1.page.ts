@@ -1,5 +1,10 @@
+import { Mosque } from 'src/app/model/mosque.model';
 import { Component, OnInit } from '@angular/core';
 import * as L from 'leaflet';
+import 'leaflet';
+import 'leaflet-control-geocoder';
+import 'leaflet-search';
+
 import { Geolocation } from '@capacitor/geolocation';
 import 'leaflet-routing-machine';
 import {MosqueService} from "../../data/mosque/mosque.service";
@@ -13,14 +18,43 @@ export class Tab1Page implements OnInit {
   map!: L.Map;
   currentRoute: any;
 
+  //pour stocker les mosquess
+  mosquee: Mosque[] = [];
+  filteredMosques: Mosque[] = [];
+  searchQuery: string = '';
+
+
+  markersLayer: L.LayerGroup = L.layerGroup();
 
   constructor(private mosqueService: MosqueService) {}
 
   async ngOnInit() {
     await this.initMap();
     const mosques = await this.mosqueService.filter();
-    await this.afiicherMosques(mosques);
+    await this.afficherMosques(mosques);
+    // ...
+    const searchLayer = L.layerGroup().addTo(this.map);
+    const searchControl =  (L as any).Control.Search({
+      position: 'topright',
+      initial: false,
+      hideMarkerOnCollapse: true,
+      zoom: 17,
+      autoCollapse: true,
+    });
+
+    searchControl.on('search:locationfound', (e: any) => {
+      if (e.layer._popup) {
+        e.layer.openPopup();
+      }
+    });
+
+    searchControl.on('search:collapsed', () => {
+      this.markersLayer.clearLayers();
+    });
+
+    this.map.addControl(searchControl);
   }
+
 //pour avoir la poistion de USERS
   async initMap() {
     const { coords } = await Geolocation.getCurrentPosition();
@@ -33,12 +67,15 @@ export class Tab1Page implements OnInit {
       maxZoom: 19,
     }).addTo(this.map);
 
+
+
+
     const marker = L.marker([lat, lng]).addTo(this.map);
 
     marker.bindPopup('Vous êtes ici !').openPopup();
   }
 
-  async afiicherMosques(mosques: any[]) {
+  async afficherMosques(mosques: any[]) {
     const imageMosque = L.icon({
       iconUrl: '/assets/logo.png', // URL de votre image personnalisée
       iconSize: [32, 32], // Taille de l'icône en pixels
@@ -133,5 +170,28 @@ export class Tab1Page implements OnInit {
     }
   }
 
+// la fonction rechercehe
+onSearchInput(event: any) {
+  const searchValue = event.target.value.toLowerCase();
+  this.filteredMosques = this.mosquee.filter((mosque) => {
+    return (
+      mosque.name.toLowerCase().includes(searchValue) ||
+      mosque.imanName.toLowerCase().includes(searchValue)
+    );
+  });
+
+  this.markersLayer.clearLayers();
+
+  this.filteredMosques.forEach((mosque) => {
+    const mosqueLocation = L.latLng(mosque.lat, mosque.lng);
+    const marker = L.marker(mosqueLocation).addTo(this.markersLayer);
+    marker.bindPopup(`
+      Nom : ${mosque.name}<br>Imam : ${mosque.imanName}<br>
+      Quartier : ${mosque.quartier}
+    `);
+  });
+
+  this.markersLayer.addTo(this.map);
+}
 
 }

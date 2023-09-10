@@ -158,7 +158,7 @@ async getAllMosques(): Promise<Mosque[]> {
         mosques.push(mosqueData);
       }
     });
-console.log(mosques);
+// console.log(mosques);
     return mosques;
   } catch (error) {
     console.error('Erreur lors de la récupération de toutes les mosquées :', error);
