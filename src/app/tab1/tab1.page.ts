@@ -2,8 +2,8 @@ import { Mosque } from 'src/app/model/mosque.model';
 import { Component, OnInit } from '@angular/core';
 import * as L from 'leaflet';
 import 'leaflet';
-import 'leaflet-control-geocoder';
-import 'leaflet-search';
+import {Geocoder, geocoders} from 'leaflet-control-geocoder';
+
 
 import { Geolocation } from '@capacitor/geolocation';
 import 'leaflet-routing-machine';
@@ -34,46 +34,52 @@ export class Tab1Page implements OnInit {
     await this.afficherMosques(mosques);
     // ...
     const searchLayer = L.layerGroup().addTo(this.map);
-    const searchControl =  (L as any).Control.Search({
-      position: 'topright',
-      initial: false,
-      hideMarkerOnCollapse: true,
-      zoom: 17,
-      autoCollapse: true,
-    });
+    // const searchControl =  (L as any).Control.Search({
+    //   position: 'topright',
+    //   initial: false,
+    //   hideMarkerOnCollapse: true,
+    //   zoom: 17,
+    //   autoCollapse: true,
+    // });
 
-    searchControl.on('search:locationfound', (e: any) => {
-      if (e.layer._popup) {
-        e.layer.openPopup();
-      }
-    });
+    // searchControl.on('search:locationfound', (e: any) => {
+    //   if (e.layer._popup) {
+    //     e.layer.openPopup();
+    //   }
+    // });
 
-    searchControl.on('search:collapsed', () => {
-      this.markersLayer.clearLayers();
-    });
+    // searchControl.on('search:collapsed', () => {
+    //   this.markersLayer.clearLayers();
+    // });
 
-    this.map.addControl(searchControl);
+    // this.map.addControl(searchControl);
   }
 
 //pour avoir la poistion de USERS
-  async initMap() {
-    const { coords } = await Geolocation.getCurrentPosition();
-    const lat = coords.latitude;
-    const lng = coords.longitude;
+async initMap() {
+  const { coords } = await Geolocation.getCurrentPosition();
+  const lat = coords.latitude;
+  const lng = coords.longitude;
 
-    this.map = L.map('map').setView([lat, lng], 15);
+  this.map = L.map('map').setView([lat, lng], 15);
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 19,
-    }).addTo(this.map);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+  }).addTo(this.map);
+
+  // Initialisez le contrôle de géocodage
+  new Geocoder({
+    geocoder: new geocoders.Nominatim(),
+    position: 'topright',
+
+  }).addTo(this.map);
 
 
+  const marker = L.marker([lat, lng]).addTo(this.map);
 
+  marker.bindPopup('Vous êtes ici !').openPopup();
+}
 
-    const marker = L.marker([lat, lng]).addTo(this.map);
-
-    marker.bindPopup('Vous êtes ici !').openPopup();
-  }
 
   async afficherMosques(mosques: any[]) {
     const imageMosque = L.icon({
