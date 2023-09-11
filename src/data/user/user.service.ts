@@ -1,5 +1,5 @@
-import { getDoc } from 'firebase/firestore';
-import { Users } from './../../model/user.model';
+import { Firestore, getDoc, getDocs, query } from 'firebase/firestore';
+import { Users } from 'src/app/model/user.model';
 import { Injectable } from '@angular/core';
 
 import {
@@ -12,7 +12,7 @@ import {
   GoogleAuthProvider,
 } from 'firebase/auth';
 
-import { addDoc, collection,updateDoc,doc, arrayRemove,getFirestore, setDoc } from 'firebase/firestore';
+import { addDoc, collection,updateDoc,doc, arrayRemove,getFirestore, setDoc,DocumentData } from 'firebase/firestore';
 import { Announcements } from 'src/app/model/announcement.model';
 import { Mosque } from 'src/app/model/mosque.model';
 
@@ -290,4 +290,47 @@ async abonneAnnonce(userId: string, announcementId: string): Promise<void> {
     }
   }
 
+  //methode pur recuperer la liste des users
+  async getListeUsers(): Promise<DocumentData[]> {
+    try {
+      const db: Firestore = getFirestore();
+      const usersCollection = collection(db, 'users');
+      const usersQuery = query(usersCollection);
+
+      const querySnapshot = await getDocs(usersQuery);
+      const users: DocumentData[] = [];
+
+      querySnapshot.forEach((doc) => {
+        users.push(doc.data());
+      });
+// console.log(users);
+      return users;
+    } catch (error) {
+      console.error('Erreur lors de la récupération de la liste des utilisateurs :', error);
+      throw error;
+    }
+  }
+
+ //methode pur recuperer un user specifique
+  async getUserById(userId: string): Promise<DocumentData | null> {
+    try {
+      const db: Firestore = getFirestore();
+      const userDocRef = doc(db, 'users', userId);
+
+      const userDocSnapshot = await getDoc(userDocRef);
+
+      if (userDocSnapshot.exists()) {
+         const user= userDocSnapshot.data();
+// console.log(user);
+
+         return user
+      } else {
+        console.log(`L'utilisateur avec l'ID ${userId} n'existe pas.`);
+        return null;
+      }
+    } catch (error) {
+      console.error('Erreur lors de la récupération de l\'utilisateur par ID :', error);
+      throw error;
+    }
+  }
 }

@@ -34,9 +34,13 @@
             "styles": [
               "src/theme/variables.scss",
               "node_modules/leaflet/dist/leaflet.css",
+              "node_modules/leaflet-search/src/leaflet-search.css",
               "src/global.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/leaflet/dist/leaflet.js",
+              "node_modules/leaflet-search/src/leaflet-search.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -117,6 +121,12 @@
             ],
             "styles": [
               "src/theme/variables.scss",
+              "node_modules/@ionic/angular/css/core.css",
+              "node_modules/@ionic/angular/css/normalize.css",
+              "node_modules/@ionic/angular/css/structure.css",
+              "node_modules/@ionic/angular/css/typography.css",
+              "node_modules/@ionic/angular/css/display.css",
+              "src/theme/variables.css",
               "src/global.scss"
             ],
             "scripts": []

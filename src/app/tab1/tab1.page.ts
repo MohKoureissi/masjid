@@ -1,5 +1,10 @@
+import { Mosque } from 'src/app/model/mosque.model';
 import { Component, OnInit } from '@angular/core';
 import * as L from 'leaflet';
+import 'leaflet';
+import {Geocoder, geocoders} from 'leaflet-control-geocoder';
+
+
 import { Geolocation } from '@capacitor/geolocation';
 import 'leaflet-routing-machine';
 import {MosqueService} from "../../data/mosque/mosque.service";
@@ -13,32 +18,70 @@ export class Tab1Page implements OnInit {
   map!: L.Map;
   currentRoute: any;
 
+  //pour stocker les mosquess
+  mosquee: Mosque[] = [];
+  filteredMosques: Mosque[] = [];
+  searchQuery: string = '';
+
+
+  markersLayer: L.LayerGroup = L.layerGroup();
 
   constructor(private mosqueService: MosqueService) {}
 
   async ngOnInit() {
     await this.initMap();
     const mosques = await this.mosqueService.filter();
-    await this.displayAllMosques(mosques);
+    await this.afficherMosques(mosques);
+    // ...
+    const searchLayer = L.layerGroup().addTo(this.map);
+    // const searchControl =  (L as any).Control.Search({
+    //   position: 'topright',
+    //   initial: false,
+    //   hideMarkerOnCollapse: true,
+    //   zoom: 17,
+    //   autoCollapse: true,
+    // });
+
+    // searchControl.on('search:locationfound', (e: any) => {
+    //   if (e.layer._popup) {
+    //     e.layer.openPopup();
+    //   }
+    // });
+
+    // searchControl.on('search:collapsed', () => {
+    //   this.markersLayer.clearLayers();
+    // });
+
+    // this.map.addControl(searchControl);
   }
-//pour avoir la poistion de
-  async initMap() {
-    const { coords } = await Geolocation.getCurrentPosition();
-    const lat = coords.latitude;
-    const lng = coords.longitude;
 
-    this.map = L.map('map').setView([lat, lng], 15);
+//pour avoir la poistion de USERS
+async initMap() {
+  const { coords } = await Geolocation.getCurrentPosition();
+  const lat = coords.latitude;
+  const lng = coords.longitude;
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 19,
-    }).addTo(this.map);
+  this.map = L.map('map').setView([lat, lng], 15);
 
-    const marker = L.marker([lat, lng]).addTo(this.map);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+  }).addTo(this.map);
 
-    marker.bindPopup('Vous êtes ici !').openPopup();
-  }
+  // Initialisez le contrôle de géocodage
+  new Geocoder({
+    geocoder: new geocoders.Nominatim(),
+    position: 'topright',
 
-  async displayAllMosques(mosques: any[]) {
+  }).addTo(this.map);
+
+
+  const marker = L.marker([lat, lng]).addTo(this.map);
+
+  marker.bindPopup('Vous êtes ici !').openPopup();
+}
+
+
+  async afficherMosques(mosques: any[]) {
     const imageMosque = L.icon({
       iconUrl: '/assets/logo.png', // URL de votre image personnalisée
       iconSize: [32, 32], // Taille de l'icône en pixels
@@ -57,7 +100,7 @@ export class Tab1Page implements OnInit {
 
       // Attachez un gestionnaire d'événements de clic au marqueur pour lancer l'itinéraire
       mosqueMarker.on('click', () => {
-        this.launchRouteToMosque(mosque);
+        this.lancerItineraireVersMosque(mosque);
       });
     });
   }
@@ -78,7 +121,7 @@ export class Tab1Page implements OnInit {
     }).addTo(this.map);
   }
 
-  async launchRouteToMosque(mosque: any) {
+  async lancerItineraireVersMosque(mosque: any) {
     // Obtenez les coordonnées de la mosquée
     const mosqueLocation = L.latLng(mosque.lat, mosque.lng);
 
@@ -89,8 +132,7 @@ export class Tab1Page implements OnInit {
     // Créez un itinéraire depuis la position actuelle vers la mosquée
     this.createRoute(currentLocation, mosqueLocation);
   }
-
-  async shareRoute() {
+  async partagerItineraire() {
     // Vérifiez d'abord si un itinéraire est actuellement tracé
     if (this.currentRoute) {
       const route = this.currentRoute.getPlan();
@@ -104,9 +146,12 @@ export class Tab1Page implements OnInit {
         // Générer un lien vers l'itinéraire en utilisant les coordonnées de départ et d'arrivée
         const routeLink = `https://www.google.com/maps/dir/${startCoords.lat},${startCoords.lng}/${endCoords.lat},${endCoords.lng}/`;
 
-        // Vous pouvez maintenant utiliser ce lien pour partager l'itinéraire
-        // Par exemple, vous pouvez l'ouvrir dans le navigateur ou le partager via une application de messagerie
-        console.log('Lien vers l\'itinéraire:', routeLink);
+        // Générer un lien WhatsApp
+        const whatsappLink = `https://api.whatsapp.com/send?text=${encodeURIComponent('Check out this route: ' + routeLink)}`;
+
+        // Ouvrir le lien WhatsApp dans une nouvelle fenêtre ou un nouvel onglet
+        window.open(whatsappLink);
+
       } else {
         console.error('L\'itinéraire ne contient pas suffisamment de waypoints pour le partager.');
       }
@@ -115,5 +160,44 @@ export class Tab1Page implements OnInit {
     }
   }
 
+//methode pour quitter l'itineraire
+  async quitterItineraire() {
+    // Vérifiez d'abord si un itinéraire est actuellement tracé
+    if (this.currentRoute) {
+      // Supprimez l'itinéraire de la carte
+      this.map.removeControl(this.currentRoute);
+
+      // Réinitialisez la variable de l'itinéraire actuel
+      this.currentRoute = null;
+
+      console.log('Itinéraire quitté.');
+    } else {
+      console.error('Aucun itinéraire actuellement tracé.');
+    }
+  }
+
+// la fonction rechercehe
+onSearchInput(event: any) {
+  const searchValue = event.target.value.toLowerCase();
+  this.filteredMosques = this.mosquee.filter((mosque) => {
+    return (
+      mosque.name.toLowerCase().includes(searchValue) ||
+      mosque.imanName.toLowerCase().includes(searchValue)
+    );
+  });
+
+  this.markersLayer.clearLayers();
+
+  this.filteredMosques.forEach((mosque) => {
+    const mosqueLocation = L.latLng(mosque.lat, mosque.lng);
+    const marker = L.marker(mosqueLocation).addTo(this.markersLayer);
+    marker.bindPopup(`
+      Nom : ${mosque.name}<br>Imam : ${mosque.imanName}<br>
+      Quartier : ${mosque.quartier}
+    `);
+  });
+
+  this.markersLayer.addTo(this.map);
+}
 
 }
