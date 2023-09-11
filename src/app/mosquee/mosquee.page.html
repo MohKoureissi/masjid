@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/tabs/home"></ion-back-button>
+      <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title>Mosquée</ion-title>
   </ion-toolbar>
@@ -21,14 +21,13 @@
               </ion-thumbnail>
             </div>
             <div class="text">
-                <h2 routerLink="/tabs/mosquee-details">La Grande Mosquée de Bamako</h2>
+                <h2 routerLink="mosquee-details">La Grande Mosquée de Bamako</h2>
                 <p></p>
             </div>
-           
           </ion-card-content>
         </ion-card>
       </div>
-      <ion-fab routerLink="/edit-mosquee" slot="fixed" vertical="bottom" horizontal="end">
+      <ion-fab routerLink="edit-mosquee" slot="fixed" vertical="bottom" horizontal="end">
         <ion-fab-button>
           <ion-icon name="add"></ion-icon>
         </ion-fab-button>
