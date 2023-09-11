@@ -7,33 +7,78 @@ const routes: Routes = [
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
   },
   {
-    path: 'demarrage',
-    loadChildren: () => import('./demarrage/demarrage.module').then( m => m.DemarragePageModule)
+    path: 'home',
+    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
   {
-    path: 'login',
-    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+    path: 'mosquee',
+    loadChildren: () => import('./mosquee/mosquee.module').then(m => m.MosqueePageModule)
   },
   {
-    path: 'inscriptionuser',
-    loadChildren: () => import('./inscriptionuser/inscriptionuser.module').then( m => m.InscriptionuserPageModule)
+    path: 'names',
+    loadChildren: () => import('./names/names.module').then( m => m.NamesPageModule)
   },
   {
-    path: 'motdepasse',
-    loadChildren: () => import('./motdepasse/motdepasse.module').then( m => m.MotdepassePageModule)
+    path: 'radio',
+    loadChildren: () => import('./radio/radio.module').then( m => m.RadioPageModule)
   },
   {
-    path: 'profiladmin',
-    loadChildren: () => import('./profiluser/profiladmin.module').then( m => m.ProfiladminPageModule)
+    path: 'calendar',
+    loadChildren: () => import('./calendar/calendar.module').then( m => m.CalendarPageModule)
   },
   {
-    path: 'nouveau-mot-de-passe',
-    loadChildren: () => import('./nouveau-mot-de-passe/nouveau-mot-de-passe.module').then( m => m.NouveauMotDePassePageModule)
+    path: 'preche',
+    loadChildren: () => import('./preche/preche.module').then( m => m.PrechePageModule)
   },
   {
-    path: 'changer',
-    loadChildren: () => import('./changer/changer.module').then( m => m.ChangerPageModule)
-  }
+    path: 'coran',
+    loadChildren: () => import('./coran/coran.module').then( m => m.CoranPageModule)
+  },
+  {
+    path: 'player',
+    loadChildren: () => import('./player/player.module').then( m => m.PlayerPageModule)
+  },
+  {
+    path: 'coran-display',
+    loadChildren: () => import('./coran-display/coran-display.module').then( m => m.CoranDisplayPageModule)
+  },
+  {
+  
+    path: 'list-coran',
+    loadChildren: () => import('./list-coran/list-coran.module').then( m => m.ListCoranPageModule)
+  },
+  {
+    path: 'p-player',
+    loadChildren: () => import('./p-player/p-player.module').then( m => m.PPlayerPageModule)
+  },
+  {
+    path: 'list-preche',
+    loadChildren: () => import('./list-preche/list-preche.module').then( m => m.ListPrechePageModule)
+  },
+  {
+    path: 'edit-mosquee',
+    loadChildren: () => import('./edit-mosquee/edit-mosquee.module').then( m => m.EditMosqueePageModule)
+  },
+  {
+    path: 'mosquee-details',
+    loadChildren: () => import('./mosquee-details/mosquee-details.module').then( m => m.MosqueeDetailsPageModule)
+  },
+  {
+    path: 'infos-horaires',
+    loadChildren: () => import('./infos-horaires/infos-horaires.module').then( m => m.InfosHorairesPageModule)
+  },
+  {
+    path: 'list-programmes',
+    loadChildren: () => import('./list-programmes/list-programmes.module').then( m => m.ListProgrammesPageModule)
+  },
+  {
+    path: 'dons',
+    loadChildren: () => import('./dons/dons.module').then( m => m.DonsPageModule)
+  },
+  {
+    path: 'annonces',
+    loadChildren: () => import('./annonces/annonces.module').then( m => m.AnnoncesPageModule)
+  },
 
 ];
 @NgModule({
