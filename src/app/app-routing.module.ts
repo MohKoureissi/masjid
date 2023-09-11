@@ -1,3 +1,4 @@
+import { LoginPageModule } from './masjid-admin/login/login.module';
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
@@ -42,7 +43,8 @@ const routes: Routes = [
   {
     path: 'player',
     loadChildren: () => import('./player/player.module').then( m => m.PlayerPageModule)
-  },  {
+  },
+  {
     path: 'coran-display',
     loadChildren: () => import('./coran-display/coran-display.module').then( m => m.CoranDisplayPageModule)
   },
@@ -82,6 +84,22 @@ const routes: Routes = [
     path: 'annonces',
     loadChildren: () => import('./annonces/annonces.module').then( m => m.AnnoncesPageModule)
   },
+
+  {
+    path: 'login',
+    loadChildren: () => import('./masjid-admin/login/login.module').then( m => m.LoginPageModule)
+  },
+ 
+  {
+    path: 'panel',
+    loadChildren: () => import('./masjid-admin/panel/panel.module').then( m => m.PanelPageModule)
+  },  {
+    path: 'dashboard',
+    loadChildren: () => import('./masjid-admin/dashboard/dashboard.module').then( m => m.DashboardPageModule)
+  },
+
+
+
 
 ];
 @NgModule({
