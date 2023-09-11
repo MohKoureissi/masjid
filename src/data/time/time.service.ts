@@ -17,7 +17,6 @@ export class TimeService {
     const docRef = await addDoc(timesCollectionRef, time);
     time.id = docRef.id;
     const timeDocRef = doc(this.firestore, `${this.COLLECTION_NAME}/${time.mosqueId}/${this.COLLECTION_NAME}/${time.id}`);
-    console.log(docRef.id);
     updateDoc(
       timeDocRef,
       {id: time.id}

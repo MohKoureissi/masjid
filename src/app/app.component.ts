@@ -9,6 +9,10 @@ import {Announcement} from "./model/announcement.model";
 import {AnnouncementService} from "../data/announcement/announcement.service";
 import {RadioModel} from "./model/radio.model";
 import {RadioService} from "../data/radio/radio.service";
+import {ReaderService} from "../data/reader/reader.service";
+import {ReaderModel} from "./model/reader.model";
+import {SurahService} from "../data/surah/surah.service";
+import {SurahModel} from "./model/surah.model";
 
 @Component({
   selector: 'app-root',
@@ -18,7 +22,7 @@ import {RadioService} from "../data/radio/radio.service";
 export class AppComponent implements OnInit {
 
   mosque: Mosque|null = null;
-  constructor(private radioService: RadioService) {}
+  constructor(private surahService: SurahService) {}
   ngOnInit(): void {
     this.test();
   }
