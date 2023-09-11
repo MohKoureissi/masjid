@@ -1,0 +1,155 @@
+#arrow-left {
+    position: absolute;
+    left: 20px; 
+    top: 30px;
+    transform: translateY(0); 
+    font-size: 40px; 
+    cursor: pointer; 
+    color: white;
+  }
+  
+  .en-tete {
+    width: 408px;
+    height: 155px;
+    flex-shrink: 0;
+    border-radius: 0px 0px 50px 50px;
+    background: #2C6632;
+    box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.35);
+    display: flex;
+    justify-content: center;
+    // align-items: flex-start;
+    padding-top: 15%;
+  }
+  
+  h1 {
+    color: #FFF;
+    text-align: center;
+    font-family: Inter;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 130%; 
+    letter-spacing: -0.3px;
+    margin-bottom: 50%; 
+  }
+  .info {
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+  }
+  
+  .containeur {
+    width: 370px;
+    height: 150px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    background: var(--light-gray-0, #FFF);
+    box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.25);
+    margin-top: 20%; 
+  }
+  
+.parent{
+    display: flex;
+    // justify-content: center;
+    align-items: center;
+    gap: 13px;
+    flex-shrink: 0;
+}
+.notification {
+    margin-top: 50px;
+    
+  }
+.tx{
+    color: var(--light-gray-11, #000);
+    font-family: Roboto;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px; 
+    letter-spacing: 0.25px;
+}
+.information{
+display: flex;
+flex-direction: column; 
+align-items: center; 
+
+
+}
+.containeu{
+width: 370px;
+height: 190px;
+flex-shrink: 0;
+border-radius: 8px;
+background: var(--light-gray-0, #FFF);
+box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.25);
+margin-top: 10%;
+}
+.icofoot{
+  margin: 10px;
+  padding: 10px;
+}
+button {
+  width: 200px;
+  height: 56px;
+  flex-shrink: 0;
+  border-radius: 30px;
+  background: #2C6632;
+  color: #FFF;
+  font-weight: bold;
+  margin-left: 20%;
+  font-size: 20px;
+
+}
+/* Style du logo */
+.logo {
+  position: absolute;
+  bottom: 87px; /* Ajustez cette valeur selon vos besoins */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+}
+
+/* Style de la div .foot */
+.foot {
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 421px;
+  height: 77px;
+  flex-shrink: 0;
+  border-radius: 205px;
+  background: #FFF;
+  box-shadow: 0px 2px 8px 0px #000;
+}
+
+.icofoot {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  gap: 20px; 
+
+}
+
+.icon-text {
+  display: flex;
+  flex-direction: column;
+  // align-items: center; 
+  // text-align: center; 
+  margin-right: 25px; 
+  
+}
+h3{
+  color: #706565;
+font-family: Inter;
+font-size: 10px;
+font-style: normal;
+font-weight: bold;
+line-height: normal;
+margin-top: 3px;
+}
+.ico{
+  width: 29px;
+  height: 29px;
+  flex-shrink: 0;
+}
