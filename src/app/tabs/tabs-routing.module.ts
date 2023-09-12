@@ -6,6 +6,11 @@ import { ProfiladminPageModule } from '../profiluser/profiladmin.module';
 
 const routes: Routes = [
   {
+    path: '',
+    redirectTo: '/tabs/home',
+    pathMatch: 'full'
+  },
+  {
     path: 'tabs',
     component: TabsPage,
     children: [
@@ -47,7 +52,7 @@ const routes: Routes = [
                     loadChildren: () => import('../annonces/annonces.module').then( m => m.AnnoncesPageModule)
                   },
                 ]
-               
+
               },
               {
                 path: 'edit-mosquee',
@@ -80,7 +85,7 @@ const routes: Routes = [
                 ]
               }
             ]
-           
+
           },{
             path: 'radio',
             loadChildren: () => import('../radio/radio.module').then( m => m.RadioPageModule)
@@ -110,16 +115,16 @@ const routes: Routes = [
                         path:'',
                         loadChildren: () => import('../player/player.module').then( m => m.PlayerPageModule)
                       },
-                      
+
                       {
                         path: 'coran-display',
                         loadChildren: () => import('../coran-display/coran-display.module').then( m => m.CoranDisplayPageModule)
                       }
                     ]
-                    
+
                   }
                 ]
-                
+
               }
             ]
           },
@@ -129,7 +134,7 @@ const routes: Routes = [
           }
         ]
       },
-      
+
       {
         path: 'names',
         loadChildren: () => import('../names/names.module').then( m => m.NamesPageModule)
@@ -176,11 +181,6 @@ const routes: Routes = [
         pathMatch: 'full'
       }
     ]
-  },
-  {
-    path: '',
-    redirectTo: '/tabs/tab1',
-    pathMatch: 'full'
   }
 ];
 
