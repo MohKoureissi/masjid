@@ -7,11 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CalendarPage implements OnInit {
 
-  constructor() { 
-   
+  constructor() {
+
   }
 
   ngOnInit() {
   }
 
+
 }
+
