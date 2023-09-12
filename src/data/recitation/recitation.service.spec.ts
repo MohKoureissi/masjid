@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { SurahService } from './surah.service';
+import { RecitationService } from './recitation.service';
 
 describe('RecitationService', () => {
-  let service: SurahService;
+  let service: RecitationService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(SurahService);
+    service = TestBed.inject(RecitationService);
   });
 
   it('should be created', () => {

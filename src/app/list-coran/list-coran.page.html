@@ -28,7 +28,7 @@
               <ion-icon routerLink="player" size="large" name="play-circle-outline"></ion-icon>
             </div>
             <div>
-              <a href="">
+              <a [href]="recitation.downloadUrl" [download]="recitation.recitationNumber">
                 <ion-icon size="large" name="arrow-down-outline"></ion-icon>
               </a>
             </div>
