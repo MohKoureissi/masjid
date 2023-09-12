@@ -4,13 +4,15 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: '',
-    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
-  },
-  {
     path: 'home',
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
+  {
+    path: 'tab1',
+    loadChildren: () => import('./tab1/tab1.module').then( m => m.Tab1PageModule)
+  },
+
+
   {
     path: '',
     redirectTo: 'home',
@@ -84,6 +86,10 @@ const routes: Routes = [
     path: 'annonces',
     loadChildren: () => import('./annonces/annonces.module').then( m => m.AnnoncesPageModule)
   },
+  {
+    path: 'login',
+    loadChildren: () => import('./dashbord-page/login/login.module').then( m => m.LoginPageModule)
+  },
 
   {
     path: 'login',
@@ -93,7 +99,8 @@ const routes: Routes = [
   {
     path: 'panel',
     loadChildren: () => import('./masjid-admin/panel/panel.module').then( m => m.PanelPageModule)
-  },  {
+  },
+  {
     path: 'dashboard',
     loadChildren: () => import('./masjid-admin/dashboard/dashboard.module').then( m => m.DashboardPageModule)
   },
