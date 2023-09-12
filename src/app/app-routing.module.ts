@@ -3,16 +3,25 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: '',
-    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
-  },
-  {
     path: 'home',
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
+  // {
+
+  //   path: 'tab1',
+  //   loadChildren: () => import('./tab1/tab1.module').then( m => m.Tab1PageModule)
+  // },
+
+
+  {
+    path: '',
+    redirectTo: 'home',
+    pathMatch: 'full'
+  },
   {
     path: 'mosquee',
-    loadChildren: () => import('./mosquee/mosquee.module').then(m => m.MosqueePageModule)
+    loadChildren: () => import('./mosquee/mosquee.module').then( m => m.MosqueePageModule)
+
   },
   {
     path: 'names',
@@ -71,14 +80,18 @@ const routes: Routes = [
     path: 'list-programmes',
     loadChildren: () => import('./list-programmes/list-programmes.module').then( m => m.ListProgrammesPageModule)
   },
-  {
-    path: 'dons',
-    loadChildren: () => import('./dons/dons.module').then( m => m.DonsPageModule)
-  },
+  // {
+  //   path: 'dons',
+  //   loadChildren: () => import('./dons/dons.module').then( m => m.DonsPageModule)
+  // },
   {
     path: 'annonces',
     loadChildren: () => import('./annonces/annonces.module').then( m => m.AnnoncesPageModule)
   },
+  {
+    path: 'login',
+    loadChildren: () => import('./dashbord-page/login/login.module').then( m => m.LoginPageModule)
+  }
 
 ];
 @NgModule({

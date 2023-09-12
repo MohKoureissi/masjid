@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "masjid-1f3cf": {
+      "hosting": {
+        "app": [
+          "masjid-1f3cf"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "masjid-1f3cf"
+  }
+}

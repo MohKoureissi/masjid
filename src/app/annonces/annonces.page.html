@@ -7,40 +7,27 @@
   </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true">
-    <div class="parallax-img" [style.background-image]="'url(../../assets/illustrations/mosquee.jpg)'">  
+    <div class="parallax-img" [style.background-image]="'url(../../assets/illustrations/mosquee.jpg)'">
       <div class="op">
          <h1>Annonces</h1>
-      </div>     
+      </div>
     </div>
       <div class="container">
-        <ion-card class="annonces">
+        <ion-card class="annonces" *ngFor="let announcement of announcements">
           <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
           <ion-card-header>
-            <ion-card-title><h1>Emission Nour sur ORTM</h1></ion-card-title>
+            <ion-card-title><h1>{{announcement.title}}</h1></ion-card-title>
           </ion-card-header>
-        
+
           <ion-card-content>
+            <p class="description">{{announcement.description}}</p>
             <div class="bottom">
-              <span>Date : 06/09/2023</span>&nbsp;
-              <span>Heure: 16H00</span>&nbsp;
-              <span>Lieu : 26 Mars</span>
+              <span>Date : {{announcement.date}}</span>&nbsp;
+              <span>Heure: {{announcement.hour}}</span>&nbsp;
+              <span>Lieu : {{announcement.place}}</span>
             </div>
           </ion-card-content>
         </ion-card>
 
-        <ion-card class="annonces">
-          <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
-          <ion-card-header>
-            <ion-card-title><h1>Prêche générale organisé par An-Sardine</h1></ion-card-title>
-          </ion-card-header>
-        
-          <ion-card-content>
-            <div class="bottom">
-              <span>Date : 06/09/2023</span>&nbsp;
-              <span>Heure: 16H00</span>&nbsp;
-              <span>Lieu : 26 Mars</span>
-            </div>
-          </ion-card-content>
-        </ion-card>
       </div>
 </ion-content>

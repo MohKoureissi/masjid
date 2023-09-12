@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ProgramService } from 'src/data/programme/programme.service';
+import { Programme } from '../model/programme.model';
 
 @Component({
   selector: 'app-list-programmes',
@@ -6,10 +8,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./list-programmes.page.scss'],
 })
 export class ListProgrammesPage implements OnInit {
+  programmes: Programme[] = [];
 
-  constructor() { }
+  constructor(private programService: ProgramService) { }
 
-  ngOnInit() {
+
+  async ngOnInit() {
+    await this.programService.getAllPrograms().then(
+      (programmes) => programmes.subscribe((a) => {
+        this.programmes = a;
+      })
+    );
+    console.log('Programmes:', this.programmes);
   }
 
 }
+
+
+
+
