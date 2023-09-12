@@ -11,7 +11,6 @@ export class NamesPage implements OnInit {
   names:any;
   constructor(private modalCtrl: ModalController) { }
 
-
   ngOnInit() {
     fetch('./assets/names/99_Names_Of_Allah.json').then(res => res.json()).then(json =>{
         this.names = json.data;
