@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {doc, Firestore, updateDoc, getDoc, deleteDoc} from '@angular/fire/firestore';
 import {addDoc, collection, getFirestore, getDocs, setDoc} from 'firebase/firestore';
 import {Observable, of} from "rxjs";
-import {SurahModel} from "../../app/model/surah.model";
+import {RecitationModel} from "../../app/model/recitation.model";
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ export class SurahService {
 
   constructor(private firestore: Firestore) { }
 
-  async addSurah(surah: SurahModel) {
+  async addSurah(surah: RecitationModel) {
     const db = getFirestore();
     try {
       const surahCollectionRef = collection(db, `${this.COLLECTION_NAME}/${surah.readerId}/${this.COLLECTION_NAME}`);
@@ -35,20 +35,20 @@ export class SurahService {
     try {
       const surahDocRef = doc(this.firestore, `${this.COLLECTION_NAME}/${readerId}/${this.COLLECTION_NAME}`, surahId);
       const surahSnap = await getDoc(surahDocRef);
-      return surahSnap.data() as SurahModel;
+      return surahSnap.data() as RecitationModel;
     }catch (erreor) {
       console.log(erreor);
       return null;
     }
   }
-  async getAllSurahs(readerId: string): Promise<Observable<SurahModel[]>> {
+  async getAllSurahs(readerId: string): Promise<Observable<RecitationModel[]>> {
     const db = getFirestore();
     try {
       const surahCollectionRef = collection(db, `${this.COLLECTION_NAME}/${readerId}/${this.COLLECTION_NAME}`);
       const surahsSnap = await getDocs(surahCollectionRef);
-      const surahs: SurahModel[] = [];
+      const surahs: RecitationModel[] = [];
       surahsSnap.forEach((doc) => {
-        surahs.push(doc.data() as SurahModel);
+        surahs.push(doc.data() as RecitationModel);
       });
       return of(surahs);
     }catch (error) {
@@ -57,7 +57,7 @@ export class SurahService {
     }
   }
 
-  async updateSurah(newSurah: SurahModel|any) {
+  async updateSurah(newSurah: RecitationModel|any) {
     const db = getFirestore();
     try {
       const docSurahRef = doc(this.firestore, `${this.COLLECTION_NAME}/${newSurah.readerId}/${this.COLLECTION_NAME}`, newSurah.id!);
