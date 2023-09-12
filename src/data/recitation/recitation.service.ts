@@ -3,92 +3,148 @@ import {doc, Firestore, updateDoc, getDoc, deleteDoc} from '@angular/fire/firest
 import {addDoc, collection, getFirestore, getDocs, setDoc} from 'firebase/firestore';
 import {Observable, of} from "rxjs";
 import {RecitationModel} from "../../app/model/recitation.model";
+import {HttpClient} from "@angular/common/http";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 @Injectable({
   providedIn: 'root'
 })
-export class SurahService {
+export class RecitationService {
 
-  COLLECTION_NAME = 'surahs';
+  COLLECTION_NAME = 'recitations';
 
-  constructor(private firestore: Firestore) { }
+  constructor(private firestore: Firestore, private http: HttpClient) { }
 
-  async addSurah(surah: RecitationModel) {
+  async addRecitation(recitation: RecitationModel, file: File) {
     const db = getFirestore();
     try {
-      const surahCollectionRef = collection(db, `${this.COLLECTION_NAME}/${surah.readerId}/${this.COLLECTION_NAME}`);
-      const docRef = await addDoc(surahCollectionRef, surah);
-      surah.id = docRef.id;
-      const surahDocRef = doc(this.firestore, `${this.COLLECTION_NAME}/${surah.readerId}/${this.COLLECTION_NAME}/${surah.id}`);
+      //recitation.downloadUrl = await this.downloadRecitation(recitation.readerId, recitation.recitationNumber);
+      recitation.downloadUrl = `gs://masjid-1f3cf.appspot.com/${this.COLLECTION_NAME}/${recitation.readerId}/${recitation.recitationNumber}`
+      recitation.apiUrl = "https://api.alquran.cloud/v1/surah/" + recitation.recitationNumber +"/fr.asad";
+      // Attendre que la requête HTTP soit terminée avant de continuer
+      const data: any = await this.http.get(recitation.apiUrl).toPromise();
+      recitation.surah = {
+        number: data.data.number,
+        name: data.data.name,
+        englishName: data.data.englishName,
+        revelationType: data.data.revelationType,
+        numberOfAyahs: data.data.numberOfAyahs
+      };
+
+
+      const surahCollectionRef = collection(db, `${this.COLLECTION_NAME}/${recitation.readerId}/${this.COLLECTION_NAME}`);
+      const docRef = await addDoc(surahCollectionRef, recitation);
+      recitation.id = docRef.id;
+      const surahDocRef = doc(this.firestore, `${this.COLLECTION_NAME}/${recitation.readerId}/${this.COLLECTION_NAME}/${recitation.id}`);
       await updateDoc(
         surahDocRef,
-        {id: surah.id}
+        {id: recitation.id}
       );
+      this.loadRecitation(recitation.readerId, file, recitation.recitationNumber);
 
-      console.log('Surah ajouté avec succès !');
+      console.log('Récitation ajouté avec succès !');
     }catch (error) {
-      console.log('Erreur lors de l\'ajout de la surah ==>', error);
+      console.log('Erreur lors de l\'ajout de la recitation ==>', error);
     }
   }
 
-  async getSurah(readerId: string, surahId: string) {
+  async getRecitation(readerId: string, recitationId: string) {
     try {
-      const surahDocRef = doc(this.firestore, `${this.COLLECTION_NAME}/${readerId}/${this.COLLECTION_NAME}`, surahId);
-      const surahSnap = await getDoc(surahDocRef);
-      return surahSnap.data() as RecitationModel;
+      const recitationDocRef = doc(this.firestore, `${this.COLLECTION_NAME}/${readerId}/${this.COLLECTION_NAME}`, recitationId);
+      const recitationSnap = await getDoc(recitationDocRef);
+      return recitationSnap.data() as RecitationModel;
     }catch (erreor) {
       console.log(erreor);
       return null;
     }
   }
-  async getAllSurahs(readerId: string): Promise<Observable<RecitationModel[]>> {
+  async getAllRecitations(readerId: string): Promise<Observable<RecitationModel[]>> {
     const db = getFirestore();
     try {
-      const surahCollectionRef = collection(db, `${this.COLLECTION_NAME}/${readerId}/${this.COLLECTION_NAME}`);
-      const surahsSnap = await getDocs(surahCollectionRef);
-      const surahs: RecitationModel[] = [];
-      surahsSnap.forEach((doc) => {
-        surahs.push(doc.data() as RecitationModel);
+      const recitationCollectionRef = collection(db, `${this.COLLECTION_NAME}/${readerId}/${this.COLLECTION_NAME}`);
+      const recitationsSnap = await getDocs(recitationCollectionRef);
+      const recitations: RecitationModel[] = [];
+      recitationsSnap.forEach((doc) => {
+        recitations.push(doc.data() as RecitationModel);
       });
-      return of(surahs);
+      return of(recitations);
     }catch (error) {
       console.log(error);
       return of([]);
     }
   }
 
-  async updateSurah(newSurah: RecitationModel|any) {
+  async updateRecitation(newRecitation: RecitationModel|any) {
     const db = getFirestore();
     try {
-      const docSurahRef = doc(this.firestore, `${this.COLLECTION_NAME}/${newSurah.readerId}/${this.COLLECTION_NAME}`, newSurah.id!);
-      const surahSnap = await getDoc(docSurahRef);
-      if(surahSnap.exists()){
-        await updateDoc(docSurahRef, newSurah);
-        console.log("Surate modifié avec succès !");
+      const docRecitationRef = doc(this.firestore, `${this.COLLECTION_NAME}/${newRecitation.readerId}/${this.COLLECTION_NAME}`, newRecitation.id!);
+      const recitationSnap = await getDoc(docRecitationRef);
+      if(recitationSnap.exists()){
+        await updateDoc(docRecitationRef, newRecitation);
+        console.log("Récitation modifié avec succès !");
       }
       else {
-        console.log("La surate spécifier est introuvable");
+        console.log("La récitation spécifier est introuvable");
       }
     }catch (error) {
       console.log(error);
     }
   }
 
-  async deleteSurah(readerId: string, surahId: string) {
+  async deleteRecitation(readerId: string, recitationId: string) {
     const db = getFirestore();
     try {
-      const docSurahRef = doc(this.firestore, `${this.COLLECTION_NAME}/${readerId}/${this.COLLECTION_NAME}`, surahId);
-      const surahSnap = await getDoc(docSurahRef);
-      if (surahSnap.exists()) {
-        await deleteDoc(docSurahRef);
-        console.log("Sourate supprimé avec succès !");
+      const docRecitationRef = doc(this.firestore, `${this.COLLECTION_NAME}/${readerId}/${this.COLLECTION_NAME}`, recitationId);
+      const recitationSnap = await getDoc(docRecitationRef);
+      if (recitationSnap.exists()) {
+        await deleteDoc(docRecitationRef);
+        console.log("Récitation supprimé avec succès !");
       }
       else {
-        console.log("La sourate spécifier est introuvable");
+        console.log("La recitation spécifier est introuvable");
       }
     }catch (error) {
       console.log(error);
     }
 
   }
+
+  loadRecitation(readerId: string, file: File, number: number) {
+    const storage = getStorage();
+
+    const recitationsRef = ref(storage, `${this.COLLECTION_NAME}/${readerId}/${number}.mp3`);
+    uploadBytes(recitationsRef, file).then((snapshot) => {
+      console.log('Fichier uploadé avec succès !');
+    });
+  }
+
+  downloadRecitation(readerId: string, recitationNumber: number): string|null {
+
+    const storage = getStorage();
+    let downloadURL: string|null = null;
+    getDownloadURL(ref(storage, `gs://masjid-1f3cf.appspot.com/${this.COLLECTION_NAME}/${readerId}/${recitationNumber}`))
+      .then((url) => {
+        downloadURL = url;
+        // `url` est l'URL de téléchargement de notre récitation
+
+        // Celui-ci peut être téléchargé directement:
+        /*const xhr = new XMLHttpRequest();
+        xhr.responseType = 'blob';
+        xhr.onload = (event) => {
+          const blob = xhr.response;
+        };
+        xhr.open('GET', url);
+        xhr.send();*/
+
+        // Or inserted into an <img> element
+        /*const img = document.getElementById('myimg');
+        img.setAttribute('src', url);*/
+      })
+      .catch((error) => {
+        // Handle any errors
+      });
+    return downloadURL;
+
+  }
+
 }
