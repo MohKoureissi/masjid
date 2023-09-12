@@ -11,11 +11,11 @@
    <h1>99 noms d'Allah</h1>
   </div>
       <div class="container">
-        <ion-card *ngFor="let i of [].constructor(99)">
-          <ion-card-content>
-            <h2>الله</h2>
-            <h2>Allah</h2>
-            <h4>Le nom suprême</h4>
+        <ion-card *ngFor="let name of names" (click)="presentModal()">
+          <ion-card-content class="names">
+            <h2>{{name.name}}</h2>
+            <h2>{{name.transliteration}}</h2>
+            <h4>{{name.fr.meaning}}</h4>
           </ion-card-content>
         </ion-card>
       </div>

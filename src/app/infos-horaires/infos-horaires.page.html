@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true">
-    <div class="parallax-img">  
+    <div class="parallax-img">
    <h1>Infos & Horaires</h1>
   </div>
       <div class="container">
@@ -21,37 +21,42 @@
           </div>
             <div class="input-container">
               <div class="input">
-                  <div><h2>Nom :&nbsp;</h2><h3>Grande mosquée de Bamako</h3></div>
-                  <div><h2>Nom de l’imam :&nbsp;</h2><h3> Koké Kallé</h3></div>
-                  <div><h2>Numéro de don :&nbsp;</h2><h3>+223 77 63 90 88</h3></div>
-                  <div><h2>Localistion : </h2><h3>12.64831,</h3><h3>-7.9927172948</h3><h2>&nbsp;<ion-icon name="copy-outline"></ion-icon></h2></div>
+                  <div><h2>Nom :&nbsp;</h2><h3>{{mosque?.name}}</h3></div>
+                  <div><h2>Nom de l’imam :&nbsp;</h2><h3>{{mosque?.imanName}}</h3></div>
+                  <div><h2>Numéro de don :&nbsp;</h2><h3>{{mosque?.donation}}</h3></div>
+                  <div><h2>Localistion : </h2><h3>{{mosque?.lat}},</h3><h3>{{mosque?.lng}}</h3><h2>&nbsp;<ion-icon name="copy-outline"></ion-icon></h2></div>
               </div>
             </div>
             <div class="input-horaire input">
               <div class="title"><ion-icon style="font-size: 40px;" name="alarm-outline"></ion-icon><h2>&nbsp;Horaires</h2></div>
               <div class="horaire">
                 <h1>Fajr : </h1>
-                <input disabled id="fajr" value="05:09" class="input" type="time" placeholder="Nom de la mosquée">
+                <input disabled id="fajr" [value]="mosque?.fajr" class="input" type="time" placeholder="Nom de la mosquée">
                 <!-- <label for="fajr"><ion-icon name="alarm-outline"></ion-icon></label>                 -->
               </div>
               <div class="horaire">
                 <h1>Dohr : </h1>
-                <input disabled id="dohr" value="13:00" class="input" type="time" placeholder="Nom de la mosquée">
+                <input disabled id="dohr" [value]="mosque?.dohr" class="input" type="time" placeholder="Nom de la mosquée">
                 <!-- <label for="dohr"><ion-icon name="alarm-outline"></ion-icon></label> -->
               </div>
               <div class="horaire">
                 <h1>Asr : </h1>
-                <input disabled id="asr" value="16:00" class="input" type="time" placeholder="Nom de la mosquée">
+                <input disabled id="asr" [value]="mosque?.asr" class="input" type="time" placeholder="Nom de la mosquée">
                 <!-- <label for="asr"><ion-icon name="alarm-outline"></ion-icon></label> -->
               </div>
               <div class="horaire">
                 <h1>Maghreb : </h1>
-                <input disabled id="maghreb" value="19:05" class="input" type="time" placeholder="Nom de la mosquée">
+                <input disabled id="maghreb" [value]="mosque?.maghreb" class="input" type="time" placeholder="Nom de la mosquée">
                 <!-- <label for="maghreb"><ion-icon name="alarm-outline"></ion-icon></label> -->
               </div>
               <div class="horaire">
-                <h1>Icha : </h1>
-                <input disabled id="icha"  value="20:05" class="input" type="time" placeholder="Nom de la mosquée">
+                <h1>Isha : </h1>
+                <input disabled id="icha"  [value]="mosque?.isha" class="input" type="time" placeholder="Nom de la mosquée">
+                <!-- <label for="icha"><ion-icon name="alarm-outline"></ion-icon></label> -->
+              </div>
+              <div class="horaire">
+                <h1>Djumha : </h1>
+                <input disabled id="djumha"  [value]="mosque?.djumha" class="input" type="time" placeholder="Nom de la mosquée">
                 <!-- <label for="icha"><ion-icon name="alarm-outline"></ion-icon></label> -->
               </div>
             </div>

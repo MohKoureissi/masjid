@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { getFirestore, doc, setDoc,  collection,getDoc,deleteDoc,updateDoc} from 'firebase/firestore';
-import { Announcements } from 'src/app/model/announcement.model';
+import { getFirestore, doc, setDoc,  collection, getDoc,deleteDoc,updateDoc, getDocs} from 'firebase/firestore';
+import {Announcement} from 'src/app/model/announcement.model';
+import {Observable, of} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -9,13 +10,14 @@ export class AnnouncementService {
 
   constructor() { }
 
-  async createAnnouncement(announcement: Announcements): Promise<void> {
+  async createAnnouncement(announcement: Announcement): Promise<void> {
     try{
       const db = getFirestore();
       const announcementCollectionRef = collection(db, "announcements")
       //ajouter une nouvelle annonce a la collection "announcements"
       const newAnouncementRef= doc(announcementCollectionRef);
       await setDoc(newAnouncementRef, announcement);
+      updateDoc(newAnouncementRef, {id: newAnouncementRef.id});
     console.log(`Annnoce  créée avec succès avec l'ID : ${newAnouncementRef.id}`);
 
     }catch (error) {
@@ -27,7 +29,7 @@ export class AnnouncementService {
 
   //update annonce
 
-  async updateAnnouncement(announcementId: string, updatedAnnouncement: Announcements|any): Promise<void> {
+  async updateAnnouncement(announcementId: string, updatedAnnouncement: Announcement|any): Promise<void> {
     try {
       const db = getFirestore();
       const announcementDocRef = doc(db, 'announcements', announcementId);
@@ -69,6 +71,37 @@ export class AnnouncementService {
     } catch (error) {
       console.error('Erreur lors de la suppression de l\'annonce :', error);
       throw error; // Vous pouvez gérer l'erreur de manière appropriée ici
+    }
+  }
+
+  async getAllAnnouncements(): Promise<Observable<Announcement[]>>{
+    const db = getFirestore();
+    const announcementsCollectionRef = collection(db, "announcements");
+
+    try {
+      const announcementsSnap = await getDocs(announcementsCollectionRef);
+      const announcements: Announcement[] = [];
+      announcementsSnap.forEach((doc) => {
+        announcements.push(doc.data() as Announcement);
+      });
+      return of(announcements);
+    }catch (error){
+      console.log(error);
+      return of([]);
+    }
+
+  }
+
+  async getAnnouncement(announcementId: string): Promise<Observable<Announcement | null>>{
+    const db = getFirestore();
+    const announcementDocRef = doc(db, 'announcements', announcementId);
+    try {
+      const announcementSnap = await getDoc(announcementDocRef);
+      const announcement = announcementSnap.data() as Announcement;
+      return of(announcement);
+    }catch (error){
+      console.log(error);
+      return of(null);
     }
   }
 

@@ -4,7 +4,7 @@ import {
   signInWithEmailAndPassword, signOut, updateEmail,
   updatePassword, updateProfile, sendPasswordResetEmail, deleteUser } from "firebase/auth";
 import { getFirestore, setDoc, doc } from 'firebase/firestore';
-import { Firestore} from "@angular/fire/firestore";
+import { Firestore } from "@angular/fire/firestore";
 import {AdminModel} from "../../app/model/admin.model";
 
 @Injectable({

@@ -5,9 +5,9 @@ import { MosqueeDetailsPage } from './mosquee-details.page';
 
 const routes: Routes = [
   {
-    path: '',
+    path: ':id',
     component: MosqueeDetailsPage
-  }
+  },
 ];
 
 @NgModule({
