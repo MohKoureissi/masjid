@@ -92,7 +92,7 @@ const routes: Routes = [
   },
 
   {
-    path: 'login',
+    path: 'login-admin',
     loadChildren: () => import('./masjid-admin/login/login.module').then( m => m.LoginPageModule)
   },
  
@@ -103,6 +103,15 @@ const routes: Routes = [
   {
     path: 'dashboard',
     loadChildren: () => import('./masjid-admin/dashboard/dashboard.module').then( m => m.DashboardPageModule)
+  }
+  ,
+  {
+    path: 'admin-page',
+    loadChildren: () => import('./masjid-admin/admin-page/admin-page.module').then( m => m.AdminPagePageModule)
+  },
+  {
+    path: 'admin-program',
+    loadChildren: () => import('./masjid-admin/admin-program/admin-program.module').then( m => m.AdminProgramPageModule)
   },
 
 
