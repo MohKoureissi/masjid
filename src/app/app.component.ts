@@ -1,18 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Mosque } from './model/mosque.model';
-import {TimeModel} from "./model/time.model";
-import {AdminModel} from "./model/admin.model";
-import {TimeService} from "../data/time/time.service";
-import {AdminService} from "../data/user/admin.service";
-import {MosqueService} from "../data/mosque/mosque.service";
-import {Announcement} from "./model/announcement.model";
-import {AnnouncementService} from "../data/announcement/announcement.service";
-import {RadioModel} from "./model/radio.model";
-import {RadioService} from "../data/radio/radio.service";
-import {ReaderService} from "../data/reader/reader.service";
-import {ReaderModel} from "./model/reader.model";
-import {SurahService} from "../data/surah/surah.service";
-import {SurahModel} from "./model/surah.model";
+import {RecitationService} from "../data/recitation/recitation.service";
+import {RecitationModel} from "./model/recitation.model";
+
 
 @Component({
   selector: 'app-root',
@@ -22,10 +12,45 @@ import {SurahModel} from "./model/surah.model";
 export class AppComponent implements OnInit {
 
   mosque: Mosque|null = null;
-  constructor(private surahService: SurahService) {}
+  constructor(private recitationService: RecitationService) {}
   ngOnInit(): void {
     this.test();
   }
 
-  async test() {}
+  async test() {
+
+
+    const recit: RecitationModel = {
+      id: null,
+      apiUrl: null,
+      duration: 0,
+      readerId: "DMfFKyFucSDh0oYYbDzN",
+      recitationNumber: 113,
+      surah: null,
+      downloadUrl: null
+    }
+
+    //await this.recitationService.addRecitation(recit);
+  }
+
+
+  // Cette méthode sera utilisé pour uploader un fichier de récitation
+  /*uploadFile() {
+    const fileInput = document.getElementById('fileInput') as HTMLInputElement;
+
+// Vérifiez si un fichier a été sélectionné
+    if (fileInput.files && fileInput.files.length > 0) {
+      // Récupérez le premier fichier sélectionné
+      const file = fileInput.files[0];
+
+      // Maintenant, vous pouvez utiliser 'file' en toute sécurité
+      console.log('Nom du fichier :', file.name);
+      console.log('Taille du fichier :', file.size, 'octets');
+
+      this.recitationService.loadRecitation("DMfFKyFucSDh0oYYbDzN", file);
+    } else {
+      // Aucun fichier sélectionné
+      console.log('Aucun fichier sélectionné.');
+    }
+  }*/
 }

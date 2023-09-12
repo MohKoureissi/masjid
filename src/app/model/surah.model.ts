@@ -1,6 +1,7 @@
 export interface SurahModel {
-  id: string|null;
+  englishName: string;
   name: string;
-  nbVerses: number;
-  readerId: string
+  number: number;
+  numberOfAyahs: number;
+  revelationType: string;
 }

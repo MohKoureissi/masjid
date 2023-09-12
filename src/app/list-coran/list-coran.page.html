@@ -7,30 +7,32 @@
   </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true">
-    <div class="parallax-img" [style.background-image]="'url(../../assets/illustrations/mosquee.jpg)'">  
+    <div class="parallax-img" [style.background-image]="'url(../../assets/illustrations/mosquee.jpg)'">
    <h1>Coran</h1>
   </div>
       <div class="container">
-        <ion-card *ngFor="let i of [].constructor(9)">
+        <ion-card *ngFor="let recitation of recitations">
           <ion-card-content class="radio-card">
             <div class="thumb">
               <ion-thumbnail>
                 <img alt="Silhouette of mountains" src="../../assets/icon/Vector.svg"/>
-                <span>1</span>
+                <span style="color: black">{{recitation.surah?.number}}</span>
               </ion-thumbnail>
             </div>
             <div class="text" routerLink="player">
-                <h1>Al-Fatiha</h1>
-                <h2>Prologue</h2>
+                <h1>{{recitation.surah?.name}}</h1>
+                <h2>{{recitation.surah?.englishName}}</h2>
                 <ion-progress-bar class="progress" [value]="0.5" color="success"></ion-progress-bar>
             </div>
             <div>
               <ion-icon routerLink="player" size="large" name="play-circle-outline"></ion-icon>
             </div>
             <div>
-              <ion-icon size="large" name="arrow-down-outline"></ion-icon>
+              <a href="">
+                <ion-icon size="large" name="arrow-down-outline"></ion-icon>
+              </a>
             </div>
-           
+
           </ion-card-content>
         </ion-card>
       </div>

@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
-//import { ProfiladminPage } from '../profiluser/profiladmin.page';
 import { ProfiladminPageModule } from '../profiluser/profiladmin.module';
 
 const routes: Routes = [
@@ -17,9 +16,14 @@ const routes: Routes = [
       {
         path: 'home',
         children:[
+
           {
             path:'',
             loadChildren: () => import('../home/home.module').then(m => m.HomePageModule)
+          },
+          {
+            path: 'annonces',
+            loadChildren: () => import('../annonces/annonces.module').then( m => m.AnnoncesPageModule)
           },
           {
             path: 'mosquee',
@@ -46,10 +50,6 @@ const routes: Routes = [
                   {
                     path: 'dons',
                     loadChildren: () => import('../dons/dons.module').then( m => m.DonsPageModule)
-                  },
-                  {
-                    path: 'annonces',
-                    loadChildren: () => import('../annonces/annonces.module').then( m => m.AnnoncesPageModule)
                   },
                 ]
 
@@ -134,7 +134,6 @@ const routes: Routes = [
           }
         ]
       },
-
       {
         path: 'names',
         loadChildren: () => import('../names/names.module').then( m => m.NamesPageModule)
@@ -159,10 +158,10 @@ const routes: Routes = [
         path: 'infos-horaires',
         loadChildren: () => import('../infos-horaires/infos-horaires.module').then( m => m.InfosHorairesPageModule)
       },
-      {
+      /*{
         path: 'list-programmes',
         loadChildren: () => import('../list-programmes/list-programmes.module').then( m => m.ListProgrammesPageModule)
-      },
+      },*/
       {
         path: 'dons',
         loadChildren: () => import('../dons/dons.module').then( m => m.DonsPageModule)
