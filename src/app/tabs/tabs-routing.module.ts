@@ -28,7 +28,10 @@ const routes: Routes = [
             loadChildren: () => import('../localisation/localisation.module').then(m => m.LocalisationModule)
           },
 
-
+          {
+            path: 'qibla',
+            loadChildren: () => import('../qibla/qibla.module').then(m => m.QiblaModule)
+          },
 
           {
             path: 'annonces',

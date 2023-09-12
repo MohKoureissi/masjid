@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Direction de la Qibla
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div id="map"></div>
+  <ion-card>
+    <ion-card-content>
+      <!-- Centrez l'image verticalement et agrandissez-la -->
+      <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+        <img src="assets/qibla.png" [style.transform]="'rotate(' + qiblaDirection + 'deg)'" alt="Boussole" style="width: 200px; height: 200px; margin: 0 auto;">
+        <!-- Placez le texte en bas -->
+        <p style="margin-top: 20px;">La direction de la Qibla par rapport a votre position : {{ qiblaDirection }} degrés.</p>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
