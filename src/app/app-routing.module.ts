@@ -88,7 +88,10 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./dashbord-page/login/login.module').then( m => m.LoginPageModule)
-  }
+  },  {
+    path: 'quibla',
+    loadChildren: () => import('./quibla/quibla.module').then( m => m.QuiblaPageModule)
+  },
 
 ];
 @NgModule({

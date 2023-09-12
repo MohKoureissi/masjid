@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-
+import { DeviceOrientation } from '@ionic-native/device-orientation/ngx';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -25,7 +25,8 @@ import {HeaderComponent} from "./dashbord-page/header/header.component";
     provideFirestore(() => getFirestore()),
     provideAuth(() => getAuth()),
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [{ provide: RouteReuseStrategy, 
+    useClass: IonicRouteStrategy, }, DeviceOrientation],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
