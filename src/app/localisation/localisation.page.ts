@@ -8,11 +8,11 @@ import 'leaflet-routing-machine';
 import { MosqueService } from "../../data/mosque/mosque.service";
 
 @Component({
-  selector: 'app-tab1',
-  templateUrl: 'tab1.page.html',
-  styleUrls: ['tab1.page.scss']
+  selector: 'app-localisation',
+  templateUrl: 'localisation.page.html',
+  styleUrls: ['localisation.page.scss']
 })
-export class Tab1Page implements OnInit {
+export class Localisation implements OnInit {
   map!: L.Map;
   currentRoute: any;
   userMarker: L.Marker | null = null;

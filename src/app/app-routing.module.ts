@@ -1,3 +1,4 @@
+import { Localisation } from './localisation/localisation.page';
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
@@ -7,8 +8,8 @@ const routes: Routes = [
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
   {
-    path: 'tab1',
-    loadChildren: () => import('./tab1/tab1.module').then( m => m.Tab1PageModule)
+    path: 'localisation',
+    loadChildren: () => import('./localisation/localisation.module').then( m => m.LocalisationModule)
   },
 
 
