@@ -1,0 +1,33 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Programmes</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+    <div class="parallax-img" [style.background-image]="'url(../../assets/illustrations/preche.jpg)'">  
+   <h1>Programmes</h1>
+  </div>
+      <div class="container">
+        <ion-card *ngFor="let i of [].constructor(9)" routerLink="/list-preche">
+          <ion-card-content class="radio-card">
+            <div class="thumb">
+              <ion-thumbnail>
+                <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/thumbnail.svg" />
+              </ion-thumbnail>
+            </div>
+            <div class="text">
+                <h2>Lecture de coran </h2>
+                <span>Organisateur : Grande Mosquée de Bamako</span>
+                <p>
+                  <span>Date : 06/09/2023</span>&nbsp;
+                  <span>Heure: 16H00</span>&nbsp;
+                  <a class="frequence" href="#"><ion-icon name="location-outline"></ion-icon>&nbsp;Hamdallaye ACI</a></p>
+            </div>
+           
+          </ion-card-content>
+        </ion-card>
+      </div>
+</ion-content>

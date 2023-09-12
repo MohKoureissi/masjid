@@ -8,8 +8,10 @@
 </ion-header>
 <ion-content [fullscreen]="true">
     <div class="parallax-img" [style.background-image]="'url(../../assets/illustrations/mosquee.jpg)'">  
-   <h1>Mosquées</h1>
-  </div>
+      <div class="op">
+        <h1>Mosquées</h1>
+      </div>
+</div>
       <div class="container">
         <ion-card *ngFor="let i of [].constructor(9)">
           <ion-card-content class="radio-card">
@@ -19,8 +21,8 @@
               </ion-thumbnail>
             </div>
             <div class="text">
-                <h2>La Grande Mosquée de Bamako</h2>
-                <p><ion-icon name="pencil-outline"></ion-icon>&nbsp;
+                <h2 routerLink="/mosquee-details">La Grande Mosquée de Bamako</h2>
+                <p><ion-icon routerLink="/edit-mosquee" name="pencil-outline"></ion-icon>&nbsp;
                   <ion-icon color="danger" name="trash-outline"></ion-icon></p>
             </div>
            
