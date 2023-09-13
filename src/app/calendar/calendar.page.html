@@ -17,7 +17,7 @@
         <span slot="time-label">Heure</span>
       </ion-datetime> -->
       <mat-card>
-      <mat-calendar > </mat-calendar>
+      <mat-calendar [selected]="selectedDate" name="appointment_date" (selectedChange)="onSelect($event)"> </mat-calendar>
     </mat-card>
 
     </div>
