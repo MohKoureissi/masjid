@@ -27,6 +27,4 @@ export class ListCoranPage implements OnInit {
     //this.recitationService.download(url);
   }
 
-
-
 }
