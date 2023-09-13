@@ -40,7 +40,7 @@ export class PlayerPage implements OnInit {
 
     await NativeAudio.preload({
       assetId: "fire",
-      assetPath: "../../assets/audios/001.wav",
+      assetPath: "../../assets/audios/001.mp3",
       audioChannelNum: 1,
       isUrl: false
     });
