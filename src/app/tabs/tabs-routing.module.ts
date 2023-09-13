@@ -6,6 +6,11 @@ import { ProfiladminPageModule } from '../profiluser/profiladmin.module';
 
 const routes: Routes = [
   {
+    path: '',
+    redirectTo: '/tabs/home',
+    pathMatch: 'full'
+  },
+  {
     path: 'tabs',
     component: TabsPage,
     children: [
@@ -169,18 +174,8 @@ const routes: Routes = [
       {
         path: 'profile',
         loadChildren: () => import('../calendar/calendar.module').then(m => m.CalendarPageModule)
-      },
-      {
-        path: '',
-        redirectTo: '/tabs/tab1',
-        pathMatch: 'full'
       }
     ]
-  },
-  {
-    path: '',
-    redirectTo: '/tabs/tab1',
-    pathMatch: 'full'
   }
 ];
 

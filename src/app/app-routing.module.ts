@@ -1,15 +1,16 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { ProgrammeComponent } from './masjid-admin/programme/programme.component';
 
 const routes: Routes = [
+ 
   {
     path: '',
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
-  },
-  {
-    path: '',
+  },  {
+    path: 'names-description',
     loadChildren: () => import('./names-description/names-description.module').then( m => m.NamesDescriptionPageModule)
-  }
+  },
 
 
 ];
@@ -20,3 +21,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule {}
+

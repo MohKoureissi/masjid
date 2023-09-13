@@ -1,4 +1,5 @@
 .container{
+    margin-top: 20px;
     text-align: center;
     // margin-top: 50%;
   }
@@ -10,15 +11,21 @@ h1{
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+    margin-top: 35px;
+}
+.logo2{
+    width: 40px;
+    height: 30px;
 }
 .formcontainer{
-margin: auto;
-width: 326px;
-height: 327px;
+margin-top: 60px; ;
+// margin-left: 30%;
+width: 400px;
+height: 380px;
 flex-shrink: 0;
-border-radius: 30px;
+// border-radius: 30px;
 background: rgba(253, 255, 253, 0.33);
-box-shadow: 0px 4px 31px 0px rgba(0, 0, 0, 0.42);
+// box-shadow: 0px 4px 31px 0px rgba(0, 0, 0, 0.42);
 
 }
 
@@ -29,34 +36,58 @@ h2{
 }
 .ipt{
     width: 80%;
-    height: 40px;
+    height: 50px;
     margin-bottom: 20px;
     border-radius: 20PX;
+    margin-top: 20px;
     background-color: #7f747410;
 }
-
+p{
+    margin-left: 50%;
+}
 button{
-width: 40%;
-height: 30px;
+margin-top: 20px;
+width: 50%;
+height: 50px;
 border-radius: 10px;
 font-weight: bold;
+color: #ffffff;
+background-color: #2C6632;
 }
 h3{
     font-weight: bold;
-    color: #48a251;
+    color: #000000;
+    position: absolute;
+    /* top: -20px; */
+    LEFT: 50%;
+    /* RIGHT: 0; */
+    width: 59%;
+    margin: auto;
+    background: #fff;
+    transform: translate(-50%, -50%);
 }
 h4{
     font-weight: bold;
 }
 span{
-    color: #48a251;
-    
+    color: #48a251;  
 }
+
 .icon {
     display: flex;
     justify-content: center;
+    margin-top: 30px;
+    margin-bottom: 10px;
   }
-
+.logo{
+    width: 120px;
+    margin-left: 35%;
+    margin-top: 30px;
+}
+.foot{
+    border-top: 1px solid;
+    padding: 0px;
+}
   .carrer {
     display: flex;
     flex-direction: column;

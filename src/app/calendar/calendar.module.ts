@@ -1,15 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
 import { IonicModule } from '@ionic/angular';
+import { MatCommonModule } from '@angular/material/core';
+
+
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 import { CalendarPageRoutingModule } from './calendar-routing.module';
 
 import { CalendarPage } from './calendar.page';
 
+
+
 @NgModule({
   imports: [
+    MatCommonModule,
     CommonModule,
     FormsModule,
     IonicModule,
@@ -17,4 +23,6 @@ import { CalendarPage } from './calendar.page';
   ],
   declarations: [CalendarPage]
 })
-export class CalendarPageModule {}
+export class CalendarPageModule {
+
+}
