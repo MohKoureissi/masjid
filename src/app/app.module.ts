@@ -1,8 +1,16 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-import { DeviceOrientation } from '@ionic-native/device-orientation/ngx';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,10 +31,19 @@ import {HeaderComponent} from "./dashbord-page/header/header.component";
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
-    provideAuth(() => getAuth()),
+    provideAuth(() => getAuth()), 
+    MatInputModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatDialogModule,
+    MatCheckboxModule
+
   ],
   providers: [{ provide: RouteReuseStrategy, 
-    useClass: IonicRouteStrategy, }, DeviceOrientation],
+    useClass: IonicRouteStrategy, }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

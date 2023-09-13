@@ -35,7 +35,8 @@
               "src/theme/variables.scss",
               "node_modules/leaflet/dist/leaflet.css",
               "node_modules/leaflet-search/src/leaflet-search.css",
-              "src/global.scss"
+              "src/global.scss",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": [
               "node_modules/leaflet/dist/leaflet.js",
@@ -127,7 +128,8 @@
               "node_modules/@ionic/angular/css/typography.css",
               "node_modules/@ionic/angular/css/display.css",
               "src/theme/variables.css",
-              "src/global.scss"
+              "src/global.scss",
+              "node_modules/bootstrap/scss/bootstrap.scss"
             ],
             "scripts": []
           },

@@ -4,7 +4,7 @@ import * as L from 'leaflet';
 import 'leaflet';
 import {Geocoder, geocoders} from 'leaflet-control-geocoder';
 
-
+        
 import { Geolocation } from '@capacitor/geolocation';
 import 'leaflet-routing-machine';
 import {MosqueService} from "../../data/mosque/mosque.service";

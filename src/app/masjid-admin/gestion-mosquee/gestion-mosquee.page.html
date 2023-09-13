@@ -1,0 +1,41 @@
+<div class="mat-elevation-z8">
+  <table mat-table [datasource="mosqueedata"] class="mat-elevation-z8">
+
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> ID</th>
+      <td mat-cell *matCellDef="let element">{{element.id}}</td>
+    </ng-container>
+    <ng-container matColumnDef="nommosquee">
+      <th mat-header-cell *matHeaderCellDef> Nom de la mosquée</th>
+      <td mat-cell *matCellDef="let element">{{element.nommosquee}}</td>
+    </ng-container>
+    <ng-container matColumnDef="nomimam">
+      <th mat-header-cell *matHeaderCellDef> Nom de l'imam</th>
+      <td mat-cell *matCellDef="let element">{{element.nomimam}}</td>
+    </ng-container>
+    <ng-container matColumnDef="numdon">
+      <th mat-header-cell *matHeaderCellDef> Numéro don</th>
+      <td mat-cell *matCellDef="let element">{{element.numdon}}</td>
+    </ng-container>
+    <ng-container matColumnDef="quartier">
+      <th mat-header-cell *matHeaderCellDef> Quartier</th>
+      <td mat-cell *matCellDef="let element">{{element.quartier}}</td>
+    </ng-container>
+    <ng-container matColumnDef="isactive">
+      <th mat-header-cell *matHeaderCellDef> Is Active</th>
+      <td mat-cell *matCellDef="let element">{{element.isactive}}</td>
+    </ng-container>
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef> Action</th>
+      <td mat-cell *matCellDef="let element">{{element.action}}
+        <div>
+          <a mat-raised-button color="primary">Edit</a>
+          <a mat-raised-button color="accent">Delete</a>
+        </div>
+      </td>
+    </ng-container>
+    <tr mat-row *matRowDef="let row; columns: displaycolums;"></tr>
+    <tr mat-row *matRowDef="let row; columns: displaycolums;"></tr>
+
+  </table>
+</div>

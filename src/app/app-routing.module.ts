@@ -1,3 +1,4 @@
+import { LoginPageModule } from './masjid-admin/login/login.module';
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
@@ -88,11 +89,29 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./dashbord-page/login/login.module').then( m => m.LoginPageModule)
-  },  {
+  },
+
+  {
+    path: 'login',
+    loadChildren: () => import('./masjid-admin/login/login.module').then( m => m.LoginPageModule)
+  },
+ 
+  {
+    path: 'panel',
+    loadChildren: () => import('./masjid-admin/panel/panel.module').then( m => m.PanelPageModule)
+  },
+  {
+    path: 'dashboard',
+    loadChildren: () => import('./masjid-admin/dashboard/dashboard.module').then( m => m.DashboardPageModule)
+  },
+  {
     path: 'quibla',
     loadChildren: () => import('./quibla/quibla.module').then( m => m.QuiblaPageModule)
   },
-
+  {
+    path: 'gestionmosquee',
+    loadChildren: () => import('./masjid-admin/gestion-mosquee/gestion-mosquee.module').then( m => m.GestionMosqueePageModule)
+  },
 ];
 @NgModule({
   imports: [
