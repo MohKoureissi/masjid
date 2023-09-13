@@ -36,6 +36,7 @@
     "@capacitor/status-bar": "5.0.6",
     "@ionic/angular": "^7.0.0",
     "bootstrap": "^5.3.1",
+    "cordova-plugin-media": "^6.1.0",
     "firebase": "^10.3.1",
     "font-awesome": "^4.7.0",
     "ionicons": "^7.0.0",
@@ -47,6 +48,8 @@
     "moment-hijri": "^2.1.2",
     "ngx-angular-material-hijri-adapter": "^1.0.9",
     "leaflet-search": "^3.0.11",
+    "moment-hijri": "^2.1.2",
+    "ngx-angular-material-hijri-adapter": "^1.0.9",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"

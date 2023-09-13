@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { IonicModule } from '@ionic/angular';
-
+import { MatCommonModule } from '@angular/material/core';
 import { CalendarPageRoutingModule } from './calendar-routing.module';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 
@@ -13,6 +13,7 @@ import { CalendarPage } from './calendar.page';
 import {MatCardModule} from  '@angular/material/card' ;
 @NgModule({
   imports: [
+    MatCommonModule,
     CommonModule,
     MatDatepickerModule,
     FormsModule,

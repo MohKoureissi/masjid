@@ -1,9 +1,71 @@
 <app-navbar></app-navbar>
+
+<div class="custom-modal" *ngIf="showAdd">
+  <div class="custom-modal-container">
+    <div class="custom-modal-header"><h1>Ajouter une mosquée</h1></div>
+    <div class="custom-modal-content">
+      <div class="dtail">
+        <div class="photo"><span>Photo</span></div>
+        <div class="input-container">
+          <div class="input">
+            <label for="mosquee-name">Nom de la mosquée</label>
+            <input id="mosquee-name" type="text">
+          </div>
+          <div class="input">
+            <label for="imam-name">Nom de l'imam</label>
+            <input id="imam-name" type="text">
+          </div>
+          <div class="input">
+            <label for="dons">Nom de la mosquée</label>
+            <input id="dons" type="text">
+          </div>
+        </div>
+      </div>
+      <div class="dtail">
+        <div class="horaires">
+          <h3>horaires</h3>
+          <div class="input-horaire">
+            <label for="fajr">Fajr</label>
+            <input type="time" id="fajr">
+          </div>
+          <div class="input-horaire">
+            <label for="dohr">Dohr</label>
+            <input type="time" id="dohr">
+          </div>
+          <div class="input-horaire">
+            <label for="asr">Asr</label>
+            <input type="time" id="asr">
+          </div>
+          <div class="input-horaire">
+            <label for="magrheb">Magrheb</label>
+            <input type="time" id="magrheb">
+          </div>
+          <div class="input-horaire">
+            <label for="icha">Icha</label>
+            <input type="time" id="icha">
+          </div>
+          <div class="input-horaire">
+            <label for="djouma">Djouma</label>
+            <input type="time" id="djouma">
+          </div>
+        </div>
+        <div class="description">
+          <label for="description">Déscription du don</label>
+          <textarea name="" id="description" rows="10"></textarea>
+          <div class="actions">
+            <ion-button class="add">Ajouter</ion-button>
+            <ion-button color="danger" (click)="showAdd =false">Fermer</ion-button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="container">
   <div class="row">
     <div class="col-12">
       <a routerLink="/panel"><ion-icon style="color: #2C6632; font-size: 40px; vertical-align: middle ;" name="arrow-back-circle-outline"></ion-icon></a><input type="text" placeholder="Recherchez une mosquée" style="border-radius: 20px; padding-left: 50px; padding-right: 50px;">
-      <i><img src="../../../assets/img/plus.png" alt="" height="32px" width="32px" style="margin-left: 10px; cursor: pointer;"></i>
+      <i (click)="showAdd=true"><img src="../../../assets/img/plus.png" alt="" height="32px" width="32px" style="margin-left: 10px; cursor: pointer;"></i>
       <img src="../../../assets/img/gestionm.png" alt="" srcset="">  
       
       <table class="table" style="margin-top: 30px;">

@@ -6,7 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./list-mosquee.page.scss'],
 })
 export class ListMosqueePage implements OnInit {
-
+  showAdd = false;
+  showAddAn = false;
+  showAddAd = true;
   constructor() { }
 
   ngOnInit() {
