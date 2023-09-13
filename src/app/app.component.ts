@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
   }
 
   async test() {
-
+    this.recitationService.downloadRecitation("DMfFKyFucSDh0oYYbDzN", 1);
 
     const recit: RecitationModel = {
       id: null,

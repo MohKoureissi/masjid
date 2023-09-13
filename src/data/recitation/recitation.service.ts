@@ -6,6 +6,9 @@ import {RecitationModel} from "../../app/model/recitation.model";
 import {HttpClient} from "@angular/common/http";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
+import * as firebase from 'firebase/app';
+import { StorageReference } from '@angular/fire/storage';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -147,21 +150,11 @@ export class RecitationService {
         // `url` est l'URL de téléchargement de notre récitation
         console.log(url)
       })
-      .catch((error) => {
-        // Handle any errors
-      });
+      .catch((error) => {});
   }
 
-  download(url: string) {
-    console.log("Hello")
-    // This can be downloaded directly:
-    const xhr = new XMLHttpRequest();
-    xhr.responseType = 'blob';
-    xhr.onload = (event) => {
-      const blob = xhr.response;
-    };
-    xhr.open('GET', url);
-    xhr.send();
-  }
+  download() {}
+
+
 
 }

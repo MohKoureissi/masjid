@@ -27,9 +27,11 @@
               <ion-icon size="large" name="play-circle-outline"></ion-icon>
             </div>
             <div>
-              <a [href]="recitation.downloadUrl" [download]="recitation.recitationNumber+ '.mp3'" type="audio/mpeg">
+              <ion-icon size="large" name="arrow-down-outline" (click)="stopPropagation($event, recitation.downloadUrl!, recitation.recitationNumber.toString()+'.mp3')"></ion-icon>
+
+              <!--<a [href]="recitation.downloadUrl" [download]="recitation.recitationNumber+ '.mp3'" type="audio/mpeg">
                 <ion-icon size="large" name="arrow-down-outline" (click)="stopPropagation($event, recitation.downloadUrl!)"></ion-icon>
-              </a>
+              </a>-->
             </div>
 
           </ion-card-content>

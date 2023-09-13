@@ -21,10 +21,44 @@ export class ListCoranPage implements OnInit {
 
   }
 
-  stopPropagation(event: Event, url: string) {
+  stopPropagation(event: Event, url: string, fileName: string) {
     event.stopPropagation();
-    this.recitationService.downloadRecitation("DMfFKyFucSDh0oYYbDzN", 1)
-    //this.recitationService.download(url);
+    this.downloadAudioFile(url, fileName)
   }
+
+
+
+
+
+
+
+
+
+  downloadAudioFile(audioUrl: string, fileName: string) {
+    console.log("commençons le téléchargement du fichier");
+    fetch(audioUrl)
+      .then((response) => response.blob())
+      .then((blob) => {
+        // Crée un objet URL à partir du Blob
+        const url = window.URL.createObjectURL(blob);
+
+        // Crée un élément <a> pour déclencher le téléchargement
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = fileName;
+
+        // Ajoute l'élément <a> à la page et déclenche le téléchargement
+        document.body.appendChild(a);
+        a.click();
+
+        // Nettoie l'objet URL
+        window.URL.revokeObjectURL(url);
+      })
+      .catch((error) => {
+        console.error('Erreur lors du téléchargement du fichier :', error);
+      });
+  }
+
+
 
 }
