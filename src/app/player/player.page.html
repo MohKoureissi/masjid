@@ -32,11 +32,11 @@
             <ion-icon routerLink="coran-display" name="book-outline"></ion-icon>
             <ion-icon routerLink="../../list-coran" name="musical-note-outline"></ion-icon>
         </p>
-        <ion-range min="0" [max]="duration" value="40" [(ngModel)]="currentTimeNumber"></ion-range>
-        <p style="text-align: center">{{currentTimeText}}</p>
+        <ion-range min="0" [max]="duration" [(ngModel)]="currentTimeNumber"></ion-range>
+        <p style="text-align: center">{{currentTimeText}}/{{durationText}}</p>
         <p class="controls">
             <ion-icon name="play-skip-back-circle"></ion-icon>
-            <ion-button (click)="playPause()">
+            <ion-button (click)="playPause()" style="background-color: transparent">
                 <ion-icon  class="play" [name]="iconPlay"></ion-icon>
             </ion-button>
             <ion-icon name="play-skip-forward-circle"></ion-icon>

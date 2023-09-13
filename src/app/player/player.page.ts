@@ -17,11 +17,19 @@ export class PlayerPage implements OnInit {
   isPlay: boolean = false;
   iconPlay: string = "play-outline";
   currentTimeNumber: number = 0;
-  currentTimeText: string = "";
+  currentTimeText: string = "00:00";
   duration!: number;
+  durationText: string = "00:00";
   audioInterval: any;
 
-  constructor(private route: ActivatedRoute, private recitationService: RecitationService) { }
+  constructor(private route: ActivatedRoute, private recitationService: RecitationService) {
+    NativeAudio.preload({
+      assetId: "fire",
+      assetPath: "../../assets/audios/001.wav",
+      audioChannelNum: 1,
+      isUrl: false
+    });
+  }
 
   async ngOnInit() {
     this.route.queryParams.subscribe(params => {
@@ -38,22 +46,20 @@ export class PlayerPage implements OnInit {
       console.log("Erreur: Recitation introuvable");
     }
 
-    await NativeAudio.preload({
-      assetId: "fire",
-      assetPath: "../../assets/audios/001.mp3",
-      audioChannelNum: 1,
-      isUrl: false
-    });
 
-    try {
-      const result = await NativeAudio.getDuration({
-        assetId: 'fire'
+    await NativeAudio.getDuration({
+      assetId: 'fire'
+    })
+      .then(result => {
+        this.duration = result.duration
+
+        const totalDuration = Math.floor(this.duration);
+        const minutes = String(Math.floor(totalDuration / 60)).padStart(2, '0');
+        const seconds = String(totalDuration % 60).padStart(2, '0');
+        this.durationText = minutes + ':' + seconds;
       });
-      this.duration = result.duration;
-      console.log("Durée de l'audio récupérée :", this.duration);
-    } catch (error) {
-      console.error("Erreur lors de l'obtention de la durée de l'audio : ", error);
-    }
+    console.log("Holla")
+    console.log(this.duration)
   }
 
   async playPause() {
@@ -96,7 +102,7 @@ export class PlayerPage implements OnInit {
 
   secondsToMinutesAndSeconds(totalSeconds: number) {
     const minutes = Math.floor(totalSeconds / 60);
-    const seconds = totalSeconds % 60;
+    const seconds = Math.floor(totalSeconds % 60);
 
     const formattedMinutes = String(minutes).padStart(2, '0');
     const formattedSeconds = String(seconds).padStart(2, '0');
