@@ -1,0 +1,25 @@
+.container {
+    left: 0;
+    right: 0;
+    top: 15%;
+    bottom: 0;
+    display: flex;
+    position: absolute;
+    justify-content: flex-start;
+    contain: layout size style;
+    overflow: hidden;
+    z-index: 0;
+    flex-direction: column;
+}
+
+ion-icon{
+    font-size: 25px;
+    align-items: center;
+    justify-content: center;
+    margin-right: 8px;
+    cursor: pointer;
+}
+td{
+    vertical-align: middle;
+}
+

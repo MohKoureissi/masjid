@@ -113,6 +113,14 @@ const routes: Routes = [
     path: 'admin-program',
     loadChildren: () => import('./masjid-admin/admin-program/admin-program.module').then( m => m.AdminProgramPageModule)
   },
+  {
+    path: 'list-mosquee',
+    loadChildren: () => import('./masjid-admin/list-mosquee/list-mosquee.module').then( m => m.ListMosqueePageModule)
+  },
+  {
+    path: 'admin-program-list',
+    loadChildren: () => import('./masjid-admin/admin-program-list/admin-program-list.module').then( m => m.AdminProgramListPageModule)
+  },
 
 
 

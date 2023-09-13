@@ -1,0 +1,50 @@
+.container {
+    left: 0;
+    right: 0;
+    top: 15%;
+    bottom: 0;
+    display: flex;
+    position: absolute;
+    justify-content: flex-start;
+    contain: layout size style;
+    overflow: hidden;
+    z-index: 0;
+    flex-direction: column;
+}
+
+ion-icon{
+    font-size: 25px;
+    align-items: center;
+    justify-content: center;
+    margin-right: 8px;
+    cursor: pointer;
+}
+
+button{
+    background-color: #2C6632;
+    border-radius: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s all ease;
+}
+button:hover{
+    background-color: white;
+    color: #2C6632 ;
+    border-radius: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+td{
+    vertical-align: middle;
+}
