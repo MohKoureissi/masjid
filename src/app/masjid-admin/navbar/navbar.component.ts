@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   standalone:true,
@@ -8,8 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent  implements OnInit {
 
-  constructor() { }
+  constructor(private router:Router) { }
 
   ngOnInit() {}
-
+accueil(){
+  this.router.navigate(['/panel'])
+  
+}
+decon(){
+  this.router.navigate(['/login-admin'])
+}
 }

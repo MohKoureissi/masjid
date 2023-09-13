@@ -14,6 +14,7 @@ export class NamesPage implements OnInit {
   ngOnInit() {
     fetch('./assets/names/99_Names_Of_Allah.json').then(res => res.json()).then(json =>{
         this.names = json.data;
+        console.log(this.names);
       //console.log(decodeURIComponent(json))
     })
     console.log(this.names)
