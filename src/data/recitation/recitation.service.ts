@@ -17,32 +17,41 @@ export class RecitationService {
 
   async addRecitation(recitation: RecitationModel, file: File) {
     const db = getFirestore();
+    const storage = getStorage();
+    const surahCollectionRef = collection(db, `${this.COLLECTION_NAME}/${recitation.readerId}/${this.COLLECTION_NAME}`);
+
     try {
-      //recitation.downloadUrl = await this.downloadRecitation(recitation.readerId, recitation.recitationNumber);
-      recitation.downloadUrl = `gs://masjid-1f3cf.appspot.com/${this.COLLECTION_NAME}/${recitation.readerId}/${recitation.recitationNumber}`
-      recitation.apiUrl = "https://api.alquran.cloud/v1/surah/" + recitation.recitationNumber +"/fr.asad";
-      // Attendre que la requête HTTP soit terminée avant de continuer
-      const data: any = await this.http.get(recitation.apiUrl).toPromise();
-      recitation.surah = {
-        number: data.data.number,
-        name: data.data.name,
-        englishName: data.data.englishName,
-        revelationType: data.data.revelationType,
-        numberOfAyahs: data.data.numberOfAyahs
-      };
+      await this.loadRecitation(recitation.readerId, file, recitation.recitationNumber).then(url =>{
+        recitation.downloadUrl = url;
+      });
+      console.log(recitation.downloadUrl)
 
+      if (recitation.downloadUrl != null){
+        //recitation.downloadUrl = await this.downloadRecitation(recitation.readerId, recitation.recitationNumber);
+        recitation.apiUrl = "https://api.alquran.cloud/v1/surah/" + recitation.recitationNumber +"/fr.asad";
+        // Attendre que la requête HTTP soit terminée avant de continuer
+        const data: any = await this.http.get(recitation.apiUrl).toPromise();
+        recitation.surah = {
+          number: data.data.number,
+          name: data.data.name,
+          englishName: data.data.englishName,
+          revelationType: data.data.revelationType,
+          numberOfAyahs: data.data.numberOfAyahs
+        };
 
-      const surahCollectionRef = collection(db, `${this.COLLECTION_NAME}/${recitation.readerId}/${this.COLLECTION_NAME}`);
-      const docRef = await addDoc(surahCollectionRef, recitation);
-      recitation.id = docRef.id;
-      const surahDocRef = doc(this.firestore, `${this.COLLECTION_NAME}/${recitation.readerId}/${this.COLLECTION_NAME}/${recitation.id}`);
-      await updateDoc(
-        surahDocRef,
-        {id: recitation.id}
-      );
-      this.loadRecitation(recitation.readerId, file, recitation.recitationNumber);
-
-      console.log('Récitation ajouté avec succès !');
+        const docRef = await addDoc(surahCollectionRef, recitation);
+        recitation.id = docRef.id;
+        const surahDocRef = doc(this.firestore, `${this.COLLECTION_NAME}/${recitation.readerId}/${this.COLLECTION_NAME}/${recitation.id}`);
+        await updateDoc(
+          surahDocRef,
+          {id: recitation.id}
+        );
+        console.log('Récitation ajouté avec succès !');
+      }
+      else {
+        //console.log('Erreur lors de l\'ajout de la recitation');
+        throw new Error('Erreur lors de l\'ajout de la recitation');
+      }
     }catch (error) {
       console.log('Erreur lors de l\'ajout de la recitation ==>', error);
     }
@@ -109,42 +118,50 @@ export class RecitationService {
 
   }
 
-  loadRecitation(readerId: string, file: File, number: number) {
+  async loadRecitation(readerId: string, file: File, number: number): Promise<string | null> {
     const storage = getStorage();
-
-    const recitationsRef = ref(storage, `${this.COLLECTION_NAME}/${readerId}/${number}.mp3`);
+    let downloadUrl: string|null = null;
+    const recitationsRef = await ref(storage, `${this.COLLECTION_NAME}/${readerId}/${number}.mp3`);
     uploadBytes(recitationsRef, file).then((snapshot) => {
       console.log('Fichier uploadé avec succès !');
     });
-  }
 
-  downloadRecitation(readerId: string, recitationNumber: number): string|null {
 
-    const storage = getStorage();
-    let downloadURL: string|null = null;
-    getDownloadURL(ref(storage, `gs://masjid-1f3cf.appspot.com/${this.COLLECTION_NAME}/${readerId}/${recitationNumber}`))
+    await getDownloadURL(recitationsRef)
       .then((url) => {
-        downloadURL = url;
         // `url` est l'URL de téléchargement de notre récitation
-
-        // Celui-ci peut être téléchargé directement:
-        /*const xhr = new XMLHttpRequest();
-        xhr.responseType = 'blob';
-        xhr.onload = (event) => {
-          const blob = xhr.response;
-        };
-        xhr.open('GET', url);
-        xhr.send();*/
-
-        // Or inserted into an <img> element
-        /*const img = document.getElementById('myimg');
-        img.setAttribute('src', url);*/
+        downloadUrl = url
       })
       .catch((error) => {
         // Handle any errors
       });
-    return downloadURL;
 
+    return downloadUrl;
+  }
+
+  downloadRecitation(readerId: string, recitationNumber: number) {
+    console.log("Je suis dedans");
+    const storage = getStorage();
+    getDownloadURL(ref(storage, `${this.COLLECTION_NAME}/${readerId}/${recitationNumber}.mp3`))
+      .then((url) => {
+        // `url` est l'URL de téléchargement de notre récitation
+        console.log(url)
+      })
+      .catch((error) => {
+        // Handle any errors
+      });
+  }
+
+  download(url: string) {
+    console.log("Hello")
+    // This can be downloaded directly:
+    const xhr = new XMLHttpRequest();
+    xhr.responseType = 'blob';
+    xhr.onload = (event) => {
+      const blob = xhr.response;
+    };
+    xhr.open('GET', url);
+    xhr.send();
   }
 
 }

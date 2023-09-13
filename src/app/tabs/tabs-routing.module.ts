@@ -167,10 +167,10 @@ const routes: Routes = [
         path: 'coran',
         loadChildren: () => import('../coran/coran.module').then( m => m.CoranPageModule)
       },
-      {
+      /*{
         path: 'player',
         loadChildren: () => import('../player/player.module').then( m => m.PlayerPageModule)
-      },
+      }*/
       {
         path: 'coran-display',
         loadChildren: () => import('../coran-display/coran-display.module').then( m => m.CoranDisplayPageModule)

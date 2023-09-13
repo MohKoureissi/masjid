@@ -1,37 +1,45 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
-    <ion-title>Coran</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title>Coran</ion-title>
+    </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true">
-    <div class="parallax-img">  
-  <h1><ion-icon name="chevron-back-outline"></ion-icon></h1>
-   <h1><ion-icon name="musical-notes-outline"></ion-icon></h1>
-   <h1><ion-icon name="volume-mute-outline"></ion-icon></h1>
-  </div>
-      <div class="container">
+    <div class="parallax-img">
+        <h1>
+            <ion-icon name="chevron-back-outline"></ion-icon>
+        </h1>
+        <h1>
+            <ion-icon name="musical-notes-outline"></ion-icon>
+        </h1>
+        <h1>
+            <ion-icon name="volume-mute-outline"></ion-icon>
+        </h1>
+    </div>
+    <div class="container">
         <h1>Al Quran</h1>
         <ion-card>
-          <ion-card-content class="player-card" [style.background-image]=
-          "'url(../../assets/illustrations/coran.jpg)'">
-          </ion-card-content>
+            <ion-card-content class="player-card" [style.background-image]="'url(../../assets/illustrations/coran.jpg)'">
+            </ion-card-content>
         </ion-card>
-        <h4>الفاتحة</h4>
-        <h4>Al-Fatiha</h4>
-        <h6 style="color: black;">Prologue</h6>
+        <h4>{{recitation?.surah?.name}}</h4>
+        <h4>{{recitation?.surah?.englishName}}</h4>
+        <!--<h6 style="color: black;">Prologue</h6>-->
         <p>
-          <ion-icon name="download-outline"></ion-icon>
-          <ion-icon routerLink="coran-display" name="book-outline"></ion-icon>
-          <ion-icon  routerLink="../../list-coran" name="musical-note-outline"></ion-icon>
+            <ion-icon name="download-outline"></ion-icon>
+            <ion-icon routerLink="coran-display" name="book-outline"></ion-icon>
+            <ion-icon routerLink="../../list-coran" name="musical-note-outline"></ion-icon>
         </p>
-        <ion-progress-bar [value]=""></ion-progress-bar>
+        <ion-range min="0" [max]="duration" value="40"></ion-range>
+        <p style="text-align: center">Temps restant: {{currentTimeText}}</p>
         <p class="controls">
-          <ion-icon  name="play-back-outline"></ion-icon>
-          <ion-icon class="play" name="play-outline"></ion-icon>
-          <ion-icon name="play-forward-outline"></ion-icon>
+            <ion-icon name="play-back-outline"></ion-icon>
+            <ion-button (click)="playPause()">
+                <ion-icon class="play" [name]="iconPlay"></ion-icon>
+            </ion-button>
+            <ion-icon name="play-forward-outline"></ion-icon>
         </p>
-      </div>
+    </div>
 </ion-content>
