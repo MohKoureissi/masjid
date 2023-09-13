@@ -15,7 +15,7 @@ export class PlayerPage implements OnInit {
   reader!: string;
   recitation!: RecitationModel|null;
   isPlay: boolean = false;
-  iconPlay: string = "pause-outline";
+  iconPlay: string = "play-outline";
   currentTimeNumber: number = 0;
   currentTimeText: string = "";
   duration!: number;
@@ -38,20 +38,22 @@ export class PlayerPage implements OnInit {
       console.log("Erreur: Recitation introuvable");
     }
 
-    NativeAudio.preload({
+    await NativeAudio.preload({
       assetId: "fire",
       assetPath: "../../assets/audios/001.wav",
       audioChannelNum: 1,
       isUrl: false
     });
 
-    NativeAudio.getDuration({
-      assetId: 'fire'
-    })
-      .then(result => {
-        this.duration = result.duration
+    try {
+      const result = await NativeAudio.getDuration({
+        assetId: 'fire'
       });
-
+      this.duration = result.duration;
+      console.log("Durée de l'audio récupérée :", this.duration);
+    } catch (error) {
+      console.error("Erreur lors de l'obtention de la durée de l'audio : ", error);
+    }
   }
 
   async playPause() {

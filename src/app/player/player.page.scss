@@ -44,12 +44,16 @@
     width: 280px;
     padding: 10px 20px;
     background-size: cover;
+    box-shadow: none;
+    background-position-x: center;
+
   }
   .container ion-card{
     height: initial;
     border-radius: 30px;
     border: 1px solid #ddd;
     margin: 5px;
+    box-shadow: none;
   }
   ion-card .text{
     flex-grow: 1;
@@ -77,7 +81,12 @@
 }
 
 h2,h4{
+
   margin-bottom: 0px;
+}
+h4{
+
+margin-top: 8px;
 }
 .container p{
   display: flex;
@@ -97,6 +106,7 @@ h2,h4{
 .controls .play{
   width: 80px;
   height: 80px;
+  align-content: center;
 }
 .controls ion-icon .icon-inner{
   width: 60%;

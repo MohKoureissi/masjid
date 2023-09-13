@@ -21,7 +21,7 @@
     <div class="container">
         <h1>Al Quran</h1>
         <ion-card>
-            <ion-card-content class="player-card" [style.background-image]="'url(../../assets/illustrations/coran.jpg)'">
+            <ion-card-content class="player-card" [style.background-image]="'url(../../assets/img/coran.png)'" >
             </ion-card-content>
         </ion-card>
         <h4>{{recitation?.surah?.name}}</h4>
@@ -32,14 +32,14 @@
             <ion-icon routerLink="coran-display" name="book-outline"></ion-icon>
             <ion-icon routerLink="../../list-coran" name="musical-note-outline"></ion-icon>
         </p>
-        <ion-range min="0" [max]="duration" value="40"></ion-range>
+        <ion-range min="0" [max]="duration" value="40" [(ngModel)]="currentTimeNumber"></ion-range>
         <p style="text-align: center">Temps restant: {{currentTimeText}}</p>
         <p class="controls">
-            <ion-icon name="play-back-outline"></ion-icon>
+            <ion-icon name="play-skip-back-circle"></ion-icon>
             <ion-button (click)="playPause()">
-                <ion-icon class="play" [name]="iconPlay"></ion-icon>
+                <ion-icon  class="play" [name]="iconPlay"></ion-icon>
             </ion-button>
-            <ion-icon name="play-forward-outline"></ion-icon>
+            <ion-icon name="play-skip-forward-circle"></ion-icon>
         </p>
     </div>
 </ion-content>

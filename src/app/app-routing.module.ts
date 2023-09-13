@@ -46,6 +46,10 @@ const routes: Routes = [
     loadChildren: () => import('./masjid-admin/admin-program-list/admin-program-list.module').then( m => m.AdminProgramListPageModule)
   },
 
+  {
+    path: 'admin-annonce',
+    loadChildren: () => import('./masjid-admin/admin-annonce/admin-annonce.module').then( m => m.AdminAnnoncePageModule)
+  },
 
 
 
