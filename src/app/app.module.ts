@@ -15,7 +15,12 @@ import { provideAuth,getAuth } from '@angular/fire/auth';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
+// Importation de registerLocaleData et les données de localisation pour "fr-FR".
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
 
+// Enregistrez les données de localisation pour "fr-FR".
+registerLocaleData(localeFr);
 @NgModule({
   declarations: [AppComponent],
   imports: [
