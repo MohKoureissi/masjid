@@ -60,3 +60,7 @@ p a{
 ion-datetime{
     margin: auto;
 }
+.mat-calendar-body .mat-calendar-body-cell.mat-calendar-body-selected {
+  background-color: green;
+  color: white;
+}

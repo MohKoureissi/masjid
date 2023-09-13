@@ -30,7 +30,7 @@ import {MatCardModule} from  '@angular/material/card' ;
 // Modification du format en utilisant `MOMENT_HIJRI_DATE_FORMATS` pour les dates et `MOMENT_HIJRI_DATE_TIME_FORMATS` pour la date/heure.
     { provide: MAT_DATE_FORMATS, useValue: MOMENT_HIJRI_DATE_FORMATS },
     // Change the localization to arabic by using `AR_SA` not `AR` only and `EN_US` not `EN` only.
-    { provide: MAT_DATE_LOCALE, useValue: "fr" },
+    { provide: MAT_DATE_LOCALE, useValue: "fr-FR" },
 ],
 
   declarations: [CalendarPage]
