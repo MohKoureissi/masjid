@@ -127,7 +127,8 @@
               "node_modules/@ionic/angular/css/typography.css",
               "node_modules/@ionic/angular/css/display.css",
               "src/theme/variables.css",
-              "src/global.scss"
+              "src/global.scss",
+              "node_modules/bootstrap/scss/bootstrap.scss"
             ],
             "scripts": []
           },
