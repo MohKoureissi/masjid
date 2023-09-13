@@ -12,31 +12,69 @@ const routes: Routes = [
         loadChildren: () => import('../home/home.module').then(m => m.HomePageModule)
       },
       {
-        path: 'tab2',
-        loadChildren: () => import('../tab2/tab2.module').then(m => m.Tab2PageModule)
-      },
-      {
-        path: 'tab3',
-        loadChildren: () => import('../tab3/tab3.module').then(m => m.Tab3PageModule)
+        path: 'mosquee',
+        loadChildren: () => import('../mosquee/mosquee.module').then(m => m.MosqueePageModule)
       },
       {
         path: 'calendar',
         loadChildren: () => import('../calendar/calendar.module').then(m => m.CalendarPageModule)
       },
       {
-        path: 'profile',
-        loadChildren: () => import('../calendar/calendar.module').then(m => m.CalendarPageModule)
+        path: 'preche',
+        loadChildren: () => import('../preche/preche.module').then(m => m.PrechePageModule)
       },
       {
+        path: 'radio',
+        loadChildren: () => import('../radio/radio.module').then(m => m.RadioPageModule)
+      },
+      {
+        path: 'annonces',
+        loadChildren: () => import('../annonces/annonces.module').then(m => m.AnnoncesPageModule)
+      },
+      {
+        path: 'coran',
+        loadChildren: () => import('../coran/coran.module').then(m => m.CoranPageModule)
+      },
+      {
+        path: 'names',
+        loadChildren: () => import('../names/names.module').then(m => m.NamesPageModule)
+      },
+      {
+        path: 'demarrage',
+        loadChildren: () => import('../demarrage/demarrage.module').then(m => m.DemarragePageModule)
+      },
+      {
+        path: 'profil',
+        loadChildren: () => import('../profiluser/profiladmin.module').then(m => m.ProfiladminPageModule)
+      },
+      {
+        path: 'motdepasse',
+        loadChildren: () => import('../motdepasse/motdepasse.module').then(m => m.MotdepassePageModule)
+      },
+      {
+        path: 'new',
+        loadChildren: () => import('../nouveau-mot-de-passe/nouveau-mot-de-passe.module').then(m => m.NouveauMotDePassePageModule)
+      },
+      {
+        path: 'inscription',
+        loadChildren: () => import('../inscriptionuser/inscriptionuser.module').then(m => m.InscriptionuserPageModule)
+      },
+      {
+        path: 'changer',
+        loadChildren: () => import('../changer/changer.module').then(m => m.ChangerPageModule)
+      },
+
+
+      {
         path: '',
-        redirectTo: '/tabs/tab1',
+        redirectTo: '/tabs/home',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/tabs/tab1',
+    redirectTo: '/tabs/home',
     pathMatch: 'full'
   }
 ];
