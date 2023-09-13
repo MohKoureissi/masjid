@@ -30,17 +30,17 @@ button{
     color: white;
     font-weight: bold;
     cursor: pointer;
-    transition: 0.3s all ease;
+    transition: 0.3s all ease-in;
 }
 button:hover{
     background-color: white;
-    color: #2C6632 ;
+    color: #2C6632;
+    border: 2px solid #2C6632;
     border-radius: 20px;
     padding-left: 30px;
     padding-right: 30px;
     padding-top: 5px;
     padding-bottom: 5px;
-    color: white;
     font-weight: bold;
     cursor: pointer;
 }

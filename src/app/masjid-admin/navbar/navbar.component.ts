@@ -12,9 +12,11 @@ export class NavbarComponent  implements OnInit {
   constructor(private router:Router) { }
 
   ngOnInit() {}
-alert(){
+accueil(){
   this.router.navigate(['/panel'])
-  //alert("bonjour tout le monde")
-  //console.log("bonJOUR")
+  
+}
+decon(){
+  this.router.navigate(['/login-admin'])
 }
 }

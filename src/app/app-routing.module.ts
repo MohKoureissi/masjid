@@ -86,10 +86,6 @@ const routes: Routes = [
     path: 'annonces',
     loadChildren: () => import('./annonces/annonces.module').then( m => m.AnnoncesPageModule)
   },
-  {
-    path: 'login',
-    loadChildren: () => import('./dashbord-page/login/login.module').then( m => m.LoginPageModule)
-  },
 
   {
     path: 'login-admin',
@@ -120,6 +116,10 @@ const routes: Routes = [
   {
     path: 'admin-program-list',
     loadChildren: () => import('./masjid-admin/admin-program-list/admin-program-list.module').then( m => m.AdminProgramListPageModule)
+  },
+  {
+    path: 'admin-annonce',
+    loadChildren: () => import('./masjid-admin/admin-annonce/admin-annonce.module').then( m => m.AdminAnnoncePageModule)
   },
 
 
