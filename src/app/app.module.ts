@@ -14,8 +14,6 @@ import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { HttpClientModule } from "@angular/common/http";
-import { FormsModule } from '@angular/forms';
-
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 // Importation de registerLocaleData et les données de localisation pour "fr-FR".
@@ -26,7 +24,7 @@ import localeFr from '@angular/common/locales/fr';
 registerLocaleData(localeFr);
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, NgxAngularMaterialHijriAdapterModule, IonicModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, FormsModule,
+  imports: [BrowserModule, NgxAngularMaterialHijriAdapterModule, IonicModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
     provideAuth(() => getAuth()),

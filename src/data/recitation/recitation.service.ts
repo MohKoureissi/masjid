@@ -6,8 +6,6 @@ import {RecitationModel} from "../../app/model/recitation.model";
 import {HttpClient} from "@angular/common/http";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
-import * as firebase from 'firebase/app';
-import { StorageReference } from '@angular/fire/storage';
 
 @Injectable({
   providedIn: 'root'

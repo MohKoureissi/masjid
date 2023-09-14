@@ -1,25 +1,30 @@
 import { Injectable, OnInit } from '@angular/core';
 import { getFirestore, doc, setDoc,getDocs,where, query, collection ,getDoc,updateDoc,deleteDoc,QuerySnapshot} from 'firebase/firestore';
 import { Mosque } from 'src/app/model/mosque.model';
-import {TimeModel} from "../../app/model/time.model";
 import {from, Observable, of} from "rxjs";
-import { catchError, map } from 'rxjs/operators';
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class MosqueService implements OnInit {
-
+  COLLECTION_NAME = 'mosques';
 
   constructor() { }
   ngOnInit(): void {
 
   }
 //Methode pour ajouter une mosque
-  async createMosque(mosque: Mosque): Promise<void> {
+  async createMosque(mosque: Mosque, imageFile: File): Promise<void> {
+    const db = getFirestore();
+    const mosqueCollectionRef = collection(db, `${this.COLLECTION_NAME}`);
+
     try {
-      const db = getFirestore();
-      const mosqueCollectionRef = collection(db, 'mosques');
+      await this.loadMosqueImage(imageFile).then(url =>{
+        mosque.imageUrl = url;
+      });
+      console.log(mosque.imageUrl)
 
       // Ajoutez la nouvelle mosquée à la collection "mosques"
       const newMosqueRef = doc(mosqueCollectionRef);
@@ -39,7 +44,7 @@ export class MosqueService implements OnInit {
   async updateMosque(mosqueId:string,updateMosque:Mosque|any): Promise<void> {
     try{
         const db = getFirestore();
-        const mosqueCollectionRef = doc(db, 'mosques',mosqueId);
+        const mosqueCollectionRef = doc(db, `${this.COLLECTION_NAME}`,mosqueId);
         // Vérifiez si la mosquee existe dans la base de données
       const mosqueSnap = await getDoc(mosqueCollectionRef);
 
@@ -61,7 +66,7 @@ export class MosqueService implements OnInit {
   async deleteMosque(mosqueId: string): Promise<void> {
     try {
       const db = getFirestore();
-      const mosqueDocRef = doc(db, 'mosques', mosqueId);
+      const mosqueDocRef = doc(db, `${this.COLLECTION_NAME}`, mosqueId);
 
       // Vérifiez si la mosquee existe dans la base de données
       const mosqueSnap = await getDoc(mosqueDocRef);
@@ -85,7 +90,7 @@ export class MosqueService implements OnInit {
 async filter(name?: string, location?: string): Promise<Mosque[]> {
   try {
     const db = getFirestore();
-    const mosqueCollectionRef = collection(db, 'mosques');
+    const mosqueCollectionRef = collection(db, `${this.COLLECTION_NAME}`);
 
     // Créez une requête pour filtrer les mosquées
     let filteredQuery = query(mosqueCollectionRef);
@@ -123,7 +128,7 @@ async filter(name?: string, location?: string): Promise<Mosque[]> {
 async getDetailsMosque(mosqueId: string): Promise<Observable<Mosque | null>> {
   try {
     const db = getFirestore();
-    const mosqueDocRef = doc(db, 'mosques', mosqueId);
+    const mosqueDocRef = doc(db, `${this.COLLECTION_NAME}`, mosqueId);
 
     // Récupérez le document de la mosquée spécifique
     const docSnapshot = await getDoc(mosqueDocRef);
@@ -148,7 +153,7 @@ async getDetailsMosque(mosqueId: string): Promise<Observable<Mosque | null>> {
   // Récupération de la liste des mosquées
   async getAllMosques(): Promise<Observable<Mosque[]>> {
     const db = getFirestore();
-    const mosquesCollectionRef = collection(db, `mosques`);
+    const mosquesCollectionRef = collection(db, `${this.COLLECTION_NAME}`);
 
     try {
       const mosquesSnap = await getDocs(mosquesCollectionRef);
@@ -167,6 +172,25 @@ async getDetailsMosque(mosqueId: string): Promise<Observable<Mosque | null>> {
   }
 
 
+  async loadMosqueImage(file: File): Promise<string | null> {
+    const storage = getStorage();
+    let imageUrl: string|null = null;
+    const mosquesRef = await ref(storage, `${this.COLLECTION_NAME}/${file.name}`);
+    uploadBytes(mosquesRef, file).then((snapshot) => {
+      console.log('Fichier uploadé avec succès !');
+    });
 
+
+    await getDownloadURL(mosquesRef)
+      .then((url) => {
+        // `url` est l'URL de téléchargement de notre récitation
+        imageUrl = url
+      })
+      .catch((error) => {
+        // Handle any errors
+      });
+
+    return imageUrl;
+  }
 
 }

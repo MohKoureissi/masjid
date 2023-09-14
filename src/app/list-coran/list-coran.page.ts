@@ -3,6 +3,8 @@ import {ActivatedRoute} from "@angular/router";
 import {RecitationService} from "../../data/recitation/recitation.service";
 import {RecitationModel} from "../model/recitation.model";
 import {HttpClient} from "@angular/common/http";
+import { saveAs } from 'file-saver';
+
 
 @Component({
   selector: 'app-list-coran',
@@ -21,9 +23,11 @@ export class ListCoranPage implements OnInit {
 
   }
 
-  stopPropagation(event: Event, url: string, fileName: string) {
+  async downloadMp3(event: Event, url: string, fileName: string) {
     event.stopPropagation();
-    this.downloadAudioFile(url, fileName)
+    await this.http.get(url, { responseType: 'blob' }).subscribe((response: Blob) => {
+      saveAs(response, fileName);
+    });
   }
 
 

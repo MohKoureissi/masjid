@@ -28,7 +28,7 @@
         <h4>{{recitation?.surah?.englishName}}</h4>
         <!--<h6 style="color: black;">Prologue</h6>-->
         <p>
-            <ion-icon name="download-outline"></ion-icon>
+            <ion-icon name="download-outline" (click)="downloadMp3(recitation?.downloadUrl!, recitation?.recitationNumber!.toString()+'.mp3')"></ion-icon>
             <ion-icon routerLink="coran-display" name="book-outline"></ion-icon>
             <ion-icon routerLink="../../list-coran" name="musical-note-outline"></ion-icon>
         </p>
@@ -36,10 +36,8 @@
         <p style="text-align: center">{{currentTimeText}}/{{durationText}}</p>
         <p class="controls">
             <ion-icon name="play-skip-back-circle"></ion-icon>
-            <ion-button (click)="playPause()" style="background-color: transparent">
-                <ion-icon  class="play" [name]="iconPlay"></ion-icon>
-            </ion-button>
-            <ion-icon name="play-skip-forward-circle"></ion-icon>
+                <ion-icon  class="play" [name]="iconPlay" (click)="playPause()"></ion-icon>
+          <ion-icon name="play-skip-forward-circle" ></ion-icon>
         </p>
     </div>
 </ion-content>

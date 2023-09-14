@@ -1,6 +1,13 @@
 // .ion-page{
 //     position: initial;
 // }
+
+.custom-modal-content{
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  gap: 10px;
+}
 .container {
     display: flex;
     justify-content: flex-start;
@@ -18,7 +25,7 @@ td{
     vertical-align: middle;
 }
 #back{
-    
+
 }
 
 .custom-modal {
@@ -47,15 +54,26 @@ td{
         border-radius: 10px;
         font-weight: bold;
     }
-    .dtail{
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+    .dtail-right{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      width: 30%;
     }
-    
+  .dtail-left{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    gap: 10px;
+    width: 70%;
+  }
+
     .input-container{
+      width: 100%;
         flex: 1;
-        padding-left: 30px;
         label,input{
         display: block;
     }
@@ -81,13 +99,14 @@ td{
             font-weight: bold;
         }
         .input-horaire{
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-            input{
-                border-radius: 10px;
-                border: 1px solid #ddd;
-            }
+          display: flex;
+          justify-content: space-between;
+          gap:20px;
+          margin-bottom: 10px;
+          input{
+              border-radius: 10px;
+              border: 1px solid #ddd;
+          }
         }
 
     }
@@ -97,12 +116,7 @@ td{
         label{
             display: block;
         }
-        textarea{
-            border-radius: 10px;
-            width: 100%;
-            padding-left: 10px;
-            border: 1px solid #ddd;
-        }
+
         .actions{
             text-align: right;
         }
@@ -120,3 +134,30 @@ td{
     }
 }
 
+
+input[type="file"] {
+  display: none;
+}
+
+.custom-file-upload {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+.line{
+  width: 100%;
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+}
+.line .input{
+  width: 100%;
+}
+textarea{
+  border-radius: 10px;
+  width: 100%;
+  padding-left: 10px;
+  border: 1px solid #ddd;
+}

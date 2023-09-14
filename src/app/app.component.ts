@@ -33,24 +33,4 @@ export class AppComponent implements OnInit {
     //await this.recitationService.addRecitation(recit);
   }
 
-
-  // Cette méthode sera utilisé pour uploader un fichier de récitation
-  /*uploadFile() {
-    const fileInput = document.getElementById('fileInput') as HTMLInputElement;
-
-// Vérifiez si un fichier a été sélectionné
-    if (fileInput.files && fileInput.files.length > 0) {
-      // Récupérez le premier fichier sélectionné
-      const file = fileInput.files[0];
-
-      // Maintenant, vous pouvez utiliser 'file' en toute sécurité
-      console.log('Nom du fichier :', file.name);
-      console.log('Taille du fichier :', file.size, 'octets');
-
-      this.recitationService.loadRecitation("DMfFKyFucSDh0oYYbDzN", file);
-    } else {
-      // Aucun fichier sélectionné
-      console.log('Aucun fichier sélectionné.');
-    }
-  }*/
 }
