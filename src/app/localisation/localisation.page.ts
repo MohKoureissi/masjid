@@ -41,24 +41,21 @@ export class Localisation implements OnInit {
     this.map = L.map('map').setView([lat, lng], 15);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 19,
+      maxZoom: 12,
     }).addTo(this.map);
 
-    new Geocoder({
-      geocoder: new geocoders.Nominatim(),
-      position: 'topright',
-
-    }).addTo(this.map);
-
-
+    // Créez un marqueur pour afficher la position exacte de l'utilisateur sur la carte
     const marker = L.marker([lat, lng]).addTo(this.map);
-    marker.bindPopup('Vous êtes ici !').openPopup();
+
+    // Vous pouvez également ajouter une info-bulle au marqueur pour afficher des informations supplémentaires si nécessaire
+    marker.bindPopup('Vous etes ici').openPopup();
+
   }
 
 
   async afficherMosques(mosques: any[]) {
     const imageMosque = L.icon({
-      iconUrl: '/assets/logo.png',
+      iconUrl: '/assets/img/dema.png',
       iconSize: [32, 32],
       iconAnchor: [16, 32],
     });
@@ -69,7 +66,7 @@ export class Localisation implements OnInit {
       const mosqueMarker = L.marker(mosqueLocation, { icon: imageMosque })
         .addTo(this.map)
         .bindPopup(`
-             Nom : ${mosque.name}<br>Quartier : ${mosque.quartier} <br>Quartier : ${mosque.imanName}
+             Nom : ${mosque.name}<br>Quartier : ${mosque.quartier} <br>Nom Iman : ${mosque.imamName}
         `);
 
       mosqueMarker.on('click', () => {
