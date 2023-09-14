@@ -24,14 +24,14 @@ export class PlayerPage implements OnInit {
   durationText: string = "00:00";
   audioInterval: any;
 
-  constructor(private route: ActivatedRoute, private recitationService: RecitationService, private http: HttpClient) {
+  constructor(private route: ActivatedRoute, private recitationService: RecitationService,
+     private http: HttpClient) {
     NativeAudio.preload({
       assetId: "fire",
       assetPath: "../../assets/audios/001.wav",
       audioChannelNum: 1,
       isUrl: false
-    });
-  }
+    });  }
 
   async ngOnInit() {
     this.route.queryParams.subscribe(params => {
