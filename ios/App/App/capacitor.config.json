@@ -1,0 +1,8 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "masjid",
+	"webDir": "www",
+	"server": {
+		"androidScheme": "https"
+	}
+}

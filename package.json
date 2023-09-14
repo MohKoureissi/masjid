@@ -38,7 +38,6 @@
     "@ionic/angular": "^7.0.0",
     "@types/file-saver": "^2.0.5",
     "bootstrap": "^5.3.1",
-    "cordova-plugin-media": "^6.1.0",
     "cors": "^2.8.5",
     "file-saver": "^2.0.5",
     "firebase": "^10.3.1",

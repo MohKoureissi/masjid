@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Mosque } from './model/mosque.model';
 import {RecitationService} from "../data/recitation/recitation.service";
 import {RecitationModel} from "./model/recitation.model";
+import {PreachService} from "../data/preach/preach.service";
+import {PreacheModel} from "./model/preache.model";
 
 
 @Component({
@@ -12,25 +14,15 @@ import {RecitationModel} from "./model/recitation.model";
 export class AppComponent implements OnInit {
 
   mosque: Mosque|null = null;
-  constructor(private recitationService: RecitationService) {}
+  constructor(private preacheService: PreachService) {}
   ngOnInit(): void {
     this.test();
   }
 
   async test() {
-    this.recitationService.downloadRecitation("DMfFKyFucSDh0oYYbDzN", 1);
 
-    const recit: RecitationModel = {
-      id: null,
-      apiUrl: null,
-      duration: 0,
-      readerId: "DMfFKyFucSDh0oYYbDzN",
-      recitationNumber: 113,
-      surah: null,
-      downloadUrl: null
-    }
 
-    //await this.recitationService.addRecitation(recit);
+    //this.preacheService.createPreache(preach, );
   }
 
 }

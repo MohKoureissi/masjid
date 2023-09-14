@@ -3,7 +3,7 @@
   <div class="parallax-img" [style.background-image]="'url(../../assets/illustrations/mosquee.jpg)'">
     <div class="op">
           <h1><ion-card-content>{{ heureActuelle }}</ion-card-content></h1>
-          <h5>Fajr 3 hour 9 min left</h5>
+          <h2>Fajr 3 hour 9 min left</h2>
     </div>
 
   </div>
@@ -16,27 +16,27 @@
       <div class="horaire">
         <span>Fadjr</span>
         <span>&#9728;</span>
-        <span>05 : 30</span>
+        <span>{{mosque?.fajr}}</span>
       </div>
       <div class="horaire">
         <span>Dohr</span>
         <span>&#9728;</span>
-        <span>05 : 30</span>
+        <span>{{mosque?.dohr}}</span>
       </div>
       <div class="horaire">
         <span>Asr</span>
         <span>&#9728;</span>
-        <span>05 : 30</span>
+        <span>{{mosque?.asr}}</span>
       </div>
       <div class="horaire">
         <span>Maghreb</span>
         <span>&#9728;</span>
-        <span>05 : 30</span>
+        <span>{{mosque?.maghreb}}</span>
       </div>
       <div class="horaire">
         <span>Icha</span>
         <span>&#9728;</span>
-        <span>20 : 00</span>
+        <span>{{mosque?.isha}}</span>
       </div>
     </div>
       <div class="container">

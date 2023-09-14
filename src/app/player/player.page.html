@@ -36,8 +36,9 @@
         <p style="text-align: center">{{currentTimeText}}/{{durationText}}</p>
         <p class="controls">
             <ion-icon name="play-skip-back-circle"></ion-icon>
-                <ion-icon  class="play" [name]="iconPlay" (click)="playPause()"></ion-icon>
-          <ion-icon name="play-skip-forward-circle" ></ion-icon>
+            <!--<audio [src] = "recitation?.downloadUrl!" id = "audio"> </audio>-->
+            <ion-icon  class="play" [name]="iconPlay" (click)="playPause()"></ion-icon>
+            <ion-icon name="play-skip-forward-circle" ></ion-icon>
         </p>
     </div>
 </ion-content>
