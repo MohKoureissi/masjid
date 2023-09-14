@@ -1,0 +1,52 @@
+<<<<<<< HEAD
+=======
+<ion-header id="map" style="width: 100%; height: 100%;" [translucent]="true">
+
+
+  <ion-toolbar>
+    <ion-title>
+      Tab 1
+    </ion-title>
+  </ion-toolbar>
+
+</ion-header>
+
+
+<ion-fab bottom id="menuButtons" style="display: flex; justify-content: space-around;">
+  <ion-row text-center>
+    <ion-col>
+      <ion-fab-button>
+        <!-- <ion-icon name="home-outline" (click)="quitterItineraire()" >stop</ion-icon> -->
+        <ion-icon name='stop' (click)="quitterItineraire()">Stop</ion-icon>
+      </ion-fab-button>
+    </ion-col>
+    <ion-col>
+      <ion-fab-button>
+        <ion-icon  name='share-social-outline' (click)="partagerItineraire()"></ion-icon>
+      </ion-fab-button>
+    </ion-col>
+<!--
+    <ion-col>
+
+      <ion-searchbar [(ngModel)]="searchQuery" (ionChange)="onSearchInput($event)" placeholder="Rechercher..."></ion-searchbar>
+
+    </ion-col>
+
+  <div class="map-container">
+    <div id="map" style="width: 100%; height: 400px;"></div>
+  </div> -->
+  </ion-row>
+</ion-fab>
+
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">MAp</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+
+
+</ion-content>
+>>>>>>> 2b249c40cab4b5b2cf57746c719cf32201c7dd0b

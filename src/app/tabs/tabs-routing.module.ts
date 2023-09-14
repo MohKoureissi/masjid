@@ -63,8 +63,7 @@ const routes: Routes = [
         path: 'changer',
         loadChildren: () => import('../changer/changer.module').then(m => m.ChangerPageModule)
       },
-
-
+    
       {
         path: '',
         redirectTo: '/tabs/home',

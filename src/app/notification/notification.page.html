@@ -1,0 +1,47 @@
+<!-- <ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>notification</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+
+    <div class="head">
+      <ion-back-button></ion-back-button>
+      <ion-buttons slot="start">
+
+      </ion-buttons>
+      <ion-title class="titre">Notifications </ion-title>
+    </div>
+  </ion-header>
+  <h2>General</h2>
+
+
+
+    <div class="content">
+ 
+      <div class="text">
+      <p>Notification générale </p>
+    </div>
+  <div class="check"><ion-toggle [checked]="true"></ion-toggle></div>
+</div>    
+<div class="content">
+  <div class="text">
+  <p>Son </p>
+</div>
+<div class="check"><ion-toggle [checked]="false"></ion-toggle></div>
+</div>    
+<div class="content">
+  <div class="text">
+  <p>Vibration</p>
+</div>
+<div class="check"><ion-toggle [checked]="true"></ion-toggle></div>
+</div>    
+  
+<div class="photo">
+  <img src="../../assets/logo.png" alt="logo">
+</div>
+    
+  
+</ion-content>
