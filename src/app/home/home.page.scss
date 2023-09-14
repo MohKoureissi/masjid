@@ -1,6 +1,13 @@
 *, ::after, ::before {
   box-sizing: border-box;
 }
+ion-card-content{
+  font-size: 40px;
+  font-weight: bold;
+}
+.h5{
+  font-size: 3rem;
+}
 .parallax-img{
   background-repeat: no-repeat;
   background-position: center;

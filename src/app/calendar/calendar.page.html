@@ -13,10 +13,16 @@
   </div>
   <br>
     <div class="calendar">
-      <ion-datetime color="danger" locale="es-ES"></ion-datetime>
+      <!-- <ion-datetime max="2025-12-31T23:59:59" color="danger" locale="fr" [firstDayOfWeek]="1" >
+        <span slot="time-label">Heure</span>
+      </ion-datetime> -->
+      <mat-card>
+      <mat-calendar [selected]="selectedDate" name="appointment_date" (selectedChange)="onSelect($event)"> </mat-calendar>
+    </mat-card>
+
     </div>
       <div class="container">
-        <ion-card *ngFor="let i of [].constructor(9)">
+        <ion-card *ngFor="let i of [].constructor(4)">
           <ion-card-content class="radio-card">
             <div class="text">
                 <h2><a>Nouvel an Islamique</a></h2>

@@ -1,0 +1,75 @@
+<app-navbar></app-navbar>
+
+<div class="custom-modal" *ngIf="showAddAn">
+  <div class="custom-modal-container">
+    <div class="custom-modal-header"><h1>Ajouter une annonce</h1></div>
+    <div class="custom-modal-content">
+      <div class="dtail">
+        <div class="photo"><span>Photo</span></div>
+        <div class="input-container">
+          <div class="input">
+            <label for="title">Titre</label>
+            <input id="title" type="text">
+          </div>
+          <div class="input">
+            <label for="date">Date</label>
+            <input id="date" type="date">
+          </div>
+          <div class="input">
+            <label for="lieu">Lieu</label>
+            <input id="lieu" type="text">
+          </div>
+          <div class="input">
+            <label for="heure">Heure</label>
+            <input id="heure" type="time">
+          </div>
+        </div>
+      </div>
+      <div class="dtail">
+        <div class="description">
+          <div class="actions">
+            <ion-button class="add">Ajouter</ion-button>
+            <ion-button color="danger" (click)="showAddAn =false">Fermer</ion-button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <a routerLink="/panel"><ion-icon id="back" style="color: #2C6632; vertical-align: middle; font-size: 40px;" name="arrow-back-circle-outline"></ion-icon></a><input type="text" placeholder="Recherchez une annonce" style="border-radius: 20px; padding-left: 50px; padding-right: 50px;">
+      <i (click)="showAddAn = true"><img src="../../../assets/img/plus.png" alt="" height="32px" width="32px" style="margin-left: 10px; cursor: pointer;"></i>
+      <img src="../../../assets/img/gannonce.png" alt="" srcset="">   
+      <table class="table" style="margin-top: 30px;">
+  <thead>
+    <tr>
+      <th scope="col">N°</th>
+      <th scope="col">Photo</th>
+      <th scope="col">Titre</th>
+      <th scope="col">Lieu</th>
+      <th scope="col">Date</th>
+      <th scope="col">Heure</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td><img src="../../../assets/img/nour.jpg" style="height: 36px;width: 36px; border-radius: 50px;" alt=""></td>
+      <td>Emission Nour sur ORTM</td>
+      <td>ORTM</td>
+      <td>08/09/2023</td>
+      <td>16H00</td>
+      <td><ion-icon class="edit" name="create-outline"  style="color:#2C6632;">
+      </ion-icon><ion-icon class="edit" name="trash-outline" style="color: red;"></ion-icon></td>
+    </tr>
+    
+  </tbody>
+</table>
+    </div>
+ 
+  </div>
+  
+</div>

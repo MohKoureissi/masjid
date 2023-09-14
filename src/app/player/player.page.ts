@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {RecitationModel} from "../model/recitation.model";
 import {RecitationService} from "../../data/recitation/recitation.service";
+import { saveAs } from 'file-saver';
 
 import {NativeAudio} from '@capacitor-community/native-audio'
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-player',
@@ -15,13 +17,21 @@ export class PlayerPage implements OnInit {
   reader!: string;
   recitation!: RecitationModel|null;
   isPlay: boolean = false;
-  iconPlay: string = "pause-outline";
+  iconPlay: string = "play-outline";
   currentTimeNumber: number = 0;
-  currentTimeText: string = "";
+  currentTimeText: string = "00:00";
   duration!: number;
+  durationText: string = "00:00";
   audioInterval: any;
 
-  constructor(private route: ActivatedRoute, private recitationService: RecitationService) { }
+  constructor(private route: ActivatedRoute, private recitationService: RecitationService, private http: HttpClient) {
+    NativeAudio.preload({
+      assetId: "fire",
+      assetPath: "../../assets/audios/001.wav",
+      audioChannelNum: 1,
+      isUrl: false
+    });
+  }
 
   async ngOnInit() {
     this.route.queryParams.subscribe(params => {
@@ -38,20 +48,20 @@ export class PlayerPage implements OnInit {
       console.log("Erreur: Recitation introuvable");
     }
 
-    NativeAudio.preload({
-      assetId: "fire",
-      assetPath: "../../assets/audios/001.wav",
-      audioChannelNum: 1,
-      isUrl: false
-    });
 
-    NativeAudio.getDuration({
+    await NativeAudio.getDuration({
       assetId: 'fire'
     })
       .then(result => {
         this.duration = result.duration
-      });
 
+        const totalDuration = Math.floor(this.duration);
+        const minutes = String(Math.floor(totalDuration / 60)).padStart(2, '0');
+        const seconds = String(totalDuration % 60).padStart(2, '0');
+        this.durationText = minutes + ':' + seconds;
+      });
+    console.log("Holla")
+    console.log(this.duration)
   }
 
   async playPause() {
@@ -59,8 +69,6 @@ export class PlayerPage implements OnInit {
       NativeAudio.pause({
         assetId: 'fire'
       });
-
-      clearInterval(this.audioInterval);
 
       this.isPlay = false
       this.iconPlay = "play-outline"
@@ -94,7 +102,7 @@ export class PlayerPage implements OnInit {
 
   secondsToMinutesAndSeconds(totalSeconds: number) {
     const minutes = Math.floor(totalSeconds / 60);
-    const seconds = totalSeconds % 60;
+    const seconds = Math.floor(totalSeconds % 60);
 
     const formattedMinutes = String(minutes).padStart(2, '0');
     const formattedSeconds = String(seconds).padStart(2, '0');
@@ -102,13 +110,20 @@ export class PlayerPage implements OnInit {
     this.currentTimeText =  `${formattedMinutes}:${formattedSeconds}`;
   }
 
+  async downloadMp3(url: string, fileName: string) {
+    await this.http.get(url, { responseType: 'blob' }).subscribe((response: Blob) => {
+      saveAs(response, fileName);
+    });
+  }
 
   ngOnDestroy() {
     // Arrêtez l'audio lorsque le composant est détruit
     NativeAudio.stop({
       assetId: 'fire'
     });
-    clearInterval(this.audioInterval);
   }
+
+
+
 
 }

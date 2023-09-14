@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatCalendarCellClassFunction } from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-calendar',
@@ -7,11 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CalendarPage implements OnInit {
 
-  constructor() {
+constructor() {}
 
-  }
-
-  ngOnInit() {
-  }
+ngOnInit() {
 
 }
+onSelect(event: Date){
+  this.selectedDate= event;
+}
+selectedDate: Date = new Date(); // Date sélectionnée par défaut
+
+
+}
+

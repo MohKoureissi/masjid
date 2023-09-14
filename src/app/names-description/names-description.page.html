@@ -1,13 +1,9 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Déscription</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">namesDescription</ion-title>
-    </ion-toolbar>
-  </ion-header>
+    <div class="container-custom">
+      <h1>{{sname.name}}</h1>
+      <h2>{{sname.transliteration}}</h2>
+      <h3>{{sname.fr.meaning}}</h3>
+      <p>{{utf8decode(sname.fr.desc)}}</p>
+      <p>{{sname.en.desc}}</p>
+    </div>
 </ion-content>
