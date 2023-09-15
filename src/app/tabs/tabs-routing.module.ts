@@ -145,6 +145,10 @@ const routes: Routes = [
           {
             path: 'names',
             loadChildren: () => import('../names/names.module').then( m => m.NamesPageModule)
+          },
+          {
+            path: 'lyrcs-player',
+            loadChildren: () => import('../lyrcs-player/lyrcs-player.module').then( m => m.LyrcsPlayerPageModule)
           }
         ]
       },
