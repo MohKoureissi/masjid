@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { ConnexionPageRoutingModule } from './connexion-routing.module';
 import { ConnexionPage } from './connexion.page';
-import { HttpClientModule } from '@angular/common/http'; // Assurez-vous que vous avez cette importation
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -12,7 +12,7 @@ import { HttpClientModule } from '@angular/common/http'; // Assurez-vous que vou
     FormsModule,
     IonicModule,
     ConnexionPageRoutingModule,
-    HttpClientModule, // Ajoutez HttpClientModule ici
+    ReactiveFormsModule,
   ],
   declarations: [ConnexionPage]
 })

@@ -1,22 +1,29 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { getFirestore, doc, setDoc } from 'firebase/firestore';
+import { Observable, of } from 'rxjs';
+
 @Injectable({
   providedIn: 'root'
 })
 export class InscriptionService {
 
+  constructor() { }
 
-  // private firebaseAuthBaseUrl = 'AIzaSyDW9MK1pAcfgLo_M8w93nrcEXKrZ3FUclM';
+  async createInscription(inscriptionData: any): Promise<void> {
+    try {
+      const db = getFirestore();
+      const inscriptionRef = doc(db, 'inscriptions', inscriptionData.email); 
 
-  // constructor(private http: HttpClient) {}
 
-  // registerUser(email: string, password: string) {
-  //   const requestBody = {
-  //     email: email,
-  //     password: password,
-  //     returnSecureToken: true, // Demande un jeton d'accès sécurisé
-  //   };
+      await setDoc(inscriptionRef, {
+        nom: inscriptionData.nom,
+        email: inscriptionData.email,
+        mdp: inscriptionData.mdp,
+      });
 
-  //   return this.http.post(this.firebaseAuthBaseUrl, requestBody);
-  // }
+      console.log('Inscription réussie !');
+    } catch (error) {
+      console.error('Erreur lors de l\'inscription :', error);
+    }
+  }
 }

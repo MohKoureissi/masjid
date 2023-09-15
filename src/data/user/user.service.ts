@@ -13,7 +13,7 @@ import {
 } from 'firebase/auth';
 
 import { addDoc, collection,updateDoc,doc, arrayRemove,getFirestore, setDoc,DocumentData } from 'firebase/firestore';
-import { Announcements } from 'src/app/model/announcement.model';
+import { Announcement} from 'src/app/model/announcement.model';
 import { Mosque } from 'src/app/model/mosque.model';
 
 @Injectable({
@@ -28,7 +28,7 @@ export class UserService {
     email: string,
     password: string,
     mosques: Mosque[],
-    announcements: Announcements[]
+    announcements: Announcement[]
   ) {
     const auth = getAuth();
     createUserWithEmailAndPassword(auth, email, password)

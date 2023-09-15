@@ -18,6 +18,10 @@ const routes: Routes = [
     loadChildren: () => import('./mosquee/mosquee.module').then(m => m.MosqueePageModule)
   },
   {
+    path: 'home',
+    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
+  },
+  {
     path: 'names',
     loadChildren: () => import('./names/names.module').then(m => m.NamesPageModule)
   },
@@ -62,18 +66,24 @@ const routes: Routes = [
     path: 'dons',
     loadChildren: () => import('./dons/dons.module').then(m => m.DonsPageModule)
   },
+  {
+    path: 'connexion',
+    loadChildren: () => import('./connexion/connexion.module').then(m => m.ConnexionPageModule)
+  },
   // {
-  //   path: 'connexion',
-  //   loadChildren: () => import('./connexion/connexion.module').then(m => m.ConnexionPageModule)
-  // },
-  // {
-  //   path: 'inscription',
+  //   path: '',
   //   loadChildren: () => import('./inscriptionuser/inscriptionuser.module').then(m => m.InscriptionuserPageModule)
   // },
   {
     path: 'demarrage',
     loadChildren: () => import('./demarrage/demarrage.module').then(m => m.DemarragePageModule)
   },
+
+  {
+    path: 'inscrire',
+    loadChildren: () => import('./inscrire/inscrire.module').then(m => m.InscrirePageModule)
+  },
+
   {
     path: 'changer',
     loadChildren: () => import('./changer/changer.module').then(m => m.ChangerPageModule)
@@ -82,6 +92,15 @@ const routes: Routes = [
     path: 'new',
     loadChildren: () => import('./nouveau-mot-de-passe/nouveau-mot-de-passe.module').then(m => m.NouveauMotDePassePageModule)
   },
+  {
+    path: 'profil',
+    loadChildren: () => import('./profiluser/profiladmin.module').then(m => m.ProfiladminPageModule)
+  },
+  {
+    path: 'inscrire',
+    loadChildren: () => import('./inscrire/inscrire.module').then( m => m.InscrirePageModule)
+  },
+
  
 
 ];

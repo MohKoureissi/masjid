@@ -1,43 +1,44 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import {  HttpErrorResponse } from '@angular/common/http';
-import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
+import { getFirestore, doc, setDoc,  collection, getDoc,deleteDoc,updateDoc, getDocs,DocumentSnapshot } from 'firebase/firestore';
+import {Observable, of} from "rxjs";
 @Injectable({
   providedIn: 'root'
 })
 export class ConnexionService {
-  private firebaseAuthBaseUrl = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDW9MK1pAcfgLo_M8w93nrcEXKrZ3FUclM';
   
+constructor(){}
 
-  constructor(private http: HttpClient) {}
+async checkIfUserIsRegistered(email: string,paswword:string): Promise<boolean> {
+  try {
+    const db = getFirestore();
+    console.log(email);
+    const userDocRef = doc(db, 'inscriptions', email);
 
-  login(email: string, password: string) {
-    const requestBody = {
-      email: email,
-      password: password,
-      returnSecureToken: true, // Demande un jeton d'accès sécurisé
-    };
+    const userDocSnapshot: DocumentSnapshot = await getDoc(userDocRef);
 
-    return this.http.post(this.firebaseAuthBaseUrl, requestBody).pipe(
-      catchError(this.handleError)
-    );
+    const isRegistered = userDocSnapshot.exists();
+    console.log(`L'utilisateur avec l'e-mail ${email} est enregistré : ${isRegistered}`);
+
+    return isRegistered;
+  } catch (error) {
+    console.error('Erreur lors de la vérification de l\'utilisateur :', error);
+    return false;
   }
+}
 
-  private handleError(error: HttpErrorResponse) {
-    // Gérez les erreurs ici, par exemple, en affichant un message d'erreur.
-    let errorMessage = 'Une erreur inconnue s\'est produite.';
-    if (error.error instanceof ErrorEvent) {
-      // Erreur côté client.
-      errorMessage = `Erreur : ${error.error.message}`;
+connection(email: string, password: string): Observable<any> {
+  
+  return new Observable((observer) => {
+    // Remplacez cette logique par votre propre logique d'authentification.
+    if (email === 'utilisateur@test.com' && password === 'motdepasse') {
+      observer.next({ idToken: 'jeton_d_authentification' });
+      observer.complete();
     } else {
-      // Erreur côté serveur.
-      errorMessage = `Code d'erreur : ${error.status}, message : ${error.error.error.message}`;
+      observer.error('Erreur d\'authentification');
     }
-    // Vous pouvez logguer l'erreur ou afficher un message à l'utilisateur.
-    console.error(errorMessage);
-    return throwError(errorMessage);
-  }
+  });
+}
 
 
 }
+

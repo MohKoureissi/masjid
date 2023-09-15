@@ -17,15 +17,13 @@
 <div class="formctn">
   <form [formGroup]="registrationForm" (ngSubmit)="onRegister()">
     <input type="text" placeholder="Nom d'utilisateur" class="ipt" formControlName="nom">
-  
     <input type="text" placeholder="Email" class="ipt" formControlName="email">
-  
     <input type="password" placeholder="Mot de passe" class="ipt" formControlName="mdp">
-  
     <input type="password" placeholder="Confirmer votre mot de passe" class="ipt" formControlName="confirm">
     <br>
     <button type="submit">S'inscrire</button>
   </form>
+  
 </div>
 <footer>
 <p>Avez-vous déja un compte? <span style="color:#2C6632; font-weight: bold;">Conectez-vous ici</span></p>

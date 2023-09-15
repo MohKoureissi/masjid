@@ -7,13 +7,16 @@
   
   <div class="formcontainer">
     <!-- Le formulaire -->
-    <form (ngSubmit)="onLogin()">
-      <input type="email" placeholder="Entrer votre email" class="ipt" name="email">
-      <input type="password" placeholder="Entrer votre mot de passe" class="ipt"  name="mdp">
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+      <input type="email" placeholder="Entrer votre email" class="ipt" name="email" formControlName="email">
+      <input type="password" placeholder="Entrer votre mot de passe" class="ipt"  name="mdp" formControlName="mdp">
       <br>
       <a routerLink="../new"><p>Mot de passe oublié?</p></a>
-      <button type="submit">Se connecter</button>
+      <button >Se connecter</button>
     </form>
+
+<div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
   </div>
   
   <footer class="foot">
@@ -26,12 +29,12 @@
         <img src="../../assets/icon/13948549-logo-google-sur-fond-blanc-transparent-gratuit-vectoriel.jpg" alt="" class="logo2">
       </div>
       <div class="carrer">
-        <ion-icon name="logo-apple" style="font-size: 30px;"></ion-icon>
+        <ion-icon name="logo-apple" [style.fontSize]="30"></ion-icon>
       </div>
     </div>
   
     <!-- Mot de passe oublié -->
-    <h4>Vous n'avez pas de compte ? <a routerLink="../inscription"><span>Inscrivez-vous</span></a></h4>
+    <h4>Vous n'avez pas de compte ? <a routerLink="../inscrire"><span>Inscrivez-vous</span></a></h4>
   </footer>
 </div>
 
