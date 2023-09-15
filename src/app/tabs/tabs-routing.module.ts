@@ -63,17 +63,21 @@ const routes: Routes = [
         path: 'changer',
         loadChildren: () => import('../changer/changer.module').then(m => m.ChangerPageModule)
       },
-    
+      {
+        path: 'connexion',
+        loadChildren: () => import('../connexion/connexion.module').then(m => m.ConnexionPageModule)
+      },
+
       {
         path: '',
-        redirectTo: '/tabs/home',
+        redirectTo: '/tabs/demarrage',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/tabs/home',
+    redirectTo: '/tabs/demarrage',
     pathMatch: 'full'
   }
 ];
@@ -81,4 +85,4 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
 })
-export class TabsPageRoutingModule {}
+export class TabsPageRoutingModule { }

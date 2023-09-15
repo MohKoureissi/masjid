@@ -1,4 +1,4 @@
-import { Announcements } from "./announcement.model";
+import { Announcement} from "./announcement.model";
 import { Mosque } from "./mosque.model";
 
 export interface Users{
@@ -8,7 +8,7 @@ export interface Users{
   email: string;
   password: string;
   mosques: Mosque[];
-  announcements: Announcements[];
+  announcements: Announcement[];
   subscribedMosques: Mosque[];
   // actions: ['itineraire', 'favoris', 'informations'],
 

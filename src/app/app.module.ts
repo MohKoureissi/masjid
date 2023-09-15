@@ -12,15 +12,13 @@ import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 
-
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
-import {HeaderComponent} from "./dashbord-page/header/header.component";
 
 
 @NgModule({
-    declarations: [AppComponent, HeaderComponent],
+    declarations: [AppComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),

@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="logo">
+    <img src="../assets/icon/logos.png" alt="">
+  </div>
+  
+  <h1>Heureux de vous revoir!</h1>
+  
+  <div class="formcontainer">
+    <!-- Le formulaire -->
+    <form (ngSubmit)="onLogin()">
+      <input type="email" placeholder="Entrer votre email" class="ipt" name="email">
+      <input type="password" placeholder="Entrer votre mot de passe" class="ipt"  name="mdp">
+      <br>
+      <a routerLink="../new"><p>Mot de passe oublié?</p></a>
+      <button type="submit">Se connecter</button>
+    </form>
+  </div>
+  
+  <footer class="foot">
+    <h3>Se connecter avec</h3>
+    <div class="icon">
+      <div class="carrer">
+        <img src="../../assets/icon/facebook-f-logo-white-background-21.jpg" alt="" class="logo2">
+      </div>
+      <div class="carrer">
+        <img src="../../assets/icon/13948549-logo-google-sur-fond-blanc-transparent-gratuit-vectoriel.jpg" alt="" class="logo2">
+      </div>
+      <div class="carrer">
+        <ion-icon name="logo-apple" style="font-size: 30px;"></ion-icon>
+      </div>
+    </div>
+  
+    <!-- Mot de passe oublié -->
+    <h4>Vous n'avez pas de compte ? <a routerLink="../inscription"><span>Inscrivez-vous</span></a></h4>
+  </footer>
+</div>
+
+
