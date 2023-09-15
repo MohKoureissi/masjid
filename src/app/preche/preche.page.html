@@ -7,11 +7,11 @@
   </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true">
-  <div class="parallax-img">
+  <div class="parallax-img" [style.background-image]="'url(../../assets/illustrations/preche.jpg)'">
     <h1>Liste des prêcheurs</h1>
   </div>
   <div class="container">
-    <ion-card *ngFor="let precheur of precheurs" [routerLink]="['list-preche', precheur.id]">
+    <ion-card *ngFor="let precheur of precheurs" [routerLink]="['list-preche', precheur.id]" [queryParams]="{imageUrl: precheur.imageUrl}">
       <ion-card-content class="radio-card">
         <div class="thumb">
           <ion-thumbnail>

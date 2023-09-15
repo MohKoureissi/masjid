@@ -16,6 +16,7 @@ export class PrechePage implements OnInit {
     this.precheurService.getAllPrecheurs().then(
       precheurs => precheurs.subscribe(p =>{
         this.precheurs = p;
+        console.log(this.precheurs)
       }))
   }
 

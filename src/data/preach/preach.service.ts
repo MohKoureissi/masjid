@@ -42,9 +42,9 @@ export class PreachService {
     }
   }
 
-  async getPreache(precheur: string, preachId: string) {
+  async getPreache(precheurId: string, preachId: string) {
     try {
-      const preachDocRef = doc(this.firestore, `${this.COLLECTION_NAME}/${precheur}/${this.COLLECTION_NAME}`, preachId);
+      const preachDocRef = doc(this.firestore, `${this.COLLECTION_NAME}/${precheurId}/${this.COLLECTION_NAME}`, preachId);
       const preachSnap = await getDoc(preachDocRef);
       return preachSnap.data() as PreacheModel;
     }catch (erreor) {

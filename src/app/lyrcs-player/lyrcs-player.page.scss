@@ -1,5 +1,5 @@
 :root{
-    --bg-color: background-color: #7f5a83;
+    --bg-color: #7f5a83;
   background-image: linear-gradient(315deg, #7f5a83 0%, #0d324d 74%);
     --menu-color: #00000045;
     --lyrics-color: white;
@@ -219,7 +219,7 @@
     #search:focus{width:40vw;}
     #playlist > #label > h1{margin:8vh 0 4vh !important;}
   }
-  
+
   #lyrics::-webkit-scrollbar,#show-box::-webkit-scrollbar{
     width:5px;
   }
