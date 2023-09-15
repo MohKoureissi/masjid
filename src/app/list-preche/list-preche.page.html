@@ -3,15 +3,15 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>Prêche Goita</ion-title>
+    <ion-title>Prêches</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true">
-    <div class="parallax-img" [style.background-image]="'url(../../assets/illustrations/mosquee.jpg)'">  
-   <h1>Coran</h1>
+    <div class="parallax-img" [style.background-image]="'url(../../assets/illustrations/mosquee.jpg)'">
+   <h1>Prêches</h1>
   </div>
       <div class="container">
-        <ion-card *ngFor="let i of [].constructor(9)" routerLink="p-player" >
+        <ion-card *ngFor="let preach of preaches" routerLink="p-player" >
           <ion-card-content class="radio-card">
             <div class="thumb">
               <ion-thumbnail>
@@ -21,9 +21,9 @@
             </div>
             <div class="text">
               <span><ion-icon name="musical-notes-outline"></ion-icon></span>
-              <h2>La prière de nuit</h2>
-              <p>Durée : 50:45 min</p>
-            </div>           
+              <h2>{{preach.title}}</h2>
+              <p>Durée : {{preach.tme}} min</p>
+            </div>
           </ion-card-content>
         </ion-card>
       </div>

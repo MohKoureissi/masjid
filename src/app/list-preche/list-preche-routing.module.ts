@@ -2,10 +2,15 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { ListPrechePage } from './list-preche.page';
+import {PPlayerPage} from "../p-player/p-player.page";
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'p-player',
+    component: PPlayerPage
+  },
+  {
+    path: ':id',
     component: ListPrechePage
   }
 ];

@@ -17,9 +17,9 @@ export class PreachService {
   async addPreache(preache: PreacheModel, file: File) {
     const db = getFirestore();
     const storage = getStorage();
-    const preacheCollectionRef = collection(db, `${this.COLLECTION_NAME}/${preache.precheur}/${this.COLLECTION_NAME}`);
+    const preacheCollectionRef = collection(db, `${this.COLLECTION_NAME}/${preache.precheurId}/${this.COLLECTION_NAME}`);
     try {
-      await this.loadPreache(preache.precheur.fullName, file).then(url =>{
+      await this.loadPreache(preache.precheurId, file).then(url =>{
         preache.preacheUrl = url;
       });
       console.log(preache.preacheUrl)
@@ -27,7 +27,7 @@ export class PreachService {
       if(preache.preacheUrl){
         const docRef = await addDoc(preacheCollectionRef, preache);
         preache.id = docRef.id;
-        const preacheDocRef = doc(this.firestore, `${this.COLLECTION_NAME}/${preache.precheur}/${this.COLLECTION_NAME}/${preache.id}`);
+        const preacheDocRef = doc(this.firestore, `${this.COLLECTION_NAME}/${preache.precheurId}/${this.COLLECTION_NAME}/${preache.id}`);
         await updateDoc(
           preacheDocRef,
           {id: preache.id}
@@ -112,10 +112,10 @@ export class PreachService {
 
 
 
-  async loadPreache(precheur: string, file: File): Promise<string | null> {
+  async loadPreache(precheurId: string, file: File): Promise<string | null> {
     const storage = getStorage();
     let downloadUrl: string|null = null;
-    const preachesRef = await ref(storage, `${this.COLLECTION_NAME}/${precheur}/${file.name}`);
+    const preachesRef = await ref(storage, `${this.COLLECTION_NAME}/${precheurId}/${file.name}`);
     uploadBytes(preachesRef, file).then((snapshot) => {
       console.log('Fichier uploadé avec succès !');
     });
