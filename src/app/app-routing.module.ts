@@ -49,14 +49,15 @@ const routes: Routes = [
   {
     path: 'admin-annonce',
     loadChildren: () => import('./masjid-admin/admin-annonce/admin-annonce.module').then( m => m.AdminAnnoncePageModule)
-  },  {
+  },
+  {
     path: 'lyrcs-player',
     loadChildren: () => import('./lyrcs-player/lyrcs-player.module').then( m => m.LyrcsPlayerPageModule)
   },
-
-
-
-
+  {
+    path: 'mosque-form',
+    loadChildren: () => import('./masjid-admin/components/mosque-form/mosque-form.module').then( m => m.MosqueFormPageModule)
+  },
 ];
 @NgModule({
   imports: [
