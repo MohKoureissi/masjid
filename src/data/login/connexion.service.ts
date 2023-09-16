@@ -1,44 +1,71 @@
 import { Injectable } from '@angular/core';
 import { getFirestore, doc, setDoc,  collection, getDoc,deleteDoc,updateDoc, getDocs,DocumentSnapshot } from 'firebase/firestore';
 import {Observable, of} from "rxjs";
+import { getAuth, signInWithEmailAndPassword, Auth } from 'firebase/auth';
 @Injectable({
   providedIn: 'root'
 })
 export class ConnexionService {
-  
-constructor(){}
+  private auth: Auth; 
+constructor(){
+  this.auth = getAuth();
+}
 
-async checkIfUserIsRegistered(email: string,paswword:string): Promise<boolean> {
+async signInWithEmailAndPassword(email: string, mdp: string): Promise<any> {
   try {
-    const db = getFirestore();
-    console.log(email);
-    const userDocRef = doc(db, 'inscriptions', email);
-
-    const userDocSnapshot: DocumentSnapshot = await getDoc(userDocRef);
-
-    const isRegistered = userDocSnapshot.exists();
-    console.log(`L'utilisateur avec l'e-mail ${email} est enregistré : ${isRegistered}`);
-
-    return isRegistered;
+    const userCredential = await signInWithEmailAndPassword(this.auth, email, mdp);
+    return userCredential.user; // Retourne l'utilisateur connecté
   } catch (error) {
-    console.error('Erreur lors de la vérification de l\'utilisateur :', error);
-    return false;
+    console.error('Erreur lors de la connexion :', error);
+    throw error; // Lancez l'erreur pour la gérer dans le composant de connexion
   }
 }
 
-connection(email: string, password: string): Observable<any> {
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+// async checkIfUserIsRegistered(email: string,mdp:string): Promise<boolean> {
+  //   try {
+  //     const db = getFirestore();
+  //     console.log(email);
+  //     const userDocRef = doc(db, 'login', email, mdp);
   
-  return new Observable((observer) => {
-    // Remplacez cette logique par votre propre logique d'authentification.
-    if (email === 'utilisateur@test.com' && password === 'motdepasse') {
-      observer.next({ idToken: 'jeton_d_authentification' });
-      observer.complete();
-    } else {
-      observer.error('Erreur d\'authentification');
-    }
-  });
-}
-
-
-}
-
+  //     const userDocSnapshot: DocumentSnapshot = await getDoc(userDocRef);
+  
+  //     const isRegistered = userDocSnapshot.exists();
+  //     console.log(`L'utilisateur avec l'e-mail ${email} est enregistré : ${isRegistered}`);
+  
+  //     return isRegistered;
+  //   } catch (error) {
+  //     console.error('Erreur lors de la vérification de l\'utilisateur :', error);
+  //     return false;
+  //   }
+  // }
+  
+  // // connection(email: string, mdp: string): Observable<any> {
+    
+  // //   return new Observable((observer) => {
+    
+  // //     if (email === this.email.inscriptionService && mdp === this.mdp.inscriptionService) {
+  // //       observer.next({ idToken: 'jeton_d_authentification' });
+  // //       observer.complete();
+  // //     } else {
+  // //       observer.error('Erreur d\'authentification');
+  // //     }
+  // //   });
+  // // }

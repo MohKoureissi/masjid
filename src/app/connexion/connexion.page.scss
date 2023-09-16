@@ -38,10 +38,12 @@ h2{
     width: 80%;
     height: 50px;
     margin-bottom: 20px;
-    border-radius: 20PX;
+    border-radius: 10px;
     margin-top: 20px;
     background-color: #7f747410;
+    border-color: #48a251;
 }
+
 p{
     margin-left: 50%;
 }
@@ -103,4 +105,10 @@ span{
   }
 p{
     margin-left: 9%;
+}
+
+.error-message{
+
+color: red;
+font-weight: bold;
 }

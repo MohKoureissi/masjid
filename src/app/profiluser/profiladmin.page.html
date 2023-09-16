@@ -1,5 +1,8 @@
 <div class="container">
-  <ion-icon name="chevron-back-outline" id="arrow-left"></ion-icon>
+
+  <ion-buttons slot="start">
+    <ion-back-button></ion-back-button>
+  </ion-buttons>
 
   <div class="en-tete">
     
@@ -11,34 +14,7 @@
 
   
   <!-- la partie information  -->
-  <div class="info">
-    <!-- Modifier info -->
-    <div class="containeur">
-      <div class="parent"> 
-        <div class="icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M2 3.993C2.00183 3.73038 2.1069 3.47902 2.29251 3.29322C2.47813 3.10742 2.72938 3.00209 2.992 3H21.008C21.556 3 22 3.445 22 3.993V20.007C21.9982 20.2696 21.8931 20.521 21.7075 20.7068C21.5219 20.8926 21.2706 20.9979 21.008 21H2.992C2.72881 20.9997 2.4765 20.895 2.29049 20.7088C2.10448 20.5226 2 20.2702 2 20.007V3.993ZM4 5V19H20V5H4ZM6 7H12V13H6V7ZM8 9V11H10V9H8ZM6 15H18V17H6V15ZM14 7H18V9H14V7ZM14 11H18V13H14V11Z" fill="black"/>
-          </svg>
-        </div>
-        <div class="tx">
-          <p>Modifier info personnelle</p>
-        </div>
-      </div>
-
-      <!-- notification -->
-      <div class="parent"> 
-        <div class="icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M20 17H22V19H2V17H4V10C4 7.87827 4.84285 5.84344 6.34315 4.34315C7.84344 2.84285 9.87827 2 12 2C14.1217 2 16.1566 2.84285 17.6569 4.34315C19.1571 5.84344 20 7.87827 20 10V17ZM18 17V10C18 8.4087 17.3679 6.88258 16.2426 5.75736C15.1174 4.63214 13.5913 4 12 4C10.4087 4 8.88258 4.63214 7.75736 5.75736C6.63214 6.88258 6 8.4087 6 10V17H18ZM9 21H15V23H9V21Z" fill="black"/>
-          </svg>
-        </div>
-        <div class="tx">
-          <p>Notification</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
+  
 <!-- la 2ème parti aide et consort -->
 <div class="information">
 <div class="containeu">
@@ -78,7 +54,7 @@
     <p>Politique</p>
   </div>
 </div>
-<button>Déconnection</button>
+  <a><button>Déconnection</button></a>
 </div>
 </div>
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { InscriptionService } from 'src/data/inscription/inscription.service';
+import { getAuth, createUserWithEmailAndPassword, Auth } from 'firebase/auth';
 
 @Component({
   selector: 'app-inscrire',
@@ -12,6 +13,8 @@ export class InscrirePage implements OnInit {
   inscriptionSuccess = false; // Variable pour suivre l'état de l'inscription réussie
   errorMessage: string | null = null; // Variable pour suivre les messages d'erreur
 
+  auth: Auth; // Ajoutez une variable pour gérer l'authentification Firebase
+
   constructor(private fb: FormBuilder, private inscriptionService: InscriptionService) {
     // Initialisation du formulaire
     this.registrationForm = this.fb.group({
@@ -20,6 +23,9 @@ export class InscrirePage implements OnInit {
       mdp: ['', Validators.required],
       confirm: ['', Validators.required],
     });
+
+    // Initialisez l'authentification Firebase
+    this.auth = getAuth();
   }
 
   onRegister() {
@@ -27,21 +33,35 @@ export class InscrirePage implements OnInit {
       const formData = this.registrationForm.value;
 
       if (formData.mdp === formData.confirm) {
-        // Les mots de passe correspondent, vous pouvez enregistrer les données
-        this.inscriptionService.createInscription(formData).then(() => {
-          console.log('Inscription réussie !');
-          this.inscriptionSuccess = true; // Définir l'état de réussite sur true
-          this.errorMessage = null; // Effacer tout message d'erreur précédent
-        }).catch((error) => {
-          console.error('Erreur lors de l\'inscription :', error);
-          this.inscriptionSuccess = false; // Définir l'état de réussite sur false en cas d'erreur
-          this.errorMessage = 'Une erreur s\'est produite lors de l\'inscription.'; // Définir le message d'erreur
-        });
+        // Les mots de passe correspondent, vous pouvez créer un nouvel utilisateur
+        createUserWithEmailAndPassword(this.auth, formData.email, formData.mdp)
+          .then((userCredential) => {
+            // L'utilisateur est créé avec succès. Vous pouvez gérer la suite ici.
+            const user = userCredential.user;
+            console.log('Utilisateur créé avec succès', user);
+
+            // Enregistrez d'autres informations d'utilisateur si nécessaire, par exemple, dans Firestore.
+            this.inscriptionService.createInscription(formData).then(() => {
+              console.log('Inscription réussie !');
+              this.inscriptionSuccess = true;
+              this.errorMessage = null;
+            }).catch((error) => {
+              console.error('Erreur lors de l\'inscription :', error);
+              this.inscriptionSuccess = false;
+              this.errorMessage = 'Une erreur s\'est produite lors de l\'inscription.';
+            });
+          })
+          .catch((error) => {
+            // Gérez les erreurs lors de la création de l'utilisateur ici.
+            console.error('Erreur lors de la création de l\'utilisateur', error);
+            this.inscriptionSuccess = false;
+            this.errorMessage = 'Une erreur s\'est produite lors de la création de l\'utilisateur.';
+          });
       } else {
         // Les mots de passe ne correspondent pas, affichez une erreur
         console.error('Les mots de passe ne correspondent pas');
-        this.inscriptionSuccess = false; // Définir l'état de réussite sur false
-        this.errorMessage = 'Les mots de passe ne correspondent pas.'; // Définir le message d'erreur
+        this.inscriptionSuccess = false;
+        this.errorMessage = 'Les mots de passe ne correspondent pas.';
       }
     }
   }

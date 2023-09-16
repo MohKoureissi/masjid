@@ -77,18 +77,19 @@ align-items: center;
 }
 .containeu{
 width: 370px;
-height: 190px;
+height: 195px;
 flex-shrink: 0;
-border-radius: 8px;
+border-radius: 20px;
 background: var(--light-gray-0, #FFF);
 box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.25);
-margin-top: 10%;
+margin-top: 50%;
 }
 .icofoot{
   margin: 10px;
   padding: 10px;
 }
 button {
+
   width: 200px;
   height: 56px;
   flex-shrink: 0;
@@ -98,6 +99,7 @@ button {
   font-weight: bold;
   margin-left: 20%;
   font-size: 20px;
+  margin-top: 50%;
 
 }
 /* Style du logo */

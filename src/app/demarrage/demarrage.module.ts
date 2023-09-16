@@ -1,19 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
+import { Router } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { DemarragePageRoutingModule } from './demarrage-routing.module';
 
 import { DemarragePage } from './demarrage.page';
 
+
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    DemarragePageRoutingModule
+    DemarragePageRoutingModule,
+  
   ],
   declarations: [DemarragePage]
 })

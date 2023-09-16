@@ -11,6 +11,7 @@
 .container{
 text-align: center;
 
+
 }
 
 h1{
@@ -43,9 +44,9 @@ input{
 height: 56px;
 flex-shrink: 0;
 border-radius: 8px;
-border: 1px solid #DADADA;
+border: 1px solid #0a6d0f;
 background: #F7F8F9;
-margin-bottom: 20px;
+margin-bottom: 40px;
 }
 
 button{
@@ -65,12 +66,26 @@ line-height: normal;
 
 .centre{
 text-align: center;
+// margin-top: 10%;
 }
 
 .logo {
     position: absolute;
-    bottom: 87px; /* Ajustez cette valeur selon vos besoins */
+     /* Ajustez cette valeur selon vos besoins */
     left: 50%;
     transform: translateX(-50%);
     width: 100px;
+    margin-top: 20%;
+  }
+  .en-tete {
+    width: 408px;
+    height: 100px;
+    flex-shrink: 0;
+    border-radius: 0px 0px 50px 50px;
+    background: #2C6632;
+    box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.35);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 15%;
   }
