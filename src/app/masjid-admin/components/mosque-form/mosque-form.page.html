@@ -1,0 +1,243 @@
+<form [formGroup]="mosqueForm">
+
+  <div [hidden]="!showForm1Content" class="first-modal">
+    <ion-list class="modal-wrapper">
+      <ion-row>
+        <ion-col>
+          <h1>Ajouter une mosquée</h1>
+          <p style="padding: 0; font-size: 18px">Informations générales</p>
+        </ion-col>
+
+        <ion-col class="cancel">
+          <ion-icon name="close-outline" size="large" (click)="closeModal()"></ion-icon>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-input type="file" fill="outline" id="fileInput" accept="image/png, image/jpeg"></ion-input>
+        </ion-col>
+      </ion-row>
+
+
+      <ion-row>
+        <ion-col>
+          <ion-input label="Nom de la mosquée" label-placement="floating" fill="outline" placeholder="Mosquée Salam" formControlName="name"></ion-input>
+        </ion-col>
+
+        <ion-col>
+          <ion-input label="Nom de l'imam" label-placement="floating" fill="outline" placeholder="Abdoul Aziz" formControlName="imamName"></ion-input>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-input label="Nom du quartier" label-placement="floating" fill="outline" placeholder="Lafiabougou" formControlName="quartier"></ion-input>
+        </ion-col>
+
+        <ion-col>
+          <ion-input label="Numero OrangeMoney/Mobicash pour le don" type="number" label-placement="floating" fill="outline" placeholder="77 63 44 90" formControlName="numDonation"></ion-input>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-input label="Lien GPS de la localisation" type="url" label-placement="floating" fill="outline" placeholder="https://maps.google.com/?q=1.1,-2.2" formControlName="location"></ion-input>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-textarea label="Comment faire un don" label-placement="floating" [counter]="true" maxlength="50" fill="outline" formControlName="descDonation"></ion-textarea>
+        </ion-col>
+      </ion-row>
+
+      <div class="action">
+        <ion-button (click)="goToPage2()" class="next-btn">Suivant</ion-button>
+      </div>
+
+    </ion-list>
+
+
+  </div>
+
+
+  <div [hidden]="!showForm2Content">
+    <ion-list>
+      <ion-row>
+        <ion-col>
+          <h1>Ajouter une mosquée</h1>
+          <p style="padding: 0; font-size: 18px">Horaires des prières</p>
+        </ion-col>
+
+        <ion-col class="cancel">
+          <ion-icon name="close-outline" size="large" (click)="closeModal()"></ion-icon>
+        </ion-col>
+      </ion-row>
+
+
+      <ion-row>
+        <ion-col>
+          <ion-item fill="outline" lines="none" mode="md">
+            <ion-label>Fajr</ion-label>
+            <ion-note slot="end" id="fajr">
+              <p style="font-size: 17px; color: #2c6632" >{{fajr}}</p>
+            </ion-note>
+
+            <ion-popover trigger="fajr" triggerAction="click">
+              <ng-template>
+                <ion-content class="ion-padding">
+                  <ion-datetime
+                    id="fajrTime"
+                    presentation="time"
+                    min="1989-06-04"
+                    max="2004-08-23"
+                    [(ngModel)]="fajr"
+                    (ionChange)="updateFajr($event)"
+                  ></ion-datetime>
+                </ion-content>
+              </ng-template>
+            </ion-popover>
+          </ion-item>
+        </ion-col>
+
+        <ion-col>
+          <ion-item fill="outline" lines="none" mode="md">
+            <ion-label>Dohr</ion-label>
+            <ion-note slot="end" id="dohr">
+              <p style="font-size: 17px; color: #2c6632" >{{dohr}}</p>
+            </ion-note>
+
+            <ion-popover trigger="dohr" triggerAction="click">
+              <ng-template>
+                <ion-content class="ion-padding">
+                  <ion-datetime
+                    id="dohrTime"
+                    presentation="time"
+                    min="1989-06-04"
+                    max="2004-08-23"
+                    [(ngModel)]="dohr"
+                    (ionChange)="updateDohr($event)"
+                  ></ion-datetime>
+                </ion-content>
+              </ng-template>
+            </ion-popover>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+
+      <ion-row>
+        <ion-col>
+          <ion-item fill="outline" lines="none" mode="md">
+            <ion-label>Asr</ion-label>
+            <ion-note slot="end" id="asr">
+              <p style="font-size: 17px; color: #2c6632" >{{asr}}</p>
+            </ion-note>
+
+            <ion-popover trigger="asr" triggerAction="click">
+              <ng-template>
+                <ion-content class="ion-padding">
+                  <ion-datetime
+                    id="asrTime"
+                    presentation="time"
+                    min="1989-06-04"
+                    max="2004-08-23"
+                    [(ngModel)]="asr"
+                    (ionChange)="updateAsr($event)"
+                  ></ion-datetime>
+                </ion-content>
+              </ng-template>
+            </ion-popover>
+          </ion-item>
+        </ion-col>
+
+        <ion-col>
+          <ion-item fill="outline" lines="none" mode="md">
+            <ion-label>Maghreb</ion-label>
+            <ion-note slot="end" id="maghreb">
+              <p style="font-size: 17px; color: #2c6632" >{{maghreb}}</p>
+            </ion-note>
+
+            <ion-popover trigger="maghreb" triggerAction="click">
+              <ng-template>
+                <ion-content class="ion-padding">
+                  <ion-datetime
+                    id="maghrebTime"
+                    presentation="time"
+                    min="1989-06-04"
+                    max="2004-08-23"
+                    [(ngModel)]="maghreb"
+                    (ionChange)="updateMaghreb($event)"
+                  ></ion-datetime>
+                </ion-content>
+              </ng-template>
+            </ion-popover>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+
+
+      <ion-row>
+        <ion-col>
+          <ion-item fill="outline" lines="none" mode="md">
+            <ion-label>Isha</ion-label>
+            <ion-note slot="end" id="isha">
+              <p style="font-size: 17px; color: #2c6632" >{{isha}}</p>
+            </ion-note>
+
+            <ion-popover trigger="isha" triggerAction="click">
+              <ng-template>
+                <ion-content class="ion-padding">
+                  <ion-datetime
+                    id="ishaTime"
+                    presentation="time"
+                    min="1989-06-04"
+                    max="2004-08-23"
+                    [(ngModel)]="isha"
+                    (ionChange)="updateIsha($event)"
+                  ></ion-datetime>
+                </ion-content>
+              </ng-template>
+            </ion-popover>
+          </ion-item>
+        </ion-col>
+
+        <ion-col>
+          <ion-item fill="outline" lines="none" mode="md">
+            <ion-label>Djumha</ion-label>
+            <ion-note slot="end" id="djumha">
+              <p style="font-size: 17px; color: #2c6632" >{{djumha}}</p>
+            </ion-note>
+
+            <ion-popover trigger="djumha" triggerAction="click">
+              <ng-template>
+                <ion-content class="ion-padding">
+                  <ion-datetime
+                    id="djumhaTime"
+                    presentation="time"
+                    min="1989-06-04"
+                    max="2004-08-23"
+                    [(ngModel)]="djumha"
+                    (ionChange)="updateDjumha($event)"
+                  ></ion-datetime>
+                </ion-content>
+              </ng-template>
+            </ion-popover>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+
+      <div class="action">
+        <ion-button (click)="previous()">Precedent</ion-button>
+        <ion-button class="next-btn">Enregistrer</ion-button>
+      </div>
+
+    </ion-list>
+
+  </div>
+
+
+</form>
