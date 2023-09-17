@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {Mosque} from "../../model/mosque.model";
-import {MosqueService} from "../../../data/mosque/mosque.service";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {map, Observable} from "rxjs";
+import { Mosque } from "../../model/mosque.model";
+import { MosqueService } from "../../../data/mosque/mosque.service";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { map, Observable } from "rxjs";
 import { AlertController } from '@ionic/angular';
 
 @Component({
@@ -14,15 +14,15 @@ export class ListMosqueePage implements OnInit {
   showAdd = false;
   showAddAn = false;
   showAddAd = true;
-  mosques: Mosque[]= [];
+  mosques: Mosque[] = [];
   mosqueForm!: FormGroup;
   mosqueeEnCoursDeModification: Mosque | any;
 
   isEditing = false;
-  constructor(private mosqueService: MosqueService, private  formBuilder: FormBuilder,  private alertController: AlertController) { }
+  constructor(private mosqueService: MosqueService, private formBuilder: FormBuilder, private alertController: AlertController) { }
 
   ngOnInit() {
-    this.mosqueService.getAllMosques().then(value => value.subscribe(v =>{
+    this.mosqueService.getAllMosques().then(value => value.subscribe(v => {
       this.mosques = v
     }));
     const urlRegex: RegExp = /(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z0-9]{2,}(\.[a-zA-Z0-9]{2,})(\.[a-zA-Z0-9]{2,})?/;
@@ -31,7 +31,7 @@ export class ListMosqueePage implements OnInit {
       name: [null, [Validators.required]],
       location: [null, [Validators.required, Validators.pattern(urlRegex)]],
       imamName: [null, [Validators.required]],
-      numDonation: [null, ],
+      numDonation: [null,],
       descDonation: [null],
       quartier: [null, [Validators.required]],
       fajr: [null, [Validators.required]],
@@ -54,14 +54,14 @@ export class ListMosqueePage implements OnInit {
       imamName: mosque.imamName,
       location: mosque.location,
       isha: mosque.isha,
-      maghreb:mosque.maghreb,
-      asr:mosque.asr,
-      djumha:mosque.djumha,
-      dohr:mosque.dohr,
-      fajr:mosque.fajr,
-      imageUrl:mosque.imageUrl,
-      numDonation:mosque.numDonation,
-      descDonation:mosque.descDonation
+      maghreb: mosque.maghreb,
+      asr: mosque.asr,
+      djumha: mosque.djumha,
+      dohr: mosque.dohr,
+      fajr: mosque.fajr,
+      imageUrl: mosque.imageUrl,
+      numDonation: mosque.numDonation,
+      descDonation: mosque.descDonation
 
       // Remplissez les autres champs ici avec les propriétés de la mosquée
     });
@@ -120,7 +120,7 @@ export class ListMosqueePage implements OnInit {
         djumha: this.mosqueForm.get('djumha')?.value,
         maghreb: this.mosqueForm.get('maghreb')?.value,
         location: this.mosqueForm.get('location')?.value,
-        dohr:this.mosqueForm.get('dohr')?.value,
+        dohr: this.mosqueForm.get('dohr')?.value,
         // imageUrl:this.mosqueForm.get('imageUrl')?.value,
         numDonation: this.mosqueForm.get('numDonation')?.value,
         descDonation: this.mosqueForm.get('descDonation')?.value
@@ -189,6 +189,8 @@ export class ListMosqueePage implements OnInit {
 
     //console.log(mosque)
   }
+
+
 
   // Cette méthode sera utilisé pour uploader un fichier de récitation
   /*uploadFile() {

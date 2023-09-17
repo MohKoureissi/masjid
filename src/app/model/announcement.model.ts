@@ -6,6 +6,6 @@ export interface Announcement {
   location: string;
   date: string;
   hour: string;
-  imageUrl: string;
+  imageUrl: string|null;
   organizer: string;
 }

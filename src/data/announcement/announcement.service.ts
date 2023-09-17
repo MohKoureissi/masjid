@@ -1,30 +1,41 @@
 import { Injectable } from '@angular/core';
-import { getFirestore, doc, setDoc,  collection, getDoc,deleteDoc,updateDoc, getDocs} from 'firebase/firestore';
+import { getFirestore, doc, addDoc,setDoc,  collection, getDoc,deleteDoc,updateDoc, getDocs} from 'firebase/firestore';
 import {Announcement} from 'src/app/model/announcement.model';
 import {Observable, of} from "rxjs";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AnnouncementService {
-
+  COLLECTION_NAME = 'announcements';
   constructor() { }
 
-  async createAnnouncement(announcement: Announcement): Promise<void> {
-    try{
-      const db = getFirestore();
-      const announcementCollectionRef = collection(db, "announcements")
-      //ajouter une nouvelle annonce a la collection "announcements"
-      const newAnouncementRef= doc(announcementCollectionRef);
-      await setDoc(newAnouncementRef, announcement);
-      updateDoc(newAnouncementRef, {id: newAnouncementRef.id});
-    console.log(`Annnoce  créée avec succès avec l'ID : ${newAnouncementRef.id}`);
+  async createAnnouncement(announcement: Announcement,imageFile:File): Promise<void> {
+    const db = getFirestore();
+    const announcementCollectionRef = collection(db, `${this.COLLECTION_NAME}`);
+    try {
+      await this.loadAnnouncementImage(imageFile).then(url =>{
+        announcement.imageUrl = url;
+      });
+      console.log(announcement.imageUrl)
 
-    }catch (error) {
-      console.error('Erreur lors de la création de l\'annonce :', error);
+      // Ajoutez la nouvelle mosquée à la collection "mosques"
+      const newAnnouncementRef = doc(announcementCollectionRef);
+      await setDoc(newAnnouncementRef, announcement);
+      updateDoc(
+        newAnnouncementRef,
+        {id: newAnnouncementRef.id}
+      );
+
+      console.log(`Annonce créée avec succès avec l'ID : ${newAnnouncementRef.id}`);
+    } catch (error) {
+      console.error('Erreur lors de la création de l\'Annonce :', error);
       throw error; // Vous pouvez gérer l'erreur de manière appropriée ici
     }
-  }
+}
+
 
 
   //update annonce
@@ -105,5 +116,27 @@ export class AnnouncementService {
     }
   }
 
+
+
+  async loadAnnouncementImage(file: File): Promise<string | null> {
+    const storage = getStorage();
+    let imageUrl: string|null = null;
+    const announcementRef = await ref(storage, `${this.COLLECTION_NAME}/${file.name}`);
+    uploadBytes(announcementRef, file).then((snapshot) => {
+      console.log('Fichier uploadé avec succès !');
+    });
+
+
+    await getDownloadURL(announcementRef)
+      .then((url) => {
+        // `url` est l'URL de téléchargement de notre récitation
+        imageUrl = url
+      })
+      .catch((error) => {
+        // Handle any errors
+      });
+
+    return imageUrl;
+  }
 
 }

@@ -1,75 +1,116 @@
 <app-navbar></app-navbar>
 
-<div class="custom-modal" *ngIf="showAddAn">
+<div class="custom-modal" *ngIf="showAddAn || showAdd">
   <div class="custom-modal-container">
-    <div class="custom-modal-header"><h1>Ajouter une annonce</h1></div>
-    <div class="custom-modal-content">
-      <div class="dtail">
-        <div class="photo"><span>Photo</span></div>
-        <div class="input-container">
-          <div class="input">
-            <label for="title">Titre</label>
-            <input id="title" type="text">
-          </div>
-          <div class="input">
-            <label for="date">Date</label>
-            <input id="date" type="date">
-          </div>
-          <div class="input">
-            <label for="lieu">Lieu</label>
-            <input id="lieu" type="text">
-          </div>
-          <div class="input">
-            <label for="heure">Heure</label>
-            <input id="heure" type="time">
-          </div>
-        </div>
-      </div>
-      <div class="dtail">
-        <div class="description">
-          <div class="actions">
-            <ion-button class="add">Ajouter</ion-button>
-            <ion-button color="danger" (click)="showAddAn =false">Fermer</ion-button>
-          </div>
-        </div>
-      </div>
+    <div class="custom-modal-header">
+      <h1>{{ isEditing ? 'Modifier l\'Annonce' : 'Ajouter une Annonce' }}</h1>
     </div>
+    <form [formGroup]="announcementForm">
+      <div class="custom-modal-content">
+        <div class="dtail">
+          <div class="photo">
+            <span>Photo</span>
+            <label class="custom-file-upload">
+              <input type="file" id="fileInput" accept="image/png, image/jpeg" />
+              <ion-icon name="image"></ion-icon>
+            </label>
+          </div>
+          <div class="input-container">
+            <div class="input">
+              <label for="title">Titre</label>
+              <input id="title" type="text" formControlName="title" />
+            </div>
+            <div class="input">
+              <label for="date">Date</label>
+              <input id="date" type="date" formControlName="date" />
+            </div>
+            <div class="input">
+              <label for="lieu">Lieu</label>
+              <input id="lieu" type="text" formControlName="place" />
+            </div>
+            <div class="input">
+              <label for="heure">Heure</label>
+              <input id="heure" type="time" formControlName="hour" />
+            </div>
+
+            <div class="input">
+              <label for="location">Location</label>
+              <input id="location" type="text" formControlName="location" />
+            </div>
+
+            <div class="input">
+              <label for="organizer">Organizer</label>
+              <input id="organizer" type="text" formControlName="organizer" />
+            </div>
+
+            <div class="input">
+              <label for="description">Description</label>
+              <textarea id="description" formControlName="description"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="dtail">
+          <div class="description">
+            <div class="actions">
+
+              <ion-button class="add" (click)="isEditing ? updateAnnouncement() : addNewAnnouncement()"
+                [disabled]="!announcementForm.valid">
+                {{ isEditing ? 'Modifier' : 'Enregistrer' }}
+              </ion-button>
+
+              <ion-button color="danger" (click)="showAdd = false">Annuler</ion-button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
   </div>
 </div>
 <div class="container">
   <div class="row">
     <div class="col-12">
-      <a routerLink="/panel"><ion-icon id="back" style="color: #2C6632; vertical-align: middle; font-size: 40px;" name="arrow-back-circle-outline"></ion-icon></a><input type="text" placeholder="Recherchez une annonce" style="border-radius: 20px; padding-left: 50px; padding-right: 50px;">
-      <i (click)="showAddAn = true"><img src="../../../assets/img/plus.png" alt="" height="32px" width="32px" style="margin-left: 10px; cursor: pointer;"></i>
-      <img src="../../../assets/img/gannonce.png" alt="" srcset="">
-      <table class="table" style="margin-top: 30px;">
-  <thead>
-    <tr>
-      <th scope="col">N°</th>
-      <th scope="col">Photo</th>
-      <th scope="col">Titre</th>
-      <th scope="col">Lieu</th>
-      <th scope="col">Date</th>
-      <th scope="col">Heure</th>
-      <th scope="col">Action</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td><img src="../../../assets/img/nour.jpg" style="height: 36px;width: 36px; border-radius: 50px;" alt=""></td>
-      <td>Emission Nour sur ORTM</td>
-      <td>ORTM</td>
-      <td>08/09/2023</td>
-      <td>16H00</td>
-      <td><ion-icon class="edit" name="create-outline"  style="color:#2C6632;">
-      </ion-icon><ion-icon class="edit" name="trash-outline" style="color: red;"></ion-icon></td>
-    </tr>
-
-  </tbody>
-</table>
+      <a routerLink="/panel">
+        <ion-icon id="back" style="color: #2c6632; vertical-align: middle; font-size: 40px"
+          name="arrow-back-circle-outline"></ion-icon>
+      </a>
+      <input type="text" placeholder="Recherchez une annonce"
+        style="border-radius: 20px; padding-left: 50px; padding-right: 50px" />
+      <i (click)="showAddAn = true; showAdd = false;">
+        <img src="../../../assets/img/plus.png" alt="" height="32px" width="32px"
+          style="margin-left: 10px; cursor: pointer" />
+      </i>
+      <img src="../../../assets/img/gannonce.png" alt="" srcset="" />
+      <table class="table" style="margin-top: 30px">
+        <thead>
+          <tr>
+            <th scope="col">N°</th>
+            <th scope="col">Photo</th>
+            <th scope="col">Titre</th>
+            <th scope="col">Lieu</th>
+            <th scope="col">Date</th>
+            <th scope="col">Heure</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let announcement of announcements; let i = index">
+            <th scope="row">{{ i + 1 }}</th>
+            <td>
+              <img [src]="announcement.imageUrl" style="height: 36px; width: 36px; border-radius: 50px" alt="" />
+            </td>
+            <td>{{ announcement.title }}</td>
+            <td>{{ announcement.place }}</td>
+            <td>{{ announcement.date }}</td>
+            <td>{{ announcement.hour }}</td>
+            <td>
+              <ion-icon class="edit" name="create-outline" style="color: #2c6632"
+                (click)="ouvrirModalModification(announcement)" style="color: #2C6632;"></ion-icon>
+              <ion-icon class="edit" name="trash-outline" style="color: red"
+                (click)="deleteAnnouncement(announcement.id)"></ion-icon>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-
   </div>
-
 </div>

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+
 import { AdminAnnoncePage } from './admin-annonce.page';
 
 const routes: Routes = [
