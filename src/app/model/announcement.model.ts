@@ -1,11 +1,11 @@
 export interface Announcement {
   id: string|null;
-  title: string;
-  place: string,
+  title: string; //ok
+  place: string, //ok
   description: string;
-  location: string;
-  date: string;
-  hour: string;
-  imageUrl: string|null;
-  organizer: string;
+  location: string; //ok
+  date: string; //ok
+  hour: string; //ok
+  imageUrl: string|null; //ok
+  organizer: string; //ok
 }

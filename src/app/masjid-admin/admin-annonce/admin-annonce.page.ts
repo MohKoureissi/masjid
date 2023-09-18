@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Announcement } from 'src/app/model/announcement.model';
 import { AnnouncementService } from 'src/data/announcement/announcement.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AlertController } from '@ionic/angular';
+import {AlertController, ModalController} from '@ionic/angular';
+import {MosqueFormPage} from "../components/mosque-form/mosque-form.page";
+import {AnnouncementFormPage} from "../components/announcement-form/announcement-form.page";
 
 
 @Component({
@@ -22,7 +24,8 @@ export class AdminAnnoncePage implements OnInit {
   constructor(
     private announcementService: AnnouncementService,
     private formBuilder: FormBuilder,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private modalCtrl: ModalController
   ) { }
 
   ngOnInit() {
@@ -174,4 +177,11 @@ export class AdminAnnoncePage implements OnInit {
     }
   }
 
+  async openModal() {
+    const announcementFormModal = this.modalCtrl.create({
+      component: AnnouncementFormPage,
+      backdropDismiss: false,
+    });
+    await announcementFormModal.then(m=> m.present());
+  }
 }

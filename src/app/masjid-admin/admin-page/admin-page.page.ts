@@ -12,4 +12,7 @@ export class AdminPagePage implements OnInit {
   ngOnInit() {
   }
 
+  openModal() {
+
+  }
 }

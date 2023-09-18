@@ -57,7 +57,11 @@ const routes: Routes = [
   {
     path: 'mosque-form',
     loadChildren: () => import('./masjid-admin/components/mosque-form/mosque-form.module').then( m => m.MosqueFormPageModule)
+  },  {
+    path: 'announcement-form',
+    loadChildren: () => import('./masjid-admin/components/announcement-form/announcement-form.module').then( m => m.AnnouncementFormPageModule)
   },
+
 ];
 @NgModule({
   imports: [

@@ -1,0 +1,60 @@
+<form [formGroup]="announcementForm">
+
+    <ion-list class="modal-wrapper">
+      <ion-row>
+        <ion-col>
+          <h1>Ajouter une annonce</h1>
+          <p style="padding: 0; font-size: 18px">Informations générales</p>
+        </ion-col>
+
+        <ion-col class="cancel">
+          <ion-icon name="close-outline" size="large" (click)="closeModal()"></ion-icon>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-input type="file" fill="outline" id="fileInput" accept="image/png, image/jpeg"></ion-input>
+        </ion-col>
+      </ion-row>
+
+
+      <ion-row>
+        <ion-col>
+          <ion-input label="Titre de l'annonce" label-placement="floating" fill="outline" placeholder="Achoura" formControlName="title"></ion-input>
+        </ion-col>
+
+        <ion-col>
+          <ion-input label="Lieu de rassemblement" label-placement="floating" fill="outline" placeholder="Stade du 26 mars" formControlName="place"></ion-input>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-input label="Date et heure" label-placement="floating" fill="outline" placeholder="26/02/2023 à 14:00" formControlName="dateTime"></ion-input>
+        </ion-col>
+
+        <ion-col>
+          <ion-input label="Non de l'organisateur" label-placement="floating" fill="outline" placeholder="Haut conceil islamique" formControlName="organizer"></ion-input>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-input label="Lien GPS de la localisation" type="url" label-placement="floating" fill="outline" placeholder="https://maps.google.com/?q=1.1,-2.2" formControlName="location"></ion-input>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-textarea label="Description de l'annonce" label-placement="floating" [counter]="true" maxlength="50" fill="outline" formControlName="description"></ion-textarea>
+        </ion-col>
+      </ion-row>
+
+      <div class="action">
+        <ion-button class="ok">Enregistrer</ion-button>
+      </div>
+
+    </ion-list>
+
+</form>
