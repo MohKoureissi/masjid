@@ -28,13 +28,14 @@ export class MosqueService implements OnInit {
 
       // Ajoutez la nouvelle mosquée à la collection "mosques"
       const newMosqueRef = doc(mosqueCollectionRef);
+      mosque.id = newMosqueRef.id;
       await setDoc(newMosqueRef, mosque);
-      updateDoc(
+      /*updateDoc(
         newMosqueRef,
         {id: newMosqueRef.id}
-      );
+      );*/
 
-      console.log(`Mosquée créée avec succès avec l'ID : ${newMosqueRef.id}`);
+      console.log(`Mosquée créée avec succès avec l'ID : ${mosque}`);
     } catch (error) {
       console.error('Erreur lors de la création de la mosquée :', error);
       throw error; // Vous pouvez gérer l'erreur de manière appropriée ici
@@ -176,13 +177,12 @@ async getDetailsMosque(mosqueId: string): Promise<Observable<Mosque | null>> {
     const storage = getStorage();
     let imageUrl: string|null = null;
     const mosquesRef = await ref(storage, `${this.COLLECTION_NAME}/${file.name}`);
-    uploadBytes(mosquesRef, file).then((snapshot) => {
+    await uploadBytes(mosquesRef, file).then((snapshot) => {
       console.log('Fichier uploadé avec succès !');
     });
 
 
-    await getDownloadURL(mosquesRef)
-      .then((url) => {
+    await getDownloadURL(mosquesRef).then((url) => {
         // `url` est l'URL de téléchargement de notre récitation
         imageUrl = url
       })

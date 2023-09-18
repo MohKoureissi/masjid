@@ -18,7 +18,7 @@ export class TestPage implements OnInit {
 
   async uploadFile() {
     const fileInput = document.getElementById('fileInput') as HTMLInputElement;
-
+    console.log(fileInput)
 // Vérifiez si un fichier a été sélectionné
     if (fileInput.files && fileInput.files.length > 0) {
       // Récupérez le premier fichier sélectionné

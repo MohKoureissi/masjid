@@ -99,8 +99,6 @@ export class AdminService {
       email: updateAdmin.email,
       password: updateAdmin.password,
       id: updateAdmin.id,
-      emailCode: updateAdmin.emailCode,
-      passwordCode: updateAdmin.passwordCode,
       recupEmail: updateAdmin.recupEmail
     });
   }

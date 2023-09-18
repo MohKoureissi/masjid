@@ -4,7 +4,5 @@ export interface AdminModel {
   email: string;
   numTel: string;
   password: string;
-  emailCode: string;
-  passwordCode: string;
   recupEmail: string;
 }

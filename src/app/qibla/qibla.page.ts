@@ -20,6 +20,7 @@ export class Qibla implements OnInit {
   constructor(private qiblaService: QiblaService) {}
 
   ngOnInit() {
+    this.getQiblaDirection()
     // Attachez la fonction handleDeviceOrientation à l'événement deviceorientation de window
     window.addEventListener("deviceorientationabsolute", (e:any) =>{
       this.data = e.alpha+" "+e.beta+" "+e.gama

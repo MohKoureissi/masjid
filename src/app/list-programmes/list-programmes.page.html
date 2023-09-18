@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true">
-  <div class="parallax-img" [style.background-image]="'url(../../assets/illustrations/preche.jpg)'">  
+  <div class="parallax-img" [style.background-image]="'url(../../assets/illustrations/preche.jpg)'">
     <h1>Programmes</h1>
   </div>
   <div class="container">
@@ -19,11 +19,11 @@
           </ion-thumbnail>
         </div>
         <div class="text">
-          <h2>{{ programme.titre }}</h2>
-          <span>Organisateur {{ programme.organisateur }}</span>
+          <h2>{{ programme.title }}</h2>
+          <span>Organisateur {{ programme.organizer }}</span>
           <p>
-            <span>Date {{ programme.date }}</span>&nbsp;
-            <span>Heure {{ programme.heure }}</span>&nbsp;
+            <span>Date {{ programme.daysTimes }}</span>&nbsp;
+            <span>Heure {{ programme.description }}</span>&nbsp;
             <a class="frequence" href="#"><ion-icon name="location-outline"></ion-icon>&nbsp;Hamdallaye ACI</a>
           </p>
         </div>
