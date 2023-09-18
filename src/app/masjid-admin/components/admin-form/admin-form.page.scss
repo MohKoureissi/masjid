@@ -1,0 +1,30 @@
+ion-input{
+  --border-radius: 50px;
+}
+
+ion-list{
+  padding: 0 20px;
+  width: 100%;
+}
+
+.action{
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  border: none;
+  padding: 0;
+}
+.next-btn{
+  --background: #2c6632;
+  --color: white;
+}
+.cancel{
+  cursor: pointer;
+  display: flex;
+  justify-content: end;
+  align-items: start;
+}
+.ok{
+  --background: #2c6632;
+  --color: white;
+}

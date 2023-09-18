@@ -39,7 +39,7 @@ export class AnnouncementFormPage implements OnInit {
   }
 
 
-  addNewMosque() {
+  addNewAnnouncement() {
     const announcement: Announcement = {
       id: null,
       title: this.announcementForm.get('title')?.value,

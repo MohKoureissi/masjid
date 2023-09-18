@@ -17,8 +17,8 @@ import {MosqueService} from "../../../../data/mosque/mosque.service";
 export class MosqueFormPage implements OnInit {
   showForm1Content = true;
   showForm2Content = false;
-
   mosqueForm!: FormGroup;
+  file!: File;
 
   fajr: string = "05:00";
   dohr: string = "13:30";
@@ -48,6 +48,22 @@ export class MosqueFormPage implements OnInit {
   goToPage2() {
     this.showForm1Content = false;
     this.showForm2Content = true;
+    // Accédez au champ de fichier via le formulaire
+    const fileInput = document.getElementById('fileInput') as HTMLInputElement;
+    console.log(fileInput);
+
+    // Vérifiez si un fichier a été sélectionné
+    if (fileInput.files && fileInput.files.length > 0) {
+      // Récupérez le premier fichier sélectionné
+      this.file = fileInput.files[0];
+
+      // Maintenant, vous pouvez utiliser 'file' en toute sécurité
+      console.log('Nom du fichier :', this.file.name);
+      console.log('Taille du fichier :', this.file.size, 'octets');
+    } else {
+      // Aucun fichier sélectionné
+      console.log('Aucune image sélectionné.');
+    }
   }
   previous() {
     this.showForm1Content = true;
@@ -107,25 +123,8 @@ export class MosqueFormPage implements OnInit {
       djumha: this.djumha
     }
 
-
-    const fileInput = document.getElementById('fileInput') as HTMLInputElement;
-
-    // Vérifiez si un fichier a été sélectionné
-    if (fileInput.files && fileInput.files.length > 0) {
-      // Récupérez le premier fichier sélectionné
-      const file = fileInput.files[0];
-
-      // Maintenant, vous pouvez utiliser 'file' en toute sécurité
-      console.log('Nom du fichier :', file.name);
-      console.log('Taille du fichier :', file.size, 'octets');
-
-      this.mosqueService.createMosque(mosque, file);
-
-      console.log(mosque);
-    } else {
-      // Aucun fichier sélectionné
-      console.log('Aucune image sélectionné.');
-    }
+    this.mosqueService.createMosque(mosque, this.file);
+    this.closeModal();
   }
 
 

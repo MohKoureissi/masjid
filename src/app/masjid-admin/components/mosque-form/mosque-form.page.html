@@ -15,7 +15,8 @@
 
       <ion-row>
         <ion-col>
-          <ion-input type="file" fill="outline" id="fileInput" accept="image/png, image/jpeg"></ion-input>
+          <input type="file" id="fileInput" accept="image/png, image/jpeg">
+          <!--<ion-input type="file" fill="outline" id="fileInput"></ion-input>-->
         </ion-col>
       </ion-row>
 
@@ -90,8 +91,6 @@
                   <ion-datetime
                     id="fajrTime"
                     presentation="time"
-                    min="1989-06-04"
-                    max="2004-08-23"
                     [(ngModel)]="fajr"
                     (ionChange)="updateFajr($event)"
                   ></ion-datetime>
@@ -114,8 +113,6 @@
                   <ion-datetime
                     id="dohrTime"
                     presentation="time"
-                    min="1989-06-04"
-                    max="2004-08-23"
                     [(ngModel)]="dohr"
                     (ionChange)="updateDohr($event)"
                   ></ion-datetime>
@@ -141,8 +138,6 @@
                   <ion-datetime
                     id="asrTime"
                     presentation="time"
-                    min="1989-06-04"
-                    max="2004-08-23"
                     [(ngModel)]="asr"
                     (ionChange)="updateAsr($event)"
                   ></ion-datetime>
@@ -165,8 +160,6 @@
                   <ion-datetime
                     id="maghrebTime"
                     presentation="time"
-                    min="1989-06-04"
-                    max="2004-08-23"
                     [(ngModel)]="maghreb"
                     (ionChange)="updateMaghreb($event)"
                   ></ion-datetime>
@@ -193,8 +186,6 @@
                   <ion-datetime
                     id="ishaTime"
                     presentation="time"
-                    min="1989-06-04"
-                    max="2004-08-23"
                     [(ngModel)]="isha"
                     (ionChange)="updateIsha($event)"
                   ></ion-datetime>
@@ -217,8 +208,6 @@
                   <ion-datetime
                     id="djumhaTime"
                     presentation="time"
-                    min="1989-06-04"
-                    max="2004-08-23"
                     [(ngModel)]="djumha"
                     (ionChange)="updateDjumha($event)"
                   ></ion-datetime>
@@ -232,7 +221,7 @@
 
       <div class="action">
         <ion-button (click)="previous()">Precedent</ion-button>
-        <ion-button class="next-btn">Enregistrer</ion-button>
+        <ion-button class="next-btn" (click)="addNewMosque()">Enregistrer</ion-button>
       </div>
 
     </ion-list>
