@@ -47,7 +47,6 @@ export class ListMosqueePage implements OnInit {
       djumha: [null, [Validators.required]],
 
     });
-
   }
 
   ouvrirModalModification(mosque: Mosque) {
@@ -154,117 +153,41 @@ export class ListMosqueePage implements OnInit {
       console.warn("ID de la mosquée à modifier est null.");
     }
   }
-  addNewMosque() {
-    const mosque: Mosque = {
-      id: null,
-      name: this.mosqueForm.get('name')?.value,
-      imageUrl: null,
-      imamName: this.mosqueForm.get('imamName')?.value,
-      numDonation: this.mosqueForm.get('numDonation')?.value,
-      descDonation: this.mosqueForm.get('descDonation')?.value,
-      location: this.mosqueForm.get('location')?.value,
-      quartier: this.mosqueForm.get('quartier')?.value,
-      lat: 0,
-      lng: 0,
-      fajr: this.mosqueForm.get('fajr')?.value,
-      dohr: this.mosqueForm.get('dohr')?.value,
-      asr: this.mosqueForm.get('asr')?.value,
-      maghreb: this.mosqueForm.get('maghreb')?.value,
-      isha: this.mosqueForm.get('isha')?.value,
-      djumha: this.mosqueForm.get('djumha')?.value
-    }
-
-
-    const fileInput = document.getElementById('fileInput') as HTMLInputElement;
-
-    // Vérifiez si un fichier a été sélectionné
-    if (fileInput.files && fileInput.files.length > 0) {
-      // Récupérez le premier fichier sélectionné
-      const file = fileInput.files[0];
-
-      // Maintenant, vous pouvez utiliser 'file' en toute sécurité
-      console.log('Nom du fichier :', file.name);
-      console.log('Taille du fichier :', file.size, 'octets');
-
-      this.mosqueService.createMosque(mosque, file);
-    } else {
-      // Aucun fichier sélectionné
-      console.log('Aucune image sélectionné.');
-    }
-
-    //console.log(mosque)
-  }
-
-  // Cette méthode sera utilisé pour uploader un fichier de récitation
-  /*uploadFile() {
-    const fileInput = document.getElementById('fileInput') as HTMLInputElement;
-
-// Vérifiez si un fichier a été sélectionné
-    if (fileInput.files && fileInput.files.length > 0) {
-      // Récupérez le premier fichier sélectionné
-      const file = fileInput.files[0];
-
-      // Maintenant, vous pouvez utiliser 'file' en toute sécurité
-      console.log('Nom du fichier :', file.name);
-      console.log('Taille du fichier :', file.size, 'octets');
-
-      this.mosqueService.loadMosqueImage(file);
-    } else {
-      // Aucun fichier sélectionné
-      console.log('Aucun fichier sélectionné.');
-    }
-  }*/
-
-
-
-
-  async changePassword(){
-    let alert = await this.alertController.create({
-      header: 'Change Password',
-      subHeader: 'Fill up the fields.',
-      inputs: [
-        {
-          name: 'oldPassword',
-          placeholder: 'Old Password.',
-          type: 'password'
-        },
-        {
-          name: 'newPassword',
-          placeholder: 'New Password.',
-          type: 'password',
-          value: 'password'
-        },
-        {
-          name: 'newPasswordConfirm',
-          placeholder: 'Confirm New Password',
-          type: 'password'
-        }
-      ],
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          handler: data => {
-            console.log('Cancel clicked.');
-          }
-        },
-        {
-          text: 'View Password',
-          handler: data => {
-            data.newPassword.type = 'text'; //Error exists
-            return false;
-          }
-        }
-      ]
-    });
-    await alert.present();
-  }//
 
 
   async openModal() {
     const mosqueFormModal = this.modalCtrl.create({
       component: MosqueFormPage,
       backdropDismiss: false,
+    });
+    await mosqueFormModal.then(m=> m.present());
+  }
+
+
+  async openModalWithUpdateMode(mosque: Mosque) {
+    const mosqueFormModal = this.modalCtrl.create({
+      component: MosqueFormPage,
+      backdropDismiss: false,
+      componentProps: {
+        // Les valeurs par défaut du formulaire
+        id: mosque.id,
+        name: mosque.name,
+        imageUrl: mosque.imageUrl,
+        imamName: mosque.imamName,
+        numDonation: mosque.numDonation,
+        descDonation: mosque.descDonation,
+        location: mosque.location,
+        quartier: mosque.quartier,
+        lat: mosque.lat,
+        lng: mosque.lng,
+        fajr: mosque.fajr,
+        dohr: mosque.dohr,
+        asr: mosque.asr,
+        maghreb: mosque.maghreb,
+        isha: mosque.isha,
+        djumha: mosque.djumha,
+        isAdd: false
+      },
     });
     await mosqueFormModal.then(m=> m.present());
   }

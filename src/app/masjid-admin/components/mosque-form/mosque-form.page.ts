@@ -3,6 +3,8 @@ import {ModalController} from "@ionic/angular";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Mosque} from "../../../model/mosque.model";
 import {MosqueService} from "../../../../data/mosque/mosque.service";
+import {ListMosqueePage} from "../../list-mosquee/list-mosquee.page";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-mosque-form',
@@ -28,12 +30,32 @@ export class MosqueFormPage implements OnInit {
   djumha: string = "13:00";
   constructor(private modalCtrl: ModalController,
               private  formBuilder: FormBuilder,
-              private mosqueService: MosqueService
+              private mosqueService: MosqueService,
+              private route: ActivatedRoute
   ) {
   }
 
   ngOnInit() {
     const urlRegex: RegExp = /(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z0-9]{2,}(\.[a-zA-Z0-9]{2,})(\.[a-zA-Z0-9]{2,})?/;
+    // Récupérez les valeurs par défaut à partir des queryParams ou des paramètres de la route
+    const idDefaultValue = this.route.snapshot.queryParamMap.get('id');
+    const nameDefaultValue = this.route.snapshot.queryParamMap.get('name');
+    const imageUrlDefaultValue = this.route.snapshot.queryParamMap.get('imageUrl');
+    const imamNameDefaultValue = this.route.snapshot.queryParamMap.get('imamName');
+    const numDonationDefaultValue = parseInt(<string>this.route.snapshot.queryParamMap.get('numDonation'), 10);
+    const descDonationDefaultValue = this.route.snapshot.queryParamMap.get('descDonation');
+    const locationDefaultValue = this.route.snapshot.queryParamMap.get('location');
+    const quartierDefaultValue = this.route.snapshot.queryParamMap.get('quartier');
+    const latDefaultValue = parseInt(<string>this.route.snapshot.queryParamMap.get('lat'), 10);
+    const lngDefaultValue = parseInt(<string>this.route.snapshot.queryParamMap.get('lng'), 10);
+    const fajrDefaultValue = this.route.snapshot.queryParamMap.get('fajr');
+    const dohrDefaultValue = this.route.snapshot.queryParamMap.get('dohr');
+    const asrDefaultValue = this.route.snapshot.queryParamMap.get('asr');
+    const maghrebDefaultValue = this.route.snapshot.queryParamMap.get('maghreb');
+    const ishaDefaultValue = this.route.snapshot.queryParamMap.get('isha');
+    const djumhaDefaultValue = this.route.snapshot.queryParamMap.get('djumha');
+    const isAdd = this.route.snapshot.queryParamMap.get('isAdd');
+
 
     this.mosqueForm = this.formBuilder.group({
       name: [null, [Validators.required]],
@@ -44,6 +66,29 @@ export class MosqueFormPage implements OnInit {
       quartier: [null, [Validators.required]],
     });
   }
+
+  formatDateTimeToTime(dateTimeString: string): string {
+    // Vérifiez si la chaîne est déjà au format "HH:mm"
+    if (/^\d{2}:\d{2}$/.test(dateTimeString)) {
+      return dateTimeString; // Retourne la chaîne telle quelle
+    }
+
+    // Si la chaîne n'est pas au format "HH:mm", alors essayez de la convertir en Date
+    const date = new Date(dateTimeString);
+
+    // Assurez-vous que la date est valide avant de la formater
+    if (!isNaN(date.getTime())) {
+      const hours = date.getHours().toString().padStart(2, '0');
+      const minutes = date.getMinutes().toString().padStart(2, '0');
+      return `${hours}:${minutes}`;
+    } else {
+      // Si la conversion en Date échoue, retournez la chaîne originale
+      return dateTimeString;
+    }
+  }
+
+
+
 
   goToPage2() {
     this.showForm1Content = false;
@@ -104,6 +149,7 @@ export class MosqueFormPage implements OnInit {
 
 
   addNewMosque() {
+    console.log(this.fajr);
     const mosque: Mosque = {
       id: null,
       name: this.mosqueForm.get('name')?.value,

@@ -1,7 +1,7 @@
 import { Injectable, OnInit } from '@angular/core';
 import { getFirestore, doc, setDoc,getDocs,where, query, collection ,getDoc,updateDoc,deleteDoc,QuerySnapshot} from 'firebase/firestore';
 import { Mosque } from 'src/app/model/mosque.model';
-import {from, Observable, of} from "rxjs";
+import { Observable, of } from "rxjs";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 
@@ -12,9 +12,9 @@ export class MosqueService implements OnInit {
   COLLECTION_NAME = 'mosques';
 
   constructor() { }
-  ngOnInit(): void {
+  ngOnInit(): void {}
 
-  }
+
 //Methode pour ajouter une mosque
   async createMosque(mosque: Mosque, imageFile: File): Promise<void> {
     const db = getFirestore();

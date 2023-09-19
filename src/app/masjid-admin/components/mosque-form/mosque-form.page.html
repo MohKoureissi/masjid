@@ -16,7 +16,6 @@
       <ion-row>
         <ion-col>
           <input type="file" id="fileInput" accept="image/png, image/jpeg">
-          <!--<ion-input type="file" fill="outline" id="fileInput"></ion-input>-->
         </ion-col>
       </ion-row>
 
@@ -49,7 +48,7 @@
 
       <ion-row>
         <ion-col>
-          <ion-textarea label="Comment faire un don" label-placement="floating" [counter]="true" maxlength="50" fill="outline" formControlName="descDonation"></ion-textarea>
+          <ion-textarea label="Comment faire un don" label-placement="floating" [counter]="true" maxlength="200" fill="outline" formControlName="descDonation"></ion-textarea>
         </ion-col>
       </ion-row>
 
@@ -82,7 +81,7 @@
           <ion-item fill="outline" lines="none" mode="md">
             <ion-label>Fajr</ion-label>
             <ion-note slot="end" id="fajr">
-              <p style="font-size: 17px; color: #2c6632" >{{fajr}}</p>
+              <p style="font-size: 17px; color: #2c6632" >{{formatDateTimeToTime(fajr)}}</p>
             </ion-note>
 
             <ion-popover trigger="fajr" triggerAction="click">
