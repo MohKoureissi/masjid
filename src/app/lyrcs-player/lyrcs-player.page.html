@@ -14,13 +14,13 @@
           <div id="lyrics">
               <h2 class="song-name"></h2><h4 class="artist-name"></h4>
               <div id="lyrics-content">
-                <ng-container *ngFor="let verset of getJsonFile(); index as i">
-                  <h2 [ngClass]="{ 'current': activeElement === 'element'+(i+1), 'uncurrent': activeElement !== 'element'+(i+1) }">{{verset.text}}</h2>
+                <ng-container *ngFor="let verset of surah1; index as i">
+                  <h2 [ngClass]="{ 'current': activeElement === 'element'+(i+1), 'uncurrent': activeElement !== 'element'+(i+1) }">{{verset.text_verset}}</h2>
                 </ng-container>
                   
               </div>
           </div>
-        <audio #audiofile (ended)="lafin($event)" src="../../assets/coran/audio/1/001001.mp3" preload="true">
+        <audio #audiofile (ended)="lafin($event)" src="{{souratePath}}" preload="true">
           
         </audio>
         <div id="player">

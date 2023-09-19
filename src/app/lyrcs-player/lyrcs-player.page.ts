@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-lyrcs-player',
   templateUrl: './lyrcs-player.page.html',
@@ -10,6 +11,7 @@ export class LyrcsPlayerPage implements OnInit,AfterViewInit {
   @ViewChild('audiofile',{read:ElementRef}) playerElementRef: any;
   next:number = 0;
   activeElement:string = "element1";
+  surah1:any;
   //"../../assets/coran/audio/1/001001.mp3"
 
   isPlaying = false;
@@ -17,14 +19,40 @@ export class LyrcsPlayerPage implements OnInit,AfterViewInit {
   currentTime = 0;
   duration = 0;
   repeate = true;
+  sourateId:any;
+  souratesAudiosPathAbsolute =  "../../assets/coran/audio/allsourates/"; //"1/00100"
+  souratePath = "";
 
   private _player!: HTMLAudioElement;
-  constructor() { 
-      
+  constructor(route:ActivatedRoute) { 
+    this.sourateId = route.snapshot.queryParamMap.get('sourate');
+    this.souratePath = this.getSouratePath(this.formatNumber(1));
+      console.log(this.souratePath);
   }
 
-  ngOnInit() {
+  getSouratePath(verset:string):string{
+    return this.souratesAudiosPathAbsolute
+    +this.formatNumber(this.sourateId)+verset+".mp3";
+  
   }
+  ngOnInit() {
+    //
+    this.getJsonFile().then((result:any) => {
+      this.surah1 = result;
+      console.log('Result:', result);
+    }).catch((error:any) => {
+      console.error('Error:', error);
+    });
+   // Dans cet exemple, nous utilisons la méthode then pour chaîner les opérations à exécuter après la résolution de la promesse fetch. Les erreurs sont gérées avec .catch pour capturer les éventuelles erreurs lors de la récupération des données JSON. Cette approche est similaire à l'utilisation de await avec une fonction asynchrone, mais elle ne nécessite pas de déclarer explicitement la fonction comme asynchrone.
+    
+    ;
+    console.log(this.surah1);
+  }
+formatNumber(num: number): string {
+    // Utilise la méthode toString() pour convertir le nombre en chaîne de caractères
+    // Ensuite, utilise la méthode padStart() pour ajouter des zéros à gauche jusqu'à ce que la chaîne ait une longueur de 3 caractères
+    return num.toString().padStart(3, '0');
+}
 
   ngAfterViewInit(): void {
     console.log(this.playerElementRef);
@@ -33,118 +61,34 @@ export class LyrcsPlayerPage implements OnInit,AfterViewInit {
 }
   lafin(ev:any) {
     this.nextAya();
-  }
+  }   
+  getJsonFile(){
 
-  
-  getJsonFile():any{
-    const audioTag = document.getElementById('audioFile');
-      
-    //'./assets/names/99_Names_Of_Allah.json'
-    //
-   const surah1 =  [
-      {
-          "number": 1,
-          "text": "﻿بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ",
-          "numberInSurah": 1,
-          "juz": 1,
-          "manzil": 1,
-          "page": 1,
-          "ruku": 1,
-          "hizbQuarter": 1,
-          "sajda": false
-      },
-      {
-          "number": 2,
-          "text": "ٱلْحَمْدُ لِلَّهِ رَبِّ ٱلْعَٰلَمِينَ",
-          "numberInSurah": 2,
-          "juz": 1,
-          "manzil": 1,
-          "page": 1,
-          "ruku": 1,
-          "hizbQuarter": 1,
-          "sajda": false
-      },
-      {
-          "number": 3,
-          "text": "ٱلرَّحْمَٰنِ ٱلرَّحِيمِ",
-          "numberInSurah": 3,
-          "juz": 1,
-          "manzil": 1,
-          "page": 1,
-          "ruku": 1,
-          "hizbQuarter": 1,
-          "sajda": false
-      },
-      {
-          "number": 4,
-          "text": "مَٰلِكِ يَوْمِ ٱلدِّينِ",
-          "numberInSurah": 4,
-          "juz": 1,
-          "manzil": 1,
-          "page": 1,
-          "ruku": 1,
-          "hizbQuarter": 1,
-          "sajda": false
-      },
-      {
-          "number": 5,
-          "text": "إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ",
-          "numberInSurah": 5,
-          "juz": 1,
-          "manzil": 1,
-          "page": 1,
-          "ruku": 1,
-          "hizbQuarter": 1,
-          "sajda": false
-      },
-      {
-          "number": 6,
-          "text": "ٱهْدِنَا ٱلصِّرَٰطَ ٱلْمُسْتَقِيمَ",
-          "numberInSurah": 6,
-          "juz": 1,
-          "manzil": 1,
-          "page": 1,
-          "ruku": 1,
-          "hizbQuarter": 1,
-          "sajda": false
-      },
-      {
-          "number": 7,
-          "text": "صِرَٰطَ ٱلَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ ٱلْمَغْضُوبِ عَلَيْهِمْ وَلَا ٱلضَّآلِّينَ",
-          "numberInSurah": 7,
-          "juz": 1,
-          "manzil": 1,
-          "page": 1,
-          "ruku": 1,
-          "hizbQuarter": 1,
-          "sajda": false
-      }
-  ]
-  return surah1;
-
-    fetch('https://api.alquran.cloud/v1/quran/quran-uthmani').then(res => res.json()).then(json =>{
-       
-      console.log(json.data.surahs[0]);
+//'https://api.alquran.cloud/v1/quran/quran-uthmani'
+  return fetch('./assets/coran/ayah.json').then(res => res.json()).then(json =>{
+        console.log(json.filter((item:any) => item.sourate_id === "114"));
+     return json.filter((item:any) => item.sourate_id === this.sourateId);
     //console.log(decodeURIComponent(json))
   })
-  
+  console.log(this.surah1);
+    return this.surah1;
   }
 
+  
   play(): void {
     this._player.paused ? this._player.play() : this._player.pause();
   }
   reload(){
     this.next = 0;
     this.activeElement = "element"+(this.next+1);
-    this._player.src = "../../assets/coran/audio/1/00100"+(this.next+1)+".mp3";
+    this._player.src = this.getSouratePath(this.next+1+"");
     this._player.play(); 
   }
   toggleRepeate():void{
     this.repeate =  this.repeate ? false: true;
   }
   previousAya() {
-    const ayas = this.getJsonFile();
-  
+    const ayas = this.getJsonFile();  
     if (this.next > 0) {
       this.next--; // Réduisez la valeur de this.next pour obtenir l'élément précédent
       this.activeElement = "element" + (this.next + 1);

@@ -40,7 +40,7 @@
     background-color: rgba(0, 0, 0, 0.4);
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: space-between;
     flex-direction: column;
     border-radius: 0px 0px 40px 40px;
   }
@@ -89,3 +89,13 @@
 ion-fab-button {
   --background: #2C6632
 }
+ion-searchbar {
+  width: 77%;
+  margin-top: 15px;
+  opacity: 0.8;
+  padding: 0;
+
+}
+ion-searchbar input{
+    border-radius: 20px;
+  }
