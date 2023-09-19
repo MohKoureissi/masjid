@@ -22,6 +22,7 @@ export class LyrcsPlayerPage implements OnInit,AfterViewInit {
   sourateId:any;
   souratesAudiosPathAbsolute =  "../../assets/coran/audio/allsourates/"; //"1/00100"
   souratePath = "";
+  //http://localhost:4200/tabs/home/lyrcs-player?sourate=111 un exemple de lien
 
   private _player!: HTMLAudioElement;
   constructor(route:ActivatedRoute) { 
