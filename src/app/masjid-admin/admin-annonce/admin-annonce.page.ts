@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Announcement } from 'src/app/model/announcement.model';
 import { AnnouncementService } from 'src/data/announcement/announcement.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {AlertController, ModalController} from '@ionic/angular';
-import {MosqueFormPage} from "../components/mosque-form/mosque-form.page";
 import {AnnouncementFormPage} from "../components/announcement-form/announcement-form.page";
 
 
@@ -13,17 +11,10 @@ import {AnnouncementFormPage} from "../components/announcement-form/announcement
   styleUrls: ['./admin-annonce.page.scss'],
 })
 export class AdminAnnoncePage implements OnInit {
-  showAddAn = false;
-  showAddAd = true;
-  showAdd = false;
   announcements: Announcement[] = [];
-  announcementForm!: FormGroup;
-  AnnouncementEnCoursDeModification: Announcement | any;
-  isEditing = false;
 
   constructor(
     private announcementService: AnnouncementService,
-    private formBuilder: FormBuilder,
     private alertController: AlertController,
     private modalCtrl: ModalController
   ) { }
@@ -32,71 +23,6 @@ export class AdminAnnoncePage implements OnInit {
     this.announcementService.getAllAnnouncements().then(value => value.subscribe(a => {
       this.announcements = a
     }));
-
-    this.announcementForm = this.formBuilder.group({
-      title: [null, [Validators.required]],
-      location: [null, [Validators.required]],
-      place: [null, [Validators.required]],
-      description: [null],
-      date: [null, [Validators.required]],
-      hour: [null, [Validators.required]],
-      imageUrl: [null, [Validators.required]],
-      organizer: [null, [Validators.required]],
-    });
-
-
-  }
-
-  ouvrirModalModification(announcement: Announcement) {
-    this.AnnouncementEnCoursDeModification = announcement;
-    this.announcementForm.patchValue({
-      title: announcement.title,
-      description: announcement.description,
-      date: announcement.date,
-      place: announcement.place,
-      location: announcement.location,
-      imageUrl: announcement.imageUrl,
-      hour: announcement.hour,
-      organizer: announcement.organizer,
-    });
-    this.showAdd = true; // Ouvrez le modal d'ajout/modification
-    this.isEditing = true;
-  }
-
-  addNewAnnouncement() {
-    const announcement = {
-      id: null,
-      title: this.announcementForm.get('title')?.value,
-      place: this.announcementForm.get('place')?.value,
-      description: this.announcementForm.get('description')?.value,
-      location: this.announcementForm.get('location')?.value,
-      date: this.announcementForm.get('date')?.value,
-      hour: this.announcementForm.get('hour')?.value,
-      imageUrl: this.announcementForm.get('imageUrl')?.value,
-      organizer: this.announcementForm.get('organizer')?.value,
-    };
-
-    // Vérifiez si un fichier a été sélectionné
-    const fileInput = document.getElementById('fileInput') as HTMLInputElement;
-    if (fileInput.files && fileInput.files.length > 0) {
-      // Récupérez le premier fichier sélectionné
-      const file = fileInput.files[0];
-
-      // Maintenant, vous pouvez utiliser 'file' en toute sécurité
-      console.log('Nom du fichier :', file.name);
-      console.log('Taille du fichier :', file.size, 'octets');
-
-      // Ensuite, vous pouvez appeler votre service pour ajouter l'annonce
-      this.announcementService.createAnnouncement(announcement, file)
-      alert("Annonce creer avec succes")
-      // Réinitialisez le formulaire après l'ajout
-
-    } else {
-      // Aucun fichier sélectionné
-      console.log('Aucune image sélectionnée.');
-    }
-
-
   }
 
   //delete annonce
@@ -139,44 +65,6 @@ export class AdminAnnoncePage implements OnInit {
   }
 
 
-  // mise a jour
-  async updateAnnouncement() {
-    if (this.AnnouncementEnCoursDeModification) {
-      // recupere les donnees du formulaire
-      const updateAnnouncement: Announcement = {
-        ...this.AnnouncementEnCoursDeModification,
-        title: this.announcementForm.get('title')?.value,
-        date: this.announcementForm.get('date')?.value,
-        description: this.announcementForm.get('description')?.value,
-        place: this.announcementForm.get('place')?.value,
-        imageUrl: this.announcementForm.get('imageUrl')?.value,
-        location: this.announcementForm.get('location')?.value,
-        organizer: this.announcementForm.get('organizer')?.value,
-        hour: this.announcementForm.get('hour')?.value
-
-      };
-      try {
-        await this.announcementService.updateAnnouncement(this.AnnouncementEnCoursDeModification.id, updateAnnouncement);
-        alert("Annonce mise a jour avec succes")
-        console.log(`Annonce avec l'ID ${this.AnnouncementEnCoursDeModification.id} mise à jour avec succès`)
-        // Mettez à jour l'annonce dans la liste locale
-        const index = this.announcements.findIndex((announcement) => announcement.id === this.AnnouncementEnCoursDeModification.id);
-        if (index !== -1) {
-          this.announcements[index] = updateAnnouncement;
-        }
-
-        // Réinitialisez le formulaire et fermez le modal
-        this.announcementForm.reset();
-        this.showAdd = false;
-        this.AnnouncementEnCoursDeModification = null;
-      } catch (error) {
-        console.error(`Erreur lors de la mise à jour de l\'annonce : ${error}`);
-      }
-    } else {
-      console.warn("ID de l\'annonce à modifier est null.");
-    }
-  }
-
   async openModal() {
     const announcementFormModal = this.modalCtrl.create({
       component: AnnouncementFormPage,
@@ -184,4 +72,25 @@ export class AdminAnnoncePage implements OnInit {
     });
     await announcementFormModal.then(m=> m.present());
   }
+
+
+  async openModalWithUpdateMode(announcement: Announcement) {
+    const announcementFormModal = this.modalCtrl.create({
+      component: AnnouncementFormPage,
+      backdropDismiss: false,
+      componentProps: {
+        // Les valeurs par défaut du formulaire
+        id: announcement.id,
+        title: announcement.title,
+        place: announcement.place,
+        description: announcement.description,
+        location: announcement.location,
+        date: announcement.date,
+        imageUrl: announcement.imageUrl,
+        organizer: announcement.organizer,
+      },
+    });
+    await announcementFormModal.then(m=> m.present());
+  }
+
 }

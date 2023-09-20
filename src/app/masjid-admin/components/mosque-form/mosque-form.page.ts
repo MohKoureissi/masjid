@@ -1,10 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import {ModalController} from "@ionic/angular";
+import {Component, Input, OnInit} from '@angular/core';
+import {ModalController, NavParams} from "@ionic/angular";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Mosque} from "../../../model/mosque.model";
 import {MosqueService} from "../../../../data/mosque/mosque.service";
-import {ListMosqueePage} from "../../list-mosquee/list-mosquee.page";
-import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-mosque-form',
@@ -20,50 +18,54 @@ export class MosqueFormPage implements OnInit {
   showForm1Content = true;
   showForm2Content = false;
   mosqueForm!: FormGroup;
-  file!: File;
+  file: File|null = null;
 
-  fajr: string = "05:00";
+  fajr!: string;
   dohr: string = "13:30";
   asr: string = "16:00";
   maghreb: string = "19:00";
   isha: string = "20:00";
   djumha: string = "13:00";
+
+  lat: number = 0;
+  lng: number = 0;
+  imageUrl: string = '';
+
+  id: string | undefined;
   constructor(private modalCtrl: ModalController,
               private  formBuilder: FormBuilder,
               private mosqueService: MosqueService,
-              private route: ActivatedRoute
+              private navParams : NavParams
   ) {
   }
 
   ngOnInit() {
     const urlRegex: RegExp = /(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z0-9]{2,}(\.[a-zA-Z0-9]{2,})(\.[a-zA-Z0-9]{2,})?/;
     // Récupérez les valeurs par défaut à partir des queryParams ou des paramètres de la route
-    const idDefaultValue = this.route.snapshot.queryParamMap.get('id');
-    const nameDefaultValue = this.route.snapshot.queryParamMap.get('name');
-    const imageUrlDefaultValue = this.route.snapshot.queryParamMap.get('imageUrl');
-    const imamNameDefaultValue = this.route.snapshot.queryParamMap.get('imamName');
-    const numDonationDefaultValue = parseInt(<string>this.route.snapshot.queryParamMap.get('numDonation'), 10);
-    const descDonationDefaultValue = this.route.snapshot.queryParamMap.get('descDonation');
-    const locationDefaultValue = this.route.snapshot.queryParamMap.get('location');
-    const quartierDefaultValue = this.route.snapshot.queryParamMap.get('quartier');
-    const latDefaultValue = parseInt(<string>this.route.snapshot.queryParamMap.get('lat'), 10);
-    const lngDefaultValue = parseInt(<string>this.route.snapshot.queryParamMap.get('lng'), 10);
-    const fajrDefaultValue = this.route.snapshot.queryParamMap.get('fajr');
-    const dohrDefaultValue = this.route.snapshot.queryParamMap.get('dohr');
-    const asrDefaultValue = this.route.snapshot.queryParamMap.get('asr');
-    const maghrebDefaultValue = this.route.snapshot.queryParamMap.get('maghreb');
-    const ishaDefaultValue = this.route.snapshot.queryParamMap.get('isha');
-    const djumhaDefaultValue = this.route.snapshot.queryParamMap.get('djumha');
-    const isAdd = this.route.snapshot.queryParamMap.get('isAdd');
-
+    this.id = this.navParams.get('id');
+    const nameDefaultValue = this.navParams.get('name');
+    this.imageUrl = this.navParams.get('imageUrl');
+    const imamNameDefaultValue = this.navParams.get('imamName');
+    const numDonationDefaultValue = this.navParams.get('numDonation');
+    const descDonationDefaultValue = this.navParams.get('descDonation');
+    const locationDefaultValue = this.navParams.get('location');
+    const quartierDefaultValue = this.navParams.get('quartier');
+    this.lat = this.navParams.get('lat');
+    this.lng = this.navParams.get('lng');
+    this.fajr = this.navParams.get('fajr');
+    this.dohr = this.navParams.get('dohr');
+    this.asr = this.navParams.get('asr');
+    this.maghreb = this.navParams.get('maghreb');
+    this.isha = this.navParams.get('isha');
+    this.djumha = this.navParams.get('djumha');
 
     this.mosqueForm = this.formBuilder.group({
-      name: [null, [Validators.required]],
-      location: [null, [Validators.required, Validators.pattern(urlRegex)]],
-      imamName: [null, [Validators.required]],
-      numDonation: [null, ],
-      descDonation: [null],
-      quartier: [null, [Validators.required]],
+      name: [nameDefaultValue, [Validators.required]],
+      location: [locationDefaultValue, [Validators.required, Validators.pattern(urlRegex)]],
+      imamName: [imamNameDefaultValue, [Validators.required]],
+      numDonation: [numDonationDefaultValue, ],
+      descDonation: [descDonationDefaultValue],
+      quartier: [quartierDefaultValue, [Validators.required]],
     });
   }
 
@@ -95,7 +97,6 @@ export class MosqueFormPage implements OnInit {
     this.showForm2Content = true;
     // Accédez au champ de fichier via le formulaire
     const fileInput = document.getElementById('fileInput') as HTMLInputElement;
-    console.log(fileInput);
 
     // Vérifiez si un fichier a été sélectionné
     if (fileInput.files && fileInput.files.length > 0) {
@@ -118,8 +119,7 @@ export class MosqueFormPage implements OnInit {
 
   updateFajr(event: any) {
     // Lorsque la valeur de l'élément ion-datetime change, elle est capturée ici
-    this.fajr = event.detail.value;
-    console.log(this.fajr)
+    this.fajr = this.formatDateTimeToTime(event.detail.value);
   }
   updateDohr(event: any) {
     // Lorsque la valeur de l'élément ion-datetime change, elle est capturée ici
@@ -149,18 +149,17 @@ export class MosqueFormPage implements OnInit {
 
 
   addNewMosque() {
-    console.log(this.fajr);
     const mosque: Mosque = {
-      id: null,
+      id: (this.id == undefined) ? null : this.id,
       name: this.mosqueForm.get('name')?.value,
-      imageUrl: null,
+      imageUrl: this.imageUrl,
       imamName: this.mosqueForm.get('imamName')?.value,
       numDonation: this.mosqueForm.get('numDonation')?.value,
       descDonation: this.mosqueForm.get('descDonation')?.value,
       location: this.mosqueForm.get('location')?.value,
       quartier: this.mosqueForm.get('quartier')?.value,
-      lat: 0,
-      lng: 0,
+      lat: this.lat,
+      lng: this.lng,
       fajr: this.fajr,
       dohr: this.dohr,
       asr: this.asr,
@@ -169,7 +168,12 @@ export class MosqueFormPage implements OnInit {
       djumha: this.djumha
     }
 
-    this.mosqueService.createMosque(mosque, this.file);
+    if (mosque.id == null) {
+      this.mosqueService.createMosque(mosque, this.file);
+    }
+    else {
+      this.mosqueService.updateMosque(mosque, this.file);
+    }
     this.closeModal();
   }
 

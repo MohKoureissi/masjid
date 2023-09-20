@@ -11,6 +11,15 @@
       </ion-col>
     </ion-row>
 
+    <ion-row>
+      <ion-col>
+        <input type="file" id="fileInput" accept="image/png, image/jpeg">
+      </ion-col>
+
+      <ion-col>
+        <p><img [src]="imageUrl" alt="L'image de la mosquée" style="width: 40px; height: 40px"></p>
+      </ion-col>
+    </ion-row>
 
     <ion-row>
       <ion-col>
@@ -18,7 +27,7 @@
       </ion-col>
 
       <ion-col>
-        <ion-input label="email" type="email" label-placement="floating" fill="outline" placeholder="test@gmail.com" formControlName="email"></ion-input>
+        <ion-input label="email" [readonly]="" type="email" label-placement="floating" fill="outline" placeholder="test@gmail.com" formControlName="email"></ion-input>
       </ion-col>
     </ion-row>
 
@@ -38,12 +47,12 @@
       </ion-col>
 
       <ion-col>
-        <ion-textarea label="Confirmation du mot de passe" type="password" label-placement="floating" fill="outline" formControlName="confirmPassword"></ion-textarea>
+        <ion-input label="Confirmation du mot de passe" type="password" label-placement="floating" fill="outline" placeholder="" formControlName="confirmPassword"></ion-input>
       </ion-col>
     </ion-row>
 
     <div class="action">
-      <ion-button class="ok">Enregistrer</ion-button>
+      <ion-button class="ok" (click)="addNewAdmin()">Enregistrer</ion-button>
     </div>
 
   </ion-list>

@@ -4,7 +4,6 @@
       <ion-row>
         <ion-col>
           <h1>Ajouter une annonce</h1>
-          <p style="padding: 0; font-size: 18px">Informations générales</p>
         </ion-col>
 
         <ion-col class="cancel">
@@ -14,7 +13,11 @@
 
       <ion-row>
         <ion-col>
-          <ion-input type="file" fill="outline" id="fileInput" accept="image/png, image/jpeg"></ion-input>
+          <input type="file" id="fileInput" accept="image/png, image/jpeg">
+        </ion-col>
+
+        <ion-col>
+          <p><img [src]="imageUrl" alt="L'image de la mosquée" style="width: 40px; height: 40px"></p>
         </ion-col>
       </ion-row>
 
@@ -31,11 +34,31 @@
 
       <ion-row>
         <ion-col>
-          <ion-input label="Date et heure" label-placement="floating" fill="outline" placeholder="26/02/2023 à 14:00" formControlName="dateTime"></ion-input>
+
+          <ion-item fill="outline" lines="none" mode="md">
+            <ion-label>Date</ion-label>
+            <ion-note slot="end" id="date">
+              <p style="font-size: 17px; color: #2c6632" >{{date}}</p>
+            </ion-note>
+
+            <ion-popover trigger="date" triggerAction="click">
+              <ng-template>
+                <ion-content class="ion-padding">
+                  <ion-datetime
+                    formControlName="date"
+                    (ionChange)="updateDate($event)"
+                  ></ion-datetime>
+                </ion-content>
+              </ng-template>
+            </ion-popover>
+          </ion-item>
         </ion-col>
 
+      </ion-row>
+
+      <ion-row>
         <ion-col>
-          <ion-input label="Non de l'organisateur" label-placement="floating" fill="outline" placeholder="Haut conceil islamique" formControlName="organizer"></ion-input>
+          <ion-input label="Nom de l'organisateur" label-placement="floating" fill="outline" placeholder="Haut conceil islamique" formControlName="organizer"></ion-input>
         </ion-col>
       </ion-row>
 
@@ -47,12 +70,12 @@
 
       <ion-row>
         <ion-col>
-          <ion-textarea label="Description de l'annonce" label-placement="floating" [counter]="true" maxlength="200" fill="outline" formControlName="description"></ion-textarea>
+          <ion-textarea label="Description de l'annonce" label-placement="floating" fill="outline" formControlName="description"></ion-textarea>
         </ion-col>
       </ion-row>
 
       <div class="action">
-        <ion-button class="ok">Enregistrer</ion-button>
+        <ion-button class="ok" (click)="addNewAnnouncement()">Enregistrer</ion-button>
       </div>
 
     </ion-list>

@@ -3,15 +3,18 @@ import {
   getAuth, createUserWithEmailAndPassword,
   signInWithEmailAndPassword, signOut, updateEmail,
   updatePassword, updateProfile, sendPasswordResetEmail, deleteUser } from "firebase/auth";
-import { getFirestore, setDoc, doc } from 'firebase/firestore';
+import {getFirestore, setDoc, doc, collection, getDocs, getDoc, deleteDoc, updateDoc} from 'firebase/firestore';
 import { Firestore } from "@angular/fire/firestore";
 import {AdminModel} from "../../app/model/admin.model";
+import {Observable, of} from "rxjs";
+import {getDownloadURL, getStorage, ref, uploadBytes} from "firebase/storage";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminService {
-
+  COLLECTION_NAME = 'admins';
+  defaultImageUrl: string = '';
   constructor(private firestore: Firestore) { }
 
   getNewEmailCode() {
@@ -22,37 +25,46 @@ export class AdminService {
     }
     return combination+='_';
   }
-  signUpAdmin(newAdmin: AdminModel) {
+  async signUpAdmin(newAdmin: AdminModel, imageFile: File|null) {
     //fullName: string, email:string, numTel:string, password:string, recupEmail:string
     const auth = getAuth();
-    createUserWithEmailAndPassword(auth, newAdmin.email, newAdmin.password)
-      .then((userCredential) => {
-        // Signed in
-        const admin = userCredential.user;
-        const db = getFirestore();
+    try {
+      createUserWithEmailAndPassword(auth, newAdmin.email, newAdmin.password)
+        .then(async (userCredential) => {
+          // Signed in
+          const admin = userCredential.user;
+          const db = getFirestore();
 
-        // Génération de code unique pour l'email et la password du nouveau administrateur
-        const emailCode = this.getNewEmailCode();
-        const passwordCode = this.getNewEmailCode();
 
-        // Création du nouvel administrateur avec comme nom de document de l'admin sont identifiant
-        setDoc(doc(db, "admins", admin.uid), {
-          id:admin.uid,
-          fullName: newAdmin.fullName,
-          numTel: newAdmin.numTel,
-          email: newAdmin.email,
-          emailCode:emailCode,
-          passwordCode:passwordCode,
-          recupEmail: newAdmin.recupEmail
+          if (imageFile != null) {
+            await this.loadAdminImage(imageFile).then(url => {
+              newAdmin.imageUrl = url;
+            });
+            console.log(newAdmin.imageUrl)
+          }
+          newAdmin.imageUrl = (newAdmin.imageUrl != null && newAdmin.imageUrl != '') ? newAdmin.imageUrl : this.defaultImageUrl;
+
+
+          // Création du nouvel administrateur avec comme nom de document de l'admin sont identifiant
+          setDoc(doc(db, `${this.COLLECTION_NAME}`, admin.uid), {
+            id: admin.uid,
+            fullName: newAdmin.fullName,
+            numTel: newAdmin.numTel,
+            email: newAdmin.email,
+            imageUrl: newAdmin.imageUrl,
+            recupEmail: newAdmin.recupEmail
+          });
+
+          console.log('Administrateur enregistré avec succès avec ');
+        })
+        .catch((error) => {
+
+          const errorMessage = error.message;
+          console.error('Erreur lors de la création de l\'admin :', errorMessage);
         });
-
-        console.log('Administrateur enregistré avec succès avec ');
-      })
-      .catch((error) => {
-
-        const errorMessage = error.message;
-        console.error('Erreur lors de la création de l\'admin :', errorMessage);
-      });
+    }catch (error){
+      console.log(error);
+    }
   }
 
   signInAdmin(email: string, password: string) {
@@ -87,20 +99,35 @@ export class AdminService {
     });
   }
 
-  updateAdmin(updateAdmin: AdminModel) {
-    //fullName: string, numTel: string, email: string, password: string, id: string
-    const db = getFirestore();
-    //this.updateEmail(email);
-    //this.updatePassword(password);
-    //this.updateBasicInfo(fullName);
-    setDoc(doc(db, "admins", updateAdmin.id!), {
-      fullName: updateAdmin.fullName,
-      numTel: updateAdmin.numTel,
-      email: updateAdmin.email,
-      password: updateAdmin.password,
-      id: updateAdmin.id,
-      recupEmail: updateAdmin.recupEmail
-    });
+  async updateAdmin(updateAdmin: AdminModel|any, imageFile: File | null) {
+    try {
+      const db = getFirestore();
+      const adminDocRef = doc(db, `${this.COLLECTION_NAME}`, updateAdmin.id!);
+
+      // Vérifiez si l'annonce existe dans la base de données
+      const adminSnap = await getDoc(adminDocRef);
+
+      if (adminSnap.exists()) {
+        if(imageFile != null){
+          await this.loadAdminImage(imageFile).then(url =>{
+            updateAdmin.imageUrl = url;
+          });
+          console.log(updateAdmin.imageUrl)
+        }
+        updateAdmin.imageUrl = (updateAdmin.imageUrl != null && updateAdmin.imageUrl != '')? updateAdmin.imageUrl:this.defaultImageUrl;
+
+
+        // L'annonce existe, mettez à jour les données
+        await updateDoc(adminDocRef, updateAdmin);
+
+        console.log(`Annonce avec l'ID ${updateAdmin.id} mise à jour avec succès`);
+      } else {
+        console.log(`L'annonce avec l'ID ${updateAdmin.id} n'existe pas.`);
+      }
+    } catch (error) {
+      console.error('Erreur lors de la mise à jour de l\'annonce :', error);
+      throw error; // Vous pouvez gérer l'erreur de manière appropriée ici
+    }
   }
 
   updateEmail(newEmail: string) {
@@ -158,8 +185,32 @@ export class AdminService {
 
   }
 
-  deleteAdmin() {
-    const auth = getAuth();
+  async deleteAdmin(adminId: string) {
+    try {
+      const db = getFirestore();
+      const adminDocRef = doc(db, `${this.COLLECTION_NAME}`, adminId);
+
+      // Vérifiez si l'annonce existe dans la base de données
+      const adminSnap = await getDoc(adminDocRef);
+
+      if (adminSnap.exists()) {
+        // L'annonce existe, supprimez-la
+        await deleteDoc(adminDocRef);
+
+        console.log(`Annonce avec l'ID ${adminId} supprimée avec succès`);
+      } else {
+        console.log(`L'annonce avec l'ID ${adminId} n'existe pas.`);
+      }
+    } catch (error) {
+      console.error('Erreur lors de la suppression de l\'annonce :', error);
+      throw error; // Vous pouvez gérer l'erreur de manière appropriée ici
+    }
+
+
+
+
+
+    /*const auth = getAuth();
     const user = auth.currentUser;
 
     if (user) {
@@ -169,23 +220,44 @@ export class AdminService {
         // An error ocurred
         // ...
       });
-    }
+    }*/
   }
 
-  /*reauthenticateAdmin(email: string, password: string) {
-    const auth = getAuth();
-    const user = auth.currentUser;
+  async getAdmins(): Promise<Observable<AdminModel[]>>{
+    const db = getFirestore();
+    const adminsCollectionRef = collection(db, `${this.COLLECTION_NAME}`);
 
-    const credential = {email: email, password: password};
-
-    if (user) {
-      reauthenticateWithCredential(user, credential).then(() => {
-        // User re-authenticated.
-      }).catch((error) => {
-        // An error ocurred
-        // ...
+    try {
+      const aadminsSnap = await getDocs(adminsCollectionRef);
+      const admins: AdminModel[] = [];
+      aadminsSnap.forEach((doc) => {
+        admins.push(doc.data() as AdminModel);
       });
+      return of(admins);
+    }catch (error){
+      console.log(error);
+      return of([]);
     }
 
-  }*/
+  }
+
+
+  async loadAdminImage(file: File): Promise<string | null> {
+    const storage = getStorage();
+    let imageUrl: string|null = null;
+    const adminRef = await ref(storage, `${this.COLLECTION_NAME}/${file.name}`);
+    uploadBytes(adminRef, file).then((snapshot) => {
+      console.log('Fichier uploadé avec succès !');
+    });
+
+    await getDownloadURL(adminRef).then((url) => {
+      // `url` est l'URL de téléchargement de notre récitation
+      imageUrl = url
+    })
+      .catch((error) => {
+        // Handle any errors
+      });
+    return imageUrl;
+  }
+
 }

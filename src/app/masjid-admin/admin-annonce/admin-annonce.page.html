@@ -1,71 +1,4 @@
 <app-navbar></app-navbar>
-
-<div class="custom-modal" *ngIf="showAddAn || showAdd">
-  <div class="custom-modal-container">
-    <div class="custom-modal-header">
-      <h1>{{ isEditing ? 'Modifier l\'Annonce' : 'Ajouter une Annonce' }}</h1>
-    </div>
-    <form [formGroup]="announcementForm">
-      <div class="custom-modal-content">
-        <div class="dtail">
-          <div class="photo">
-            <span>Photo</span>
-            <label class="custom-file-upload">
-              <input type="file" id="fileInput" accept="image/png, image/jpeg" />
-              <ion-icon name="image"></ion-icon>
-            </label>
-          </div>
-          <div class="input-container">
-            <div class="input">
-              <label for="title">Titre</label>
-              <input id="title" type="text" formControlName="title" />
-            </div>
-            <div class="input">
-              <label for="date">Date</label>
-              <input id="date" type="date" formControlName="date" />
-            </div>
-            <div class="input">
-              <label for="lieu">Lieu</label>
-              <input id="lieu" type="text" formControlName="place" />
-            </div>
-            <div class="input">
-              <label for="heure">Heure</label>
-              <input id="heure" type="time" formControlName="hour" />
-            </div>
-
-            <div class="input">
-              <label for="location">Location</label>
-              <input id="location" type="text" formControlName="location" />
-            </div>
-
-            <div class="input">
-              <label for="organizer">Organizer</label>
-              <input id="organizer" type="text" formControlName="organizer" />
-            </div>
-
-            <div class="input">
-              <label for="description">Description</label>
-              <textarea id="description" formControlName="description"></textarea>
-            </div>
-          </div>
-        </div>
-        <div class="dtail">
-          <div class="description">
-            <div class="actions">
-
-              <ion-button class="add" (click)="isEditing ? updateAnnouncement() : addNewAnnouncement()"
-                [disabled]="!announcementForm.valid">
-                {{ isEditing ? 'Modifier' : 'Enregistrer' }}
-              </ion-button>
-
-              <ion-button color="danger" (click)="showAdd = false">Annuler</ion-button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </form>
-  </div>
-</div>
 <div class="container">
   <div class="row">
     <div class="col-12">
@@ -79,11 +12,6 @@
             <ion-icon name="add-circle-outline" size="large" (click)="openModal()" class="green"></ion-icon>
           </div>
         </div>
-
-        <!--<a routerLink="/panel"><ion-icon style="color: #2C6632; font-size: 40px; vertical-align: middle ;" name="arrow-back-circle-outline"></ion-icon></a>
-        <input type="text" placeholder="Recherchez une mosquée" style="border-radius: 20px; padding-left: 50px; padding-right: 50px;">
-        <i (click)="showAdd=true"><img src="../../../assets/img/plus.png" alt="" height="32px" width="32px" style="margin-left: 10px; cursor: pointer;"></i>-->
-
         <img src="../../../assets/img/gannonce.png" alt="" srcset="">
       </div>
       <table class="table" style="margin-top: 30px">
@@ -94,7 +22,8 @@
             <th scope="col">Titre</th>
             <th scope="col">Lieu</th>
             <th scope="col">Date</th>
-            <th scope="col">Heure</th>
+            <th scope="col">Organisateur</th>
+            <th scope="col">Localisation</th>
             <th scope="col">Action</th>
           </tr>
         </thead>
@@ -107,10 +36,11 @@
             <td>{{ announcement.title }}</td>
             <td>{{ announcement.place }}</td>
             <td>{{ announcement.date }}</td>
-            <td>{{ announcement.hour }}</td>
+            <td>{{ announcement.organizer }}</td>
+            <td><a [href]="announcement.location">{{ announcement.place }}</a></td>
             <td>
               <ion-icon class="edit" name="create-outline" style="color: #2c6632"
-                (click)="ouvrirModalModification(announcement)" style="color: #2C6632;"></ion-icon>
+                (click)="openModalWithUpdateMode(announcement)" style="color: #2C6632;"></ion-icon>
               <ion-icon class="edit" name="trash-outline" style="color: red"
                 (click)="deleteAnnouncement(announcement.id)"></ion-icon>
             </td>

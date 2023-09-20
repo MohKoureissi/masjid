@@ -10,21 +10,25 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 })
 export class MosqueService implements OnInit {
   COLLECTION_NAME = 'mosques';
+  defaultImageUrl = 'https://firebasestorage.googleapis.com/v0/b/masjid-1f3cf.appspot.com/o/announcements%2Fortm.jpg?alt=media&token=822c435c-13bf-4942-a4f6-7ab62df67f63';
 
   constructor() { }
   ngOnInit(): void {}
 
 
 //Methode pour ajouter une mosque
-  async createMosque(mosque: Mosque, imageFile: File): Promise<void> {
+  async createMosque(mosque: Mosque, imageFile: File|null): Promise<void> {
     const db = getFirestore();
     const mosqueCollectionRef = collection(db, `${this.COLLECTION_NAME}`);
 
     try {
-      await this.loadMosqueImage(imageFile).then(url =>{
-        mosque.imageUrl = url;
-      });
-      console.log(mosque.imageUrl)
+      if(imageFile != null){
+        await this.loadMosqueImage(imageFile).then(url =>{
+          mosque.imageUrl = url;
+        });
+        console.log(mosque.imageUrl)
+      }
+      mosque.imageUrl = (mosque.imageUrl != null && mosque.imageUrl != '')? mosque.imageUrl:this.defaultImageUrl;
 
       // Ajoutez la nouvelle mosquée à la collection "mosques"
       const newMosqueRef = doc(mosqueCollectionRef);
@@ -42,20 +46,28 @@ export class MosqueService implements OnInit {
     }
   }
 // update mosquee
-  async updateMosque(mosqueId:string,updateMosque:Mosque|any): Promise<void> {
+  async updateMosque(updateMosque:Mosque|any, imageFile: File|null): Promise<void> {
     try{
-        const db = getFirestore();
-        const mosqueCollectionRef = doc(db, `${this.COLLECTION_NAME}`,mosqueId);
-        // Vérifiez si la mosquee existe dans la base de données
+      const db = getFirestore();
+      const mosqueCollectionRef = doc(db, `${this.COLLECTION_NAME}`,updateMosque.id);
+      // Vérifiez si la mosquee existe dans la base de données
       const mosqueSnap = await getDoc(mosqueCollectionRef);
 
       if (mosqueSnap.exists()) {
+       if(imageFile != null){
+         await this.loadMosqueImage(imageFile).then(url =>{
+           updateMosque.imageUrl = url;
+         });
+         console.log(updateMosque.imageUrl)
+       }
+        updateMosque.imageUrl = (updateMosque.imageUrl != null && updateMosque.imageUrl != '')? updateMosque.imageUrl:this.defaultImageUrl;
+
         // La mosquee existe, mettez à jour les données
         await updateDoc(mosqueCollectionRef, updateMosque);
 
-        console.log(`Mosquee avec l'ID ${mosqueId} mise à jour avec succès`);
+        console.log(`La mosquée avec l'ID ${updateMosque.id} à été mise à jour avec succès`);
       } else {
-        console.log(`Mosquee avec l'ID ${mosqueId} n'existe pas.`);
+        console.log(`La mosquée avec l'ID ${updateMosque.id} n'existe pas.`);
       }
      }catch (error) {
       console.error('Erreur lors de la mise à jour de la mosquee :', error);
@@ -181,7 +193,6 @@ async getDetailsMosque(mosqueId: string): Promise<Observable<Mosque | null>> {
       console.log('Fichier uploadé avec succès !');
     });
 
-
     await getDownloadURL(mosquesRef).then((url) => {
         // `url` est l'URL de téléchargement de notre récitation
         imageUrl = url
@@ -189,7 +200,6 @@ async getDetailsMosque(mosqueId: string): Promise<Observable<Mosque | null>> {
       .catch((error) => {
         // Handle any errors
       });
-
     return imageUrl;
   }
 

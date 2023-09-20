@@ -3,9 +3,8 @@
   <div [hidden]="!showForm1Content" class="first-modal">
     <ion-list class="modal-wrapper">
       <ion-row>
-        <ion-col>
+        <ion-col size="10">
           <h1>Ajouter une mosquée</h1>
-          <p style="padding: 0; font-size: 18px">Informations générales</p>
         </ion-col>
 
         <ion-col class="cancel">
@@ -16,6 +15,10 @@
       <ion-row>
         <ion-col>
           <input type="file" id="fileInput" accept="image/png, image/jpeg">
+        </ion-col>
+
+        <ion-col>
+          <p><img [src]="imageUrl" alt="L'image de la mosquée" style="width: 40px; height: 40px"></p>
         </ion-col>
       </ion-row>
 
@@ -57,17 +60,15 @@
       </div>
 
     </ion-list>
-
-
   </div>
+</form>
 
-
+<ion-content>
   <div [hidden]="!showForm2Content">
     <ion-list>
       <ion-row>
-        <ion-col>
-          <h1>Ajouter une mosquée</h1>
-          <p style="padding: 0; font-size: 18px">Horaires des prières</p>
+        <ion-col size="10">
+          <h1>Ajouter une mosquée (Horaires)</h1>
         </ion-col>
 
         <ion-col class="cancel">
@@ -103,7 +104,7 @@
           <ion-item fill="outline" lines="none" mode="md">
             <ion-label>Dohr</ion-label>
             <ion-note slot="end" id="dohr">
-              <p style="font-size: 17px; color: #2c6632" >{{dohr}}</p>
+              <p style="font-size: 17px; color: #2c6632" >{{formatDateTimeToTime(dohr)}}</p>
             </ion-note>
 
             <ion-popover trigger="dohr" triggerAction="click">
@@ -128,7 +129,7 @@
           <ion-item fill="outline" lines="none" mode="md">
             <ion-label>Asr</ion-label>
             <ion-note slot="end" id="asr">
-              <p style="font-size: 17px; color: #2c6632" >{{asr}}</p>
+              <p style="font-size: 17px; color: #2c6632" >{{formatDateTimeToTime(asr)}}</p>
             </ion-note>
 
             <ion-popover trigger="asr" triggerAction="click">
@@ -150,7 +151,7 @@
           <ion-item fill="outline" lines="none" mode="md">
             <ion-label>Maghreb</ion-label>
             <ion-note slot="end" id="maghreb">
-              <p style="font-size: 17px; color: #2c6632" >{{maghreb}}</p>
+              <p style="font-size: 17px; color: #2c6632" >{{formatDateTimeToTime(maghreb)}}</p>
             </ion-note>
 
             <ion-popover trigger="maghreb" triggerAction="click">
@@ -176,7 +177,7 @@
           <ion-item fill="outline" lines="none" mode="md">
             <ion-label>Isha</ion-label>
             <ion-note slot="end" id="isha">
-              <p style="font-size: 17px; color: #2c6632" >{{isha}}</p>
+              <p style="font-size: 17px; color: #2c6632" >{{formatDateTimeToTime(isha)}}</p>
             </ion-note>
 
             <ion-popover trigger="isha" triggerAction="click">
@@ -198,7 +199,7 @@
           <ion-item fill="outline" lines="none" mode="md">
             <ion-label>Djumha</ion-label>
             <ion-note slot="end" id="djumha">
-              <p style="font-size: 17px; color: #2c6632" >{{djumha}}</p>
+              <p style="font-size: 17px; color: #2c6632" >{{formatDateTimeToTime(djumha)}}</p>
             </ion-note>
 
             <ion-popover trigger="djumha" triggerAction="click">
@@ -226,6 +227,5 @@
     </ion-list>
 
   </div>
+</ion-content>
 
-
-</form>

@@ -1,40 +1,4 @@
 <app-navbar></app-navbar>
-<div class="custom-modal" *ngIf="showAddAd">
-  <div class="custom-modal-container">
-    <div class="custom-modal-header"><h1>Ajouter un admin</h1></div>
-    <div class="custom-modal-content">
-      <div class="dtail">
-        <div class="photo"><span>Photo</span></div>
-        <div class="input-container">
-          <div class="input">
-            <label for="name">Nom complet</label>
-            <input id="name" type="text">
-          </div>
-          <div class="input">
-            <label for="mail">E-mail</label>
-            <input id="mail" type="email">
-          </div>
-          <div class="input">
-            <label for="number">Numéro de téléphone</label>
-            <input id="number" type="text">
-          </div>
-          <div class="input">
-            <label for="password">Mot de passe</label>
-            <input id="password" type="password">
-          </div>
-        </div>
-      </div>
-      <div class="dtail">
-        <div class="description">
-          <div class="actions">
-            <ion-button class="add">Ajouter</ion-button>
-            <ion-button color="danger" (click)="showAddAd =false">Fermer</ion-button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 <div class="container">
   <div class="row">
     <div class="col-12">
@@ -58,21 +22,26 @@
       <th scope="col">Nom</th>
       <th scope="col">Email</th>
       <th scope="col">Téléphone</th>
+      <th scope="col">Email de récuperation</th>
       <th scope="col">Action</th>
     </tr>
   </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td><img src="../../../assets/img/jack.jpg" style="height: 36px;width: 36px; border-radius: 50px;" alt=""></td>
-      <td>Jack Baueur</td>
-      <td>jackbaueur@gmail.com</td>
-      <td>77 63 44 90</td>
-      <td><ion-icon name="create-outline"  style="color:#2C6632;">
-      </ion-icon><ion-icon name="trash-outline" style="color: red;"></ion-icon></td>
-    </tr>
-
-  </tbody>
+        <tbody>
+        <tr *ngFor="let admin of admins; let i = index">
+          <th scope="row">{{ i + 1 }}</th>
+          <td>
+            <img [src]="admin.imageUrl" style="height: 36px; width: 36px; border-radius: 50px" alt="" />
+          </td>
+          <td>{{ admin.fullName }}</td>
+          <td>{{ admin.email }}</td>
+          <td>{{ admin.numTel }}</td>
+          <td>{{ admin.recupEmail }}</td>
+          <td>
+            <ion-icon class="edit" name="create-outline" style="color: #2c6632" (click)="openModalWithUpdateMode(admin)" style="color: #2C6632;"></ion-icon>
+            <ion-icon class="edit" name="trash-outline" style="color: red" (click)="deleteAdmin(admin.id)"></ion-icon>
+          </td>
+        </tr>
+        </tbody>
 </table>
     </div>
 

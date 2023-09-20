@@ -1,149 +1,46 @@
-  <app-navbar></app-navbar>
-
-  <div class="custom-modal" *ngIf="showAdd">
-    <div class="custom-modal-container">
-      <h1>{{ isEditing ? 'Modifier la mosquée' : 'Ajouter une mosquée' }}</h1>
-      <form [formGroup]="mosqueForm">
-        <div class="custom-modal-content">
-          <div class="dtail-left">
-            <div class="input-container">
-              <div class="line">
-                <div class="input">
-                  <label for="name">Nom de la mosquée</label>
-                  <input id="name" type="text" formControlName="name">
-                </div>
-                <div class="input">
-                  <label for="imamname">Nom de l'imam</label>
-                  <input id="imamname" type="text" formControlName="imamName">
-                </div>
-              </div>
-
-              <div class="line">
-                <div class="input">
-                  <label for="quartier">Non du quartier</label>
-                  <input id="quartier" type="text" placeholder="" formControlName="quartier">
-                </div>
-                <div class="input">
-                  <label for="numDonation">Numero OrangeMoney/Mobicash pour le don</label>
-                  <input id="numDonation" type="number" placeholder="" formControlName="numDonation">
-                </div>
-              </div>
-
-              <div class="input">
-                <label for="location">Lien GPS de la localisation</label>
-                <input id="location" type="url" placeholder="https://maps.google.com/?q=1.1,-2.2" formControlName="location">
-              </div>
-
-              <div class="input" >
-                <label for="descDonation">Comment faire un don</label>
-                <textarea name="" id="descDonation" rows="8" formControlName="descDonation"></textarea >
-              </div>
-
-            </div>
+<app-navbar></app-navbar>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="head">
+        <div class="align">
+          <div class="go-back">
+            <ion-icon name="arrow-back-circle-outline" size="large" class="green" routerLink="/panel"></ion-icon>
           </div>
-
-
-          <div class="dtail-right">
-            <div class="photo">
-              <label class="custom-file-upload">
-                <input type="file" id="fileInput" accept="image/png, image/jpeg" />
-                <ion-icon name="image" ></ion-icon>
-              </label>
-            </div>
-            <div class="horaires">
-              <h3>horaires</h3>
-              <div class="input-horaire">
-                <label for="fajr">Fajr</label>
-                <input type="time" id="fajr" formControlName="fajr">
-              </div>
-              <div class="input-horaire">
-                <label for="dohr">Dohr</label>
-                <input type="time" id="dohr" formControlName="dohr">
-              </div>
-              <div class="input-horaire">
-                <label for="asr">Asr</label>
-                <input type="time" id="asr" formControlName="asr">
-              </div>
-              <div class="input-horaire">
-                <label for="magrheb">Magrheb</label>
-                <input type="time" id="magrheb" formControlName="maghreb">
-              </div>
-              <div class="input-horaire">
-                <label for="icha">Icha</label>
-                <input type="time" id="icha" formControlName="isha">
-              </div>
-              <div class="input-horaire">
-                <label for="djouma">Djouma</label>
-                <input type="time" id="djouma" formControlName="djumha">
-              </div>
-            </div>
-            <div class="description">
-              <div class="actions">
-
-
-                <ion-button class="add" [disabled]="!mosqueForm.valid">
-                  {{ isEditing ? 'Modifier' : 'Enregistrer' }}
-                </ion-button>
-                <ion-button color="danger" (click)="showAdd =false">Annuler</ion-button>
-              </div>
-
-            </div>
+          <ion-searchbar placeholder="Rechercher" inputmode="search"></ion-searchbar>
+          <div class="add">
+            <ion-icon name="add-circle-outline" size="large" (click)="openModal()" class="green"></ion-icon>
           </div>
-
-
         </div>
-      </form>
-    </div>
-  </div>
-  <div class="container">
-    <div class="row">
-      <div class="col-12">
-
-       <div class="head">
-         <div class="align">
-           <div class="go-back">
-             <ion-icon name="arrow-back-circle-outline" size="large" class="green" routerLink="/panel"></ion-icon>
-           </div>
-           <ion-searchbar placeholder="Rechercher" inputmode="search"></ion-searchbar>
-           <div class="add">
-             <ion-icon name="add-circle-outline" size="large" (click)="openModal()" class="green"></ion-icon>
-           </div>
-         </div>
-         <img src="../../../assets/img/gestionm.png" alt="" srcset="">
-       </div>
-        <table class="table" style="margin-top: 30px;">
-    <thead>
-      <tr>
-        <th scope="col">N°</th>
-        <th scope="col">Photo</th>
-        <th scope="col">Nom de la mosquée</th>
-        <th scope="col">Nom de l'imam</th>
-        <th scope="col">N°Don</th>
-        <th scope="col">Quartier</th>
-        <th scope="col">Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let mosque of mosques let i = index">
-        <!--<th scope="row">1</th>-->
-        <th scope="row">{{ i + 1 }}</th>
-        <td><img [src]="mosque.imageUrl" style="height: 36px;width: 36px; border-radius: 50px;" alt=""></td>
-        <td>{{mosque.name}}</td>
-        <td>{{mosque.imamName}}</td>
-        <td>{{mosque.numDonation}}</td>
-        <td>{{mosque.quartier}}</td>
-        <td>
-
-
-          <ion-icon name="create-outline" (click)="ouvrirModalModification(mosque)" style="color:#2C6632;">
-          </ion-icon><ion-icon name="trash-outline" style="color: red;" (click)="deleteMosque(mosque.id)"></ion-icon>
-        </td>
-      </tr>
-
-    </tbody>
-  </table>
+        <img src="../../../assets/img/gestionm.png" alt="" srcset="">
       </div>
-
+      <table class="table" style="margin-top: 30px;">
+        <thead>
+          <tr>
+            <th scope="col">N°</th>
+            <th scope="col">Photo</th>
+            <th scope="col">Nom de la mosquée</th>
+            <th scope="col">Nom de l'imam</th>
+            <th scope="col">N°Don</th>
+            <th scope="col">Quartier</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let mosque of mosques let i = index">
+            <th scope="row">{{ i + 1 }}</th>
+            <td><img [src]="mosque.imageUrl" style="height: 36px;width: 36px; border-radius: 50px;" alt=""></td>
+            <td>{{mosque.name}}</td>
+            <td>{{mosque.imamName}}</td>
+            <td>{{mosque.numDonation}}</td>
+            <td>{{mosque.quartier}}</td>
+            <td>
+              <ion-icon name="create-outline" (click)="openModalWithUpdateMode(mosque)" style="color:#2C6632;">
+              </ion-icon><ion-icon name="trash-outline" style="color: red;" (click)="deleteMosque(mosque.id)"></ion-icon>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-
   </div>
+</div>

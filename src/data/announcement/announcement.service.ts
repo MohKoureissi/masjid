@@ -10,16 +10,22 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 })
 export class AnnouncementService {
   COLLECTION_NAME = 'announcements';
+  defaultImageUrl = 'https://firebasestorage.googleapis.com/v0/b/masjid-1f3cf.appspot.com/o/mosques%2Fdefault-mosque.jpg?alt=media&token=64a4374f-bddc-437e-9d09-3f890a33fc11';
+
+
   constructor() { }
 
-  async createAnnouncement(announcement: Announcement,imageFile:File): Promise<void> {
+  async createAnnouncement(announcement: Announcement, imageFile:File|null): Promise<void> {
     const db = getFirestore();
     const announcementCollectionRef = collection(db, `${this.COLLECTION_NAME}`);
     try {
-      await this.loadAnnouncementImage(imageFile).then(url =>{
-        announcement.imageUrl = url;
-      });
-      console.log(announcement.imageUrl)
+      if(imageFile != null){
+        await this.loadAnnouncementImage(imageFile).then(url =>{
+          announcement.imageUrl = url;
+        });
+        console.log(announcement.imageUrl)
+      }
+      announcement.imageUrl = (announcement.imageUrl != null && announcement.imageUrl != '')? announcement.imageUrl:this.defaultImageUrl;
 
       // Ajoutez la nouvelle mosquée à la collection "mosques"
       const newAnnouncementRef = doc(announcementCollectionRef);
@@ -40,21 +46,30 @@ export class AnnouncementService {
 
   //update annonce
 
-  async updateAnnouncement(announcementId: string, updatedAnnouncement: Announcement|any): Promise<void> {
+  async updateAnnouncement(updatedAnnouncement: Announcement|any, imageFile: File|null): Promise<void> {
     try {
       const db = getFirestore();
-      const announcementDocRef = doc(db, 'announcements', announcementId);
+      const announcementDocRef = doc(db, 'announcements', updatedAnnouncement.id);
 
       // Vérifiez si l'annonce existe dans la base de données
       const announcementSnap = await getDoc(announcementDocRef);
 
       if (announcementSnap.exists()) {
+        if(imageFile != null){
+          await this.loadAnnouncementImage(imageFile).then(url =>{
+            updatedAnnouncement.imageUrl = url;
+          });
+          console.log(updatedAnnouncement.imageUrl)
+        }
+        updatedAnnouncement.imageUrl = (updatedAnnouncement.imageUrl != null && updatedAnnouncement.imageUrl != '')? updatedAnnouncement.imageUrl:this.defaultImageUrl;
+
+
         // L'annonce existe, mettez à jour les données
         await updateDoc(announcementDocRef, updatedAnnouncement);
 
-        console.log(`Annonce avec l'ID ${announcementId} mise à jour avec succès`);
+        console.log(`Annonce avec l'ID ${updatedAnnouncement.id} mise à jour avec succès`);
       } else {
-        console.log(`L'annonce avec l'ID ${announcementId} n'existe pas.`);
+        console.log(`L'annonce avec l'ID ${updatedAnnouncement.id} n'existe pas.`);
       }
     } catch (error) {
       console.error('Erreur lors de la mise à jour de l\'annonce :', error);
@@ -126,16 +141,13 @@ export class AnnouncementService {
       console.log('Fichier uploadé avec succès !');
     });
 
-
-    await getDownloadURL(announcementRef)
-      .then((url) => {
+    await getDownloadURL(announcementRef).then((url) => {
         // `url` est l'URL de téléchargement de notre récitation
         imageUrl = url
       })
       .catch((error) => {
         // Handle any errors
       });
-
     return imageUrl;
   }
 
