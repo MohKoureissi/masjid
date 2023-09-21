@@ -1,0 +1,83 @@
+<form [formGroup]="announcementForm">
+
+    <ion-list class="modal-wrapper">
+      <ion-row>
+        <ion-col>
+          <h1>Ajouter une annonce</h1>
+        </ion-col>
+
+        <ion-col class="cancel">
+          <ion-icon name="close-outline" size="large" (click)="closeModal()"></ion-icon>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <input type="file" id="fileInput" accept="image/png, image/jpeg">
+        </ion-col>
+
+        <ion-col>
+          <p><img [src]="imageUrl" alt="L'image de la mosquée" style="width: 40px; height: 40px"></p>
+        </ion-col>
+      </ion-row>
+
+
+      <ion-row>
+        <ion-col>
+          <ion-input label="Titre de l'annonce" label-placement="floating" fill="outline" placeholder="Achoura" formControlName="title"></ion-input>
+        </ion-col>
+
+        <ion-col>
+          <ion-input label="Lieu de rassemblement" label-placement="floating" fill="outline" placeholder="Stade du 26 mars" formControlName="place"></ion-input>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+
+          <ion-item fill="outline" lines="none" mode="md">
+            <ion-label>Date</ion-label>
+            <ion-note slot="end" id="date">
+              <p style="font-size: 17px; color: #2c6632" >{{date}}</p>
+            </ion-note>
+
+            <ion-popover trigger="date" triggerAction="click">
+              <ng-template>
+                <ion-content class="ion-padding">
+                  <ion-datetime
+                    formControlName="date"
+                    (ionChange)="updateDate($event)"
+                  ></ion-datetime>
+                </ion-content>
+              </ng-template>
+            </ion-popover>
+          </ion-item>
+        </ion-col>
+
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-input label="Nom de l'organisateur" label-placement="floating" fill="outline" placeholder="Haut conceil islamique" formControlName="organizer"></ion-input>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-input label="Lien GPS de la localisation" type="url" label-placement="floating" fill="outline" placeholder="https://maps.google.com/?q=1.1,-2.2" formControlName="location"></ion-input>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-textarea label="Description de l'annonce" label-placement="floating" fill="outline" formControlName="description"></ion-textarea>
+        </ion-col>
+      </ion-row>
+
+      <div class="action">
+        <ion-button class="ok" (click)="addNewAnnouncement()">Enregistrer</ion-button>
+      </div>
+
+    </ion-list>
+
+</form>

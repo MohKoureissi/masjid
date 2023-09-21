@@ -1,0 +1,40 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Coran</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+    <div class="parallax-img" [style.background-image]="'url(../../assets/illustrations/mosquee.jpg)'">
+   <h1>Coran</h1>
+  </div>
+      <div class="container">
+        <ion-card *ngFor="let recitation of recitations">
+          <ion-card-content class="radio-card" routerLink="../player" [queryParams]="{readerId: recitation.readerId, surahId: recitation.id}">
+            <div class="thumb">
+              <ion-thumbnail>
+                <img alt="Silhouette of mountains" src="../../assets/icon/Vector.svg"/>
+                <span style="color: black">{{recitation.surah?.number}}</span>
+              </ion-thumbnail>
+            </div>
+            <div class="text" routerLink="player" >
+                <h1>{{recitation.surah?.name}}</h1>
+                <h2 class="trans">{{recitation.surah?.englishName}}</h2>
+            </div>
+            <!--<div>
+              <ion-icon size="large" name="play-circle-outline"></ion-icon>
+            </div>-->
+            <div>
+              <ion-icon size="large" name="arrow-down-outline" (click)="downloadMp3($event, recitation.downloadUrl!, recitation.recitationNumber.toString()+'.mp3')"></ion-icon>
+
+              <!--<a [href]="recitation.downloadUrl" [download]="recitation.recitationNumber+ '.mp3'" type="audio/mpeg">
+                <ion-icon size="large" name="arrow-down-outline" (click)="stopPropagation($event, recitation.downloadUrl!)"></ion-icon>
+              </a>-->
+            </div>
+
+          </ion-card-content>
+        </ion-card>
+      </div>
+</ion-content>

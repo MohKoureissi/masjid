@@ -1,0 +1,171 @@
+.container {
+    left: 0;
+    right: 0;
+    top: 15%;
+    bottom: 0;
+    display: flex;
+    position: absolute;
+    justify-content: flex-start;
+    contain: layout size style;
+    overflow: hidden;
+    z-index: 0;
+    flex-direction: column;
+}
+
+.edit{
+    font-size: 25px;
+    align-items: center;
+    justify-content: center;
+    margin-right: 8px;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+button{
+    background-color: #2C6632;
+    border-radius: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+td{
+    vertical-align: middle;
+}
+.custom-modal {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 100;
+    label{
+        font-weight: bold;
+        cursor: pointer;
+    }
+    .custom-modal-header{
+        margin-bottom: 10px;
+    }
+    h1{
+        text-align: center;
+        color: #2C6632;
+        font-weight: bold;
+    }
+    .photo{
+        border: 1px solid #ddd;
+        padding: 60px;
+        border-radius: 10px;
+        font-weight: bold;
+    }
+    .dtail{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+    }
+
+    .input-container{
+        flex: 1;
+        padding-left: 30px;
+        label,input{
+        display: block;
+    }
+        .input{
+            margin-bottom: 15px;
+        }
+        input{
+            width: 100%;
+            border-radius: 10px;
+            width: 100%;
+            border-radius: 10px;
+            height: 40px;
+            padding-left: 10px;
+            border: 1px solid #ddd;
+        }
+    }
+    .horaires{
+        text-align: center;
+        flex: 1;
+        margin-right: 10px;
+        h3{
+            color: #2C6632;
+            font-weight: bold;
+        }
+        .input-horaire{
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            input{
+                border-radius: 10px;
+                border: 1px solid #ddd;
+            }
+        }
+
+    }
+    .description{
+        flex: 2;
+        margin-left: 5px;
+        label{
+            display: block;
+        }
+        textarea{
+            border-radius: 10px;
+            width: 100%;
+            padding-left: 10px;
+            border: 1px solid #ddd;
+        }
+        .actions{
+            text-align: right;
+        }
+        ion-button.add{
+            --background:#2C6632;
+        }
+    }
+    .custom-modal-container{
+        background-color: #fff;
+        width: 80%;
+        margin: auto;
+        margin-top: 60px;
+        border-radius: 20px;
+        padding: 20px;
+    }
+}
+
+
+.align{
+  height: auto;
+  display: flex;
+  align-items: end;
+  justify-content: start;
+}
+ion-searchbar{
+  --background: #EDEDED;
+  width: 300px;
+  height: 50px;
+  --box-shadow: none;
+  --border-radius: 20px;
+}
+.head{
+  display: flex;
+}
+.go-back{
+  height: 40px;
+}
+.add{
+  height: 40px;
+}
+.green{
+  color: #2C6632;
+}
+
+ion-icon{
+  font-size: 25px;
+  align-items: center;
+  justify-content: center;
+  margin-right: 8px;
+  cursor: pointer;
+}

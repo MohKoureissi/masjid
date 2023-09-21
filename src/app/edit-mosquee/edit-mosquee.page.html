@@ -1,0 +1,59 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Coran</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+    <div class="parallax-img">  
+   <h1>Ajouter une mosquée</h1>
+  </div>
+      <div class="container">
+          <div class="thumb">
+              <div class="photo">
+                <span>Photo</span>
+              </div>
+              <div>
+                <img src="../../assets/icon/mosquee.svg" alt="mosquee">
+              </div>
+          </div>
+            <div class="input-container">
+              <input class="input" type="text" placeholder="Nom de la mosquée">
+              <input class="input" type="text" placeholder="Imam de la mosquée">
+              <input class="input" type="text" placeholder="Numéro pour faire un don">
+              <input class="input" type="text" placeholder="Localisation">
+            </div>
+            <div class="input-horaire">
+              <div class="horaire">
+                <h1>Fajr : </h1>
+                <input id="fajr" class="input" type="time" placeholder="Nom de la mosquée">
+                <!-- <label for="fajr"><ion-icon name="alarm-outline"></ion-icon></label>                 -->
+              </div>
+              <div class="horaire">
+                <h1>Dohr : </h1>
+                <input id="dohr" class="input" type="time" placeholder="Nom de la mosquée">
+                <!-- <label for="dohr"><ion-icon name="alarm-outline"></ion-icon></label> -->
+              </div>
+              <div class="horaire">
+                <h1>Asr : </h1>
+                <input id="asr" class="input" type="time" placeholder="Nom de la mosquée">
+                <!-- <label for="asr"><ion-icon name="alarm-outline"></ion-icon></label> -->
+              </div>
+              <div class="horaire">
+                <h1>Maghreb : </h1>
+                <input id="maghreb" class="input" type="time" placeholder="Nom de la mosquée">
+                <!-- <label for="maghreb"><ion-icon name="alarm-outline"></ion-icon></label> -->
+              </div>
+              <div class="horaire">
+                <h1>Icha : </h1>
+                <input id="icha" class="input" type="time" placeholder="Nom de la mosquée">
+                <!-- <label for="icha"><ion-icon name="alarm-outline"></ion-icon></label> -->
+              </div>
+            </div>
+            <div class="add-btn-container">
+              <ion-button expand="block">Ajouter</ion-button>
+            </div>
+      </div>
+</ion-content>

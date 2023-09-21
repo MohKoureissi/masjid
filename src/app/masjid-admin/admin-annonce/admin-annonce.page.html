@@ -1,0 +1,52 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="head">
+        <div class="align">
+          <div class="go-back">
+            <ion-icon name="arrow-back-circle-outline" size="large" class="green" routerLink="/panel"></ion-icon>
+          </div>
+          <ion-searchbar placeholder="Rechercher" inputmode="search"></ion-searchbar>
+          <div class="add">
+            <ion-icon name="add-circle-outline" size="large" (click)="openModal()" class="green"></ion-icon>
+          </div>
+        </div>
+        <img src="../../../assets/img/gannonce.png" alt="" srcset="">
+      </div>
+      <table class="table" style="margin-top: 30px">
+        <thead>
+          <tr>
+            <th scope="col">N°</th>
+            <th scope="col">Photo</th>
+            <th scope="col">Titre</th>
+            <th scope="col">Lieu</th>
+            <th scope="col">Date</th>
+            <th scope="col">Organisateur</th>
+            <th scope="col">Localisation</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let announcement of announcements; let i = index">
+            <th scope="row">{{ i + 1 }}</th>
+            <td>
+              <img [src]="announcement.imageUrl" style="height: 36px; width: 36px; border-radius: 50px" alt="" />
+            </td>
+            <td>{{ announcement.title }}</td>
+            <td>{{ announcement.place }}</td>
+            <td>{{ announcement.date }}</td>
+            <td>{{ announcement.organizer }}</td>
+            <td><a [href]="announcement.location">{{ announcement.place }}</a></td>
+            <td>
+              <ion-icon class="edit" name="create-outline" style="color: #2c6632"
+                (click)="openModalWithUpdateMode(announcement)" style="color: #2C6632;"></ion-icon>
+              <ion-icon class="edit" name="trash-outline" style="color: red"
+                (click)="deleteAnnouncement(announcement.id)"></ion-icon>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

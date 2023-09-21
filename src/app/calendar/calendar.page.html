@@ -1,0 +1,68 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Calendrier</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <div class="parallax-img" [style.background-image]=
+    "'url(../../assets/illustrations/calendar.jpg)'">
+    <h1>Calendrier</h1>
+  </div>
+  <br>
+  <div class="calendar">
+    <!-- <ion-datetime max="2025-12-31T23:59:59" color="danger" locale="fr" [firstDayOfWeek]="1" >
+      <span slot="time-label">Heure</span>
+    </ion-datetime> -->
+    <mat-card>
+      <mat-calendar class="bold-calendar" [selected]="selectedDate1" [selected]="selectedDate" name="appointment_date" (selectedChange)="onSelect($event)"> </mat-calendar>
+    </mat-card>
+
+  </div>
+  <div class="container">
+    <ion-card>
+      <ion-card-content class="radio-card">
+        <div class="text">
+          <h2><a>Al-Hijira</a></h2>
+          <p><a>1 Muharram 1445 AH</a></p>
+        </div>
+        <a class="frequence" href="#">19 Jullet 2023</a>
+      </ion-card-content>
+
+      <ion-card-content class="radio-card">
+        <div class="text">
+          <h2><a>Lailat al Miraj</a></h2>
+          <p><a>27 rajab 1445 AH</a></p>
+        </div>
+        <a class="frequence" href="#">08 Février 2024</a>
+      </ion-card-content>
+
+      <ion-card-content class="radio-card">
+        <div class="text">
+          <h2><a>Lailat al Baraat</a></h2>
+          <p><a>15 chaabane 1445 AH</a></p>
+        </div>
+        <a class="frequence" href="#">25 Février 2024</a>
+      </ion-card-content>
+
+      <ion-card-content class="radio-card">
+        <div class="text">
+          <h2><a>Ramadan</a></h2>
+          <p><a>1 Ramadan 1445 AH</a></p>
+        </div>
+        <a class="frequence" href="#">11 Mars 2024</a>
+      </ion-card-content>
+
+      <ion-card-content class="radio-card">
+        <div class="text">
+          <h2><a>Aïd el-Fitr</a></h2>
+          <p><a>1 chawwal 1445 AH</a></p>
+        </div>
+        <a class="frequence" href="#">10 Avril 2024</a>
+      </ion-card-content>
+
+    </ion-card>
+  </div>
+</ion-content>
