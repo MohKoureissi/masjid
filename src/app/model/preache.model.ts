@@ -5,5 +5,5 @@ export interface PreacheModel {
   title: string;
   precheurId: string;
   preacheUrl: string|null;
-  tme:string
+  time:string
 }

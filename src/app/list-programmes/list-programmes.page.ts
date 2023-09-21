@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProgramService } from 'src/data/programme/programme.service';
 import { Programme } from '../model/programme.model';
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-list-programmes',
@@ -10,11 +11,14 @@ import { Programme } from '../model/programme.model';
 export class ListProgrammesPage implements OnInit {
   programmes: Programme[] = [];
 
-  constructor(private programService: ProgramService) { }
+  constructor(private programService: ProgramService, private route: ActivatedRoute) { }
 
 
   async ngOnInit() {
-    await this.programService.getAllPrograms('').then(
+    const mosqueId = await this.route.snapshot.params['mosqueId']
+
+
+    await this.programService.getAllPrograms(mosqueId).then(
       (programmes) => programmes.subscribe((a) => {
         this.programmes = a;
       })
