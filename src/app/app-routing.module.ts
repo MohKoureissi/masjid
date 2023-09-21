@@ -69,6 +69,10 @@ const routes: Routes = [
     path: 'admin-form',
     loadChildren: () => import('./masjid-admin/components/admin-form/admin-form.module').then( m => m.AdminFormPageModule)
   },
+  {
+    path: 'not-found',
+    loadChildren: () => import('./utils/not-found/not-found.module').then( m => m.NotFoundPageModule)
+  },
 
 
 ];

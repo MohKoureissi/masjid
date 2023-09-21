@@ -23,6 +23,7 @@
             <th scope="col">Nom de l'imam</th>
             <th scope="col">N°Don</th>
             <th scope="col">Quartier</th>
+            <th scope="col">Programmes</th>
             <th scope="col">Action</th>
           </tr>
         </thead>
@@ -33,7 +34,8 @@
             <td>{{mosque.name}}</td>
             <td>{{mosque.imamName}}</td>
             <td>{{mosque.numDonation}}</td>
-            <td>{{mosque.quartier}}</td>
+            <td><a [href]="mosque.location">{{mosque.quartier}}</a></td>
+            <td><a [routerLink]="['/admin-program-list', mosque.id]"><button>Programmes</button></a></td>
             <td>
               <ion-icon name="create-outline" (click)="openModalWithUpdateMode(mosque)" style="color:#2C6632;">
               </ion-icon><ion-icon name="trash-outline" style="color: red;" (click)="deleteMosque(mosque.id)"></ion-icon>

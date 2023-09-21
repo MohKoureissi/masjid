@@ -14,7 +14,7 @@ export class ListProgrammesPage implements OnInit {
 
 
   async ngOnInit() {
-    await this.programService.getAllPrograms().then(
+    await this.programService.getAllPrograms('').then(
       (programmes) => programmes.subscribe((a) => {
         this.programmes = a;
       })

@@ -5,7 +5,7 @@ import { AdminProgramPage } from './admin-program.page';
 
 const routes: Routes = [
   {
-    path: '',
+    path: ':id',
     component: AdminProgramPage
   }
 ];

@@ -188,3 +188,18 @@ ion-searchbar{
   color: #2C6632;
 }
 
+button{
+  background-color: #2C6632;
+  border-radius: 20px;
+  padding: 5px 30px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s all ease-in;
+}
+button:hover{
+  background-color: white;
+  color: #2C6632;
+  border: 2px solid #2C6632;
+}
+

@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ModalController} from "@ionic/angular";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {AnnouncementService} from "../../../../data/announcement/announcement.service";
-import {Announcement} from "../../../model/announcement.model";
 import {Programme} from "../../../model/programme.model";
 import {ProgramService} from "../../../../data/programme/programme.service";
 
@@ -40,7 +38,7 @@ export class ProgramFormPage implements OnInit {
       organizer: this.programForm.get('organizer')?.value,
       daysTimes: this.programForm.get('daysTimes')?.value,
       description: this.programForm.get('description')?.value,
-      mosque: undefined
+      mosqueId: 'null'
     }
 
     this.programmeService.createProgram(programme);
