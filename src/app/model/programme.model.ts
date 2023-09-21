@@ -1,5 +1,3 @@
-import {Mosque} from "./mosque.model";
-
 export interface Programme {
    id: string | null;
    title: string;

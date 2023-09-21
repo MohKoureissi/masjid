@@ -34,10 +34,6 @@ const routes: Routes = [
     loadChildren: () => import('./masjid-admin/admin-page/admin-page.module').then( m => m.AdminPagePageModule)
   },
   {
-    path: 'admin-program',
-    loadChildren: () => import('./masjid-admin/admin-program/admin-program.module').then( m => m.AdminProgramPageModule)
-  },
-  {
     path: 'list-mosquee',
     loadChildren: () => import('./masjid-admin/list-mosquee/list-mosquee.module').then( m => m.ListMosqueePageModule)
   },
@@ -65,7 +61,8 @@ const routes: Routes = [
   {
     path: 'program-form',
     loadChildren: () => import('./masjid-admin/components/program-form/program-form.module').then( m => m.ProgramFormPageModule)
-  },  {
+  },
+  {
     path: 'admin-form',
     loadChildren: () => import('./masjid-admin/components/admin-form/admin-form.module').then( m => m.AdminFormPageModule)
   },

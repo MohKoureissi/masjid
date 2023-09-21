@@ -15,16 +15,15 @@
       <ion-card-content class="radio-card">
         <div class="thumb">
           <ion-thumbnail>
-            <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/thumbnail.svg" />
+            <img alt="Silhouette of mountains" [src]="mosque?.imageUrl" />
           </ion-thumbnail>
         </div>
         <div class="text">
           <h2>{{ programme.title }}</h2>
-          <span>Organisateur {{ programme.organizer }}</span>
+          <span>Organisateur <strong>{{ programme.organizer }}</strong></span>
           <p>
             <span>Date {{ programme.daysTimes }}</span>&nbsp;
             <span>Heure {{ programme.description }}</span>&nbsp;
-            <a class="frequence" href="#"><ion-icon name="location-outline"></ion-icon>&nbsp;Hamdallaye ACI</a>
           </p>
         </div>
       </ion-card-content>
