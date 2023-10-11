@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Mosque } from './model/mosque.model';
 import { TimeModel } from "./model/time.model";
 import { AdminModel } from "./model/admin.model";
@@ -15,6 +15,10 @@ import { SurahService } from "../data/surah/surah.service";
 import { SurahModel } from "./model/surah.model";
 import { Programme } from './model/programme.model';
 import { ProgramService } from 'src/data/programme/programme.service';
+import { AnimationBuilder } from '@ionic/angular';
+
+import { createAnimation } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-root',
@@ -23,8 +27,10 @@ import { ProgramService } from 'src/data/programme/programme.service';
 })
 export class AppComponent implements OnInit {
 
+
   mosque: Mosque | null = null;
-  constructor(private proServeice: ProgramService) { }
+  constructor(private proServeice: ProgramService) {}
+
   ngOnInit(): void {
     this.test();
   }

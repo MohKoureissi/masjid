@@ -1,5 +1,6 @@
 <div class="container">
-
+  <div class="en-tete">
+  </div>
   <div class="logo">
     <img src="../assets/icon/logos.png" alt="">
   </div>
@@ -11,9 +12,10 @@
   
   <div class="titre">
   <h1>Bienvenue sur <span>Masjid</span></h1>
-  </div>
+</div>
   
   <!-- le formulaire d'inscription  -->
+  <div class="form">
   <div class="formctn">
     <form [formGroup]="registrationForm" (ngSubmit)="onRegister()">
       <input type="text" placeholder="Nom d'utilisateur" class="ipt" formControlName="nom">
@@ -27,6 +29,7 @@
     <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
     
   </div>
+</div>
   <footer>
  <a routerlink="/connexion"> <p>Avez-vous déja un compte? <span style="color:#2C6632; font-weight: bold;">Conectez-vous ici</span></p></a>
     <P>Se connecter avec</P>

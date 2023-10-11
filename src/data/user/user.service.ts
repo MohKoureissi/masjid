@@ -115,7 +115,8 @@ export class UserService {
     sendPasswordResetEmail(auth, email)
       .then(() => {
         // Password reset email sent!
-        console.log('Vous avez recu un email de changement de mot de passe');
+        console.log('Vous avez recu un email de changement de mot de passe', sendPasswordResetEmail);
+        console.log('Vous avez recu un email de changement de mot de passe', this.forgotPassword);
       })
       .catch((error) => {
         const errorCode = error.code;

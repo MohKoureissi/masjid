@@ -99,15 +99,13 @@ const routes: Routes = [
   {
     path: 'inscrire',
     loadChildren: () => import('./inscrire/inscrire.module').then( m => m.InscrirePageModule)
-  },  {
+  },
+  {
     path: 'oublier',
     loadChildren: () => import('./oublier/oublier.module').then( m => m.OublierPageModule)
   },
-
-
- 
-
 ];
+
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })

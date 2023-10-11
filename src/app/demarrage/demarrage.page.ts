@@ -11,9 +11,7 @@ export class DemarragePage implements OnInit {
   constructor(private router: Router) { }
 
   async ngOnInit() {
-   
-
-    await SplashScreen.show({ showDuration: 2000, autoHide: true, });
+    await SplashScreen.show({ showDuration: 12000, autoHide: true, });
 
     console.log(SplashScreen)
     this.router.navigate(['/connexion']);

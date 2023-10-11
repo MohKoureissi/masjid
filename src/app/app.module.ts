@@ -16,11 +16,12 @@ import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 
 
+
 @NgModule({
     declarations: [AppComponent],
   imports: [BrowserModule,
 
-    IonicModule.forRoot(), AppRoutingModule,
+    IonicModule.forRoot({ animated: false}), AppRoutingModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
     provideAuth(() => getAuth()),
