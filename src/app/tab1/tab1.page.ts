@@ -181,7 +181,7 @@ onSearchInput(event: any) {
   this.filteredMosques = this.mosquee.filter((mosque) => {
     return (
       mosque.name.toLowerCase().includes(searchValue) ||
-      mosque.imanName.toLowerCase().includes(searchValue)
+      mosque.imamName.toLowerCase().includes(searchValue)
     );
   });
 
@@ -191,7 +191,7 @@ onSearchInput(event: any) {
     const mosqueLocation = L.latLng(mosque.lat, mosque.lng);
     const marker = L.marker(mosqueLocation).addTo(this.markersLayer);
     marker.bindPopup(`
-      Nom : ${mosque.name}<br>Imam : ${mosque.imanName}<br>
+      Nom : ${mosque.name}<br>Imam : ${mosque.imamName}<br>
       Quartier : ${mosque.quartier}
     `);
   });

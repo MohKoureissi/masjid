@@ -1,0 +1,43 @@
+<form [formGroup]="programForm">
+
+  <ion-list class="modal-wrapper">
+    <ion-row>
+      <ion-col>
+        <h1>Ajouter un programme</h1>
+      </ion-col>
+
+      <ion-col class="cancel">
+        <ion-icon name="close-outline" size="large" (click)="closeModal()"></ion-icon>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-input label="Titre du programme" label-placement="floating" fill="outline" placeholder="Tafsir" formControlName="title"></ion-input>
+      </ion-col>
+
+      <ion-col>
+        <ion-input label="Présentateur" label-placement="floating" fill="outline" placeholder="Abdoul Aziz" formControlName="organizer"></ion-input>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-input label="Date et heure" label-placement="floating" fill="outline" placeholder="Ex: Lundi à 14:00, Jeudi-Samedi a 16:00" formControlName="daysTimes"></ion-input>
+      </ion-col>
+    </ion-row>
+
+
+    <ion-row>
+      <ion-col>
+        <ion-textarea label="Description du programme" label-placement="floating" [counter]="true" maxlength="200" fill="outline" formControlName="description"></ion-textarea>
+      </ion-col>
+    </ion-row>
+
+    <div class="action">
+      <ion-button class="ok" (click)="addNewProgram()">Enregistrer</ion-button>
+    </div>
+
+  </ion-list>
+
+</form>

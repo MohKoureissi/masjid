@@ -13,17 +13,19 @@
       <div class="container">
           <div class="thumb">
               <div class="photo">
-                <span>Photo</span>
+                <span>
+                  <img [src]="imageUrl" alt="">
+                </span>
               </div>
-              <div>
-                <img src="../../assets/icon/mosquee.svg" alt="mosquee">
-              </div>
+            <!--<div>
+              <img src="../../assets/icon/mosquee.svg" alt="mosquee">
+            </div>-->
           </div>
             <div class="input-container">
               <div class="input">
                   <div><h2>Nom :&nbsp;</h2><h3>{{mosque?.name}}</h3></div>
-                  <div><h2>Nom de l’imam :&nbsp;</h2><h3>{{mosque?.imanName}}</h3></div>
-                  <div><h2>Numéro de don :&nbsp;</h2><h3>{{mosque?.donation}}</h3></div>
+                  <div><h2>Nom de l’imam :&nbsp;</h2><h3>{{mosque?.imamName}}</h3></div>
+                  <div><h2>Numéro de don :&nbsp;</h2><h3>{{mosque?.numDonation}}</h3></div>
                   <div><h2>Localistion : </h2><h3>{{mosque?.lat}},</h3><h3>{{mosque?.lng}}</h3><h2>&nbsp;<ion-icon name="copy-outline"></ion-icon></h2></div>
               </div>
             </div>

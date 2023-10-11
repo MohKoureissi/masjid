@@ -3,35 +3,122 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>Coran</ion-title>
+    <ion-title><div id="about-song">
+      <h2 class="song-name">{{recitation?.surah?.englishName}}</h2>
+      <h4 class="artist-name"></h4></div></ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content [fullscreen]="true">
-    <div class="parallax-img">  
-  <h1><ion-icon name="chevron-back-outline"></ion-icon></h1>
-   <h1><ion-icon name="musical-notes-outline"></ion-icon></h1>
-   <h1><ion-icon name="volume-mute-outline"></ion-icon></h1>
+<ion-content>
+  <div class="container">
+    <div id="music-player">
+      <div id="lyrics">
+        <h2 class="song-name"></h2><h4 class="artist-name"></h4>
+        <div id="lyrics-content">
+
+          <!--<ion-card>
+            <ion-card-content class="player-card" [style.background-image]="'url(../../assets/img/coran.png)'" >
+            </ion-card-content>
+          </ion-card>-->
+          <ng-container *ngFor="let verset of getJsonFile(); index as i">
+            <h2 [ngClass]="{ 'current': activeElement === 'element'+(i+1), 'uncurrent': activeElement !== 'element'+(i+1) }">{{verset.text}}</h2>
+          </ng-container>
+
+        </div>
+      </div>
+      <audio #audiofile (ended)="lafin($event)" src="../../assets/coran/audio/1/001001.mp3" preload="true">
+
+      </audio>
+      <div id="player">
+        <div id="bar" class="hide">
+          <div id="currentTime">{{formatTime(currentTime)}}</div>
+          <div id="progress-bar">
+            <div id="progress" [style.width]="((currentTime/duration)*100)+'%'"><i id="progressButton" class="fa fa-circle"></i></div>
+          </div>
+          <div id="totalTime">{{formatTime(duration)}}</div>
+        </div>
+        <div id="menu">
+          <button (click)="toggleRepeate()" id="repeat" [style.color]="!repeate ? 'grey' : 'black'"><i class="fa fa-repeat"></i></button>
+          <button (click)="previousAya()" id="prev"><i class="fa fa-step-backward"></i></button>
+          <button (click)="play()" id="play"><i class="fa fa-{{isPlaying ? 'pause' : 'play'}}"></i></button>
+          <button (click)="nextAya()" id="next"><i class="fa fa-step-forward"></i></button>
+          <button (click)="reload()" id="shuffle" style="color:black"><i class="fa fa-rotate-right"></i></button>
+        </div>
+      </div>
+      <div id="playlist">
+        <div id="label">
+          <h1>Playlist</h1>
+          <input id="search" type="text" placeholder="&#xF002; Search from all songs">
+        </div>
+        <div id="show-box">
+          <div id="show-list">
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-      <div class="container">
+
+</ion-content>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<ion-header [translucent]="true">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title>Coran</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+    <div class="parallax-img">
+        <h1>
+            <ion-icon name="chevron-back-outline"></ion-icon>
+        </h1>
+        <h1>
+            <ion-icon name="musical-notes-outline"></ion-icon>
+        </h1>
+        <h1>
+            <ion-icon name="volume-mute-outline"></ion-icon>
+        </h1>
+    </div>
+    <div class="container">
         <h1>Al Quran</h1>
         <ion-card>
-          <ion-card-content class="player-card" [style.background-image]=
-          "'url(../../assets/illustrations/coran.jpg)'">
-          </ion-card-content>
+            <ion-card-content class="player-card" [style.background-image]="'url(../../assets/img/coran.png)'" >
+            </ion-card-content>
         </ion-card>
-        <h4>الفاتحة</h4>
-        <h4>Al-Fatiha</h4>
-        <h6 style="color: black;">Prologue</h6>
+        <h4>{{recitation?.surah?.name}}</h4>
+        <h4>{{recitation?.surah?.englishName}}</h4>
+        <h6 style="color: black;">Prologue</h6
         <p>
-          <ion-icon name="download-outline"></ion-icon>
-          <ion-icon routerLink="/coran-display" name="book-outline"></ion-icon>
-          <ion-icon  routerLink="/list-coran" name="musical-note-outline"></ion-icon>
+            <ion-icon name="download-outline" (click)="downloadMp3(recitation?.downloadUrl!, recitation?.recitationNumber!.toString()+'.mp3')"></ion-icon>
+            <ion-icon routerLink="coran-display" name="book-outline"></ion-icon>
+            <ion-icon routerLink="../../list-coran" name="musical-note-outline"></ion-icon>
         </p>
-        <ion-progress-bar [value]=""></ion-progress-bar>
+        <ion-range min="0" [max]="duration" [(ngModel)]="currentTimeNumber"></ion-range>
+        <p style="text-align: center">{{currentTimeText}}/{{durationText}}</p>
         <p class="controls">
-          <ion-icon  name="play-back-outline"></ion-icon>
-          <ion-icon class="play" name="play-outline"></ion-icon>
-          <ion-icon name="play-forward-outline"></ion-icon>
+            <ion-icon name="play-skip-back-circle"></ion-icon>
+            <audio [src] = "recitation?.downloadUrl!" id = "audio"> </audio>
+            <ion-icon  class="play" [name]="iconPlay" (click)="playPause()"></ion-icon>
+            <ion-icon name="play-skip-forward-circle" ></ion-icon>
         </p>
-      </div>
-</ion-content>
+    </div>
+</ion-content>-->

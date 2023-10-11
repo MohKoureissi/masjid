@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {PreacheModel} from "../model/preache.model";
+import {ActivatedRoute} from "@angular/router";
+import {PreachService} from "../../data/preach/preach.service";
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-list-preche',
@@ -7,9 +11,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListPrechePage implements OnInit {
 
-  constructor() { }
+  preaches: PreacheModel[] = [];
+  imageUrl: string = "";
+  constructor(private route: ActivatedRoute, private preachService: PreachService, private http: HttpClient) { }
 
-  ngOnInit() {
+  async ngOnInit() {
+    const id = this.route.snapshot.params['id'];
+
+
+    this.route.queryParams.subscribe(params => {
+      this.imageUrl = params['imageUrl'];
+    });
+
+
+    console.log(this.imageUrl);
+    await this.preachService.getAllPreaches(id).then(preaches => preaches.subscribe(p => {
+      this.preaches = p;
+    }))
   }
 
 }

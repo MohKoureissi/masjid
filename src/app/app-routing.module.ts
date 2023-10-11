@@ -54,6 +54,7 @@ const routes: Routes = [
     path: 'infos-horaires/:id',
     loadChildren: () => import('./infos-horaires/infos-horaires.module').then(m => m.InfosHorairesPageModule)
   },
+
   {
     path: 'list-programmes',
     loadChildren: () => import('./list-programmes/list-programmes.module').then(m => m.ListProgrammesPageModule)
@@ -108,7 +109,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
   ],
   exports: [RouterModule]
 })

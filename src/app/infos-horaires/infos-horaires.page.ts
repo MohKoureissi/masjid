@@ -12,15 +12,18 @@ import {TimeService} from "../../data/time/time.service";
 })
 export class InfosHorairesPage implements OnInit {
   mosque: Mosque|null = null;
+  imageUrl: String = "";
   constructor(private route: ActivatedRoute, private mosqueService: MosqueService) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     const id = this.route.snapshot.params['id'];
 
     if(id){
-      this.mosqueService.getDetailsMosque(id).then(mosque => mosque.subscribe(v=>{
+      await this.mosqueService.getDetailsMosque(id).then(mosque => mosque.subscribe(v=>{
         this.mosque=v;
       }));
+      this.imageUrl = this.mosque?.imageUrl!
+      console.log(this.mosque?.imageUrl)
     }
   }
 

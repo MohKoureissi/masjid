@@ -7,11 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CalendarPage implements OnInit {
 
-  constructor() { 
-   
-  }
+  constructor() {}
 
   ngOnInit() {
+
   }
+  onSelect(event: Date){
+    this.selectedDate= event;
+  }
+  selectedDate: Date = new Date(); // Date sélectionnée par défaut
+  selectedDate1: Date = new Date(14,2,14);
+// selectedDate: Date = new Date();
+// selectedDate: Date = new Date();
+
 
 }

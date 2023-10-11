@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
 import { getFirestore, doc, setDoc, collection, getDoc, deleteDoc, updateDoc, getDocs, addDoc } from 'firebase/firestore';
 import { Programme } from 'src/app/model/programme.model';
-// import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProgramService {
+  COLLECTION_NAME = 'programmes';
   constructor() {}
  async createProgram(programme : Programme): Promise<void> {
     try {
       const db = getFirestore();
-      const programCollectionRef = collection(db, 'programmes');
+      const programCollectionRef = collection(db, `${this.COLLECTION_NAME}/${programme.mosqueId}/${this.COLLECTION_NAME}`);
       // Ajouter un nouveau programme à la collection "programs"
       const newProgramRef = doc(programCollectionRef);
       await setDoc(newProgramRef, programme);
@@ -20,14 +20,14 @@ export class ProgramService {
       console.log(`Programme créé avec succès avec l'ID : ${newProgramRef.id}`);
     } catch (error) {
       console.error('Erreur lors de la création du programme :', error);
-      throw error; 
+      throw error;
     }
   }
 
-  async updateProgram(programId: string, updatedProgram: Programme | any): Promise<void> {
+  async updateProgram(updatedProgram: Programme | any): Promise<void> {
     try {
       const db = getFirestore();
-      const programDocRef = doc(db, 'programmes', programId);
+      const programDocRef = doc(db, `${this.COLLECTION_NAME}/${updatedProgram.mosqueId}/${this.COLLECTION_NAME}`, updatedProgram.id);
 
       // Vérifiez si le programme existe dans la base de données
       const programSnap = await getDoc(programDocRef);
@@ -36,9 +36,9 @@ export class ProgramService {
         // Le programme existe, mettez à jour les données
         await updateDoc(programDocRef, updatedProgram);
 
-        console.log(`Programme avec l'ID ${programId} mis à jour avec succès`);
+        console.log(`Programme avec l'ID ${updatedProgram.id} mis à jour avec succès`);
       } else {
-        console.log(`Le programme avec l'ID ${programId} n'existe pas.`);
+        console.log(`Le programme avec l'ID ${updatedProgram.id} n'existe pas.`);
       }
     } catch (error) {
       console.error('Erreur lors de la mise à jour du programme :', error);
@@ -46,10 +46,10 @@ export class ProgramService {
     }
   }
 
-  async deleteProgram(programId: string): Promise<void> {
+  async deleteProgram(mosqueId:string, programId: string): Promise<void> {
     try {
       const db = getFirestore();
-      const programDocRef = doc(db, 'programmes', programId);
+      const programDocRef = doc(db, `${this.COLLECTION_NAME}/${mosqueId}/${this.COLLECTION_NAME}`, programId);
 
       // Vérifiez si le programme existe dans la base de données
       const programSnap = await getDoc(programDocRef);
@@ -68,9 +68,9 @@ export class ProgramService {
     }
   }
 
-  async getAllPrograms(): Promise<Observable<Programme[]>> {
+  async getAllPrograms(mosqueId: string): Promise<Observable<Programme[]>> {
     const db = getFirestore();
-    const programsCollectionRef = collection(db, 'programmes');
+    const programsCollectionRef = collection(db, `${this.COLLECTION_NAME}/${mosqueId}/${this.COLLECTION_NAME}`);
 
     try {
       const programsSnap = await getDocs(programsCollectionRef);
@@ -86,23 +86,11 @@ export class ProgramService {
     }
   }
 
-  // async getProgram(programId: string): Promise<Observable<Programme | null>> {
-  //   const db = getFirestore();
-  //   const programDocRef = doc(db, 'programmes', programId);
-  //   try {
-  //     const programSnap = await getDoc(programDocRef);
-  //     const programme = programSnap.data() as Programme;
-  //     return of(programme);
-  //   } catch (error) {
-  //     console.log(error);
-  //     return of(null);
-  //   }
-  // }
 }
 
 
 
-  
+
 
 
 
@@ -168,7 +156,7 @@ export class ProgramService {
   //       });
   //   });
   // }
-  
+
 
   // addProgramme(programme: string, newProgramme: any): Observable<any> {
   //   const collectionRef = collection(this.db, programme);
@@ -183,4 +171,4 @@ export class ProgramService {
   //       });
   //   });
   // }
-  
+

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {PrecheurService} from "../../data/precheur/precheur.service";
+import {PrecheurModel} from "../model/precheur.model";
 
 @Component({
   selector: 'app-preche',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PrechePage implements OnInit {
 
-  constructor() { }
+  precheurs:  PrecheurModel[]= [];
+  constructor(private precheurService: PrecheurService) { }
 
   ngOnInit() {
+    this.precheurService.getAllPrecheurs().then(
+      precheurs => precheurs.subscribe(p =>{
+        this.precheurs = p;
+        console.log(this.precheurs)
+      }))
   }
 
 }

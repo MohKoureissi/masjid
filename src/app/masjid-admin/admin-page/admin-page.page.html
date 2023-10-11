@@ -1,0 +1,50 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="head">
+        <div class="align">
+          <div class="go-back">
+            <ion-icon name="arrow-back-circle-outline" size="large" class="green" routerLink="/panel"></ion-icon>
+          </div>
+          <ion-searchbar placeholder="Rechercher" inputmode="search"></ion-searchbar>
+          <div class="add">
+            <ion-icon name="add-circle-outline" size="large" (click)="openModal()" class="green"></ion-icon>
+          </div>
+        </div>
+        <img src="../../../assets/img/gadmin.png" alt="" srcset="">
+      </div>
+      <table class="table" style="margin-top: 30px;">
+  <thead>
+    <tr>
+      <th scope="col">N°</th>
+      <th scope="col">Photo</th>
+      <th scope="col">Nom</th>
+      <th scope="col">Email</th>
+      <th scope="col">Téléphone</th>
+      <th scope="col">Email de récuperation</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+        <tbody>
+        <tr *ngFor="let admin of admins; let i = index">
+          <th scope="row">{{ i + 1 }}</th>
+          <td>
+            <img [src]="admin.imageUrl" style="height: 36px; width: 36px; border-radius: 50px" alt="" />
+          </td>
+          <td>{{ admin.fullName }}</td>
+          <td>{{ admin.email }}</td>
+          <td>{{ admin.numTel }}</td>
+          <td>{{ admin.recupEmail }}</td>
+          <td>
+            <ion-icon class="edit" name="create-outline" style="color: #2c6632" (click)="openModalWithUpdateMode(admin)" style="color: #2C6632;"></ion-icon>
+            <ion-icon class="edit" name="trash-outline" style="color: red" (click)="deleteAdmin(admin.id)"></ion-icon>
+          </td>
+        </tr>
+        </tbody>
+</table>
+    </div>
+
+  </div>
+
+</div>

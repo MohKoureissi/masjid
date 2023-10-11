@@ -33,7 +33,6 @@
   }
   .op{
     position: absolute;
-    top: 0;
     bottom: 0;
     left: 0;
     right: 0;
@@ -50,19 +49,31 @@
   }
   .radio-card{
     position: absolute;
-    padding-top: 0px;
-    padding-bottom: 0px;
     top: 0;
     bottom: 0;
     right: 0;
     left: 0;
-    background: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: flex-end;
+    font-weight: bold;
+    padding: 0;
+    p{
+      flex: 1;
+    color: white;
+    font-weight: bold;
+    text-align: left;
+    padding: 5px 15px;
+    margin: 0;
+    background: rgba(0,0,0,0.6);
+    font-size: 17px;
+    }
   }
   .container ion-card{
     height: 104px;
     border-radius: 30px;
     border: 1px solid #ddd;
     background-size: cover;
+    background-position-y:center;
   }
   ion-card .text{
     flex-grow: 1;
@@ -75,11 +86,15 @@
   }
   .card-content-ios p {
     font-size: 20px;
-    text-align: right;
+    text-align: left;
     position: absolute;
     bottom: 0px;
     color: #fff;
     font-weight: bold;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,0.6);
+    padding-left: 15px;
 }
 .thumb ion-thumbnail{
     height: 75px;

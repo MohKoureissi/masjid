@@ -37,5 +37,7 @@ export class AppComponent implements OnInit {
 
   async test() {
 
+    //this.preacheService.createPreache(preach, );
   }
+
 }

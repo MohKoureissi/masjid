@@ -1,0 +1,60 @@
+<form [formGroup]="adminForm">
+
+  <ion-list class="modal-wrapper">
+    <ion-row>
+      <ion-col>
+        <h1>Ajouter un nouveau administrateur</h1>
+      </ion-col>
+
+      <ion-col class="cancel">
+        <ion-icon name="close-outline" size="large" (click)="closeModal()"></ion-icon>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <input type="file" id="fileInput" accept="image/png, image/jpeg">
+      </ion-col>
+
+      <ion-col>
+        <p><img [src]="imageUrl" alt="L'image de la mosquée" style="width: 40px; height: 40px"></p>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-input label="Nom complet" label-placement="floating" fill="outline" placeholder="Abdoul Aziz" formControlName="fullName"></ion-input>
+      </ion-col>
+
+      <ion-col>
+        <ion-input label="email" [readonly]="" type="email" label-placement="floating" fill="outline" placeholder="test@gmail.com" formControlName="email"></ion-input>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-input label="numTel" type="number" label-placement="floating" fill="outline" placeholder="72 81 89 15" formControlName="numTel"></ion-input>
+      </ion-col>
+
+      <ion-col>
+        <ion-textarea label="Email de récuperation" type="email" label-placement="floating" fill="outline" placeholder="test2@gmail.com" formControlName="recupEmail"></ion-textarea>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-input label="password" type="password" label-placement="floating" fill="outline" placeholder="" formControlName="password"></ion-input>
+      </ion-col>
+
+      <ion-col>
+        <ion-input label="Confirmation du mot de passe" type="password" label-placement="floating" fill="outline" placeholder="" formControlName="confirmPassword"></ion-input>
+      </ion-col>
+    </ion-row>
+
+    <div class="action">
+      <ion-button class="ok" (click)="addNewAdmin()">Enregistrer</ion-button>
+    </div>
+
+  </ion-list>
+
+</form>

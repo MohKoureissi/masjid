@@ -1,10 +1,10 @@
 export interface Mosque{
   id: string|null;
   name: string;
-  imageUrl: string;
-  imanName: string;
-  description: string;
-  donation: string;
+  imageUrl: string|null;
+  imamName: string;
+  numDonation: number;
+  descDonation: string;
   location: string;
   quartier: string;
   lat: number;
