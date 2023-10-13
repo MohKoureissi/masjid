@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
+
 const routes: Routes = [
 
 
@@ -54,7 +55,6 @@ const routes: Routes = [
     path: 'infos-horaires/:id',
     loadChildren: () => import('./infos-horaires/infos-horaires.module').then(m => m.InfosHorairesPageModule)
   },
-
   {
     path: 'list-programmes',
     loadChildren: () => import('./list-programmes/list-programmes.module').then(m => m.ListProgrammesPageModule)
@@ -105,11 +105,19 @@ const routes: Routes = [
     path: 'oublier',
     loadChildren: () => import('./oublier/oublier.module').then( m => m.OublierPageModule)
   },
+  {
+    path: 'info',
+    loadChildren: () => import('./infos-horaires/infos-horaires.module').then( m => m.InfosHorairesPageModule)
+  },
+  {
+    path: 'localisation',
+    loadChildren: () => import('./localisation/localisation.module').then( m => m.LocalisationModule)
+  },
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
   ],
   exports: [RouterModule]
 })

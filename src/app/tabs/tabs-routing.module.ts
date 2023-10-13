@@ -1,18 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
-import { ProfiladminPageModule } from '../profiluser/profiladmin.module';
+import { DemarragePage } from '../demarrage/demarrage.page';
 
 const routes: Routes = [
   {
-    path: '',
-    redirectTo: '/tabs/home',
-    pathMatch: 'full'
-
-  },
-  {
-    path: 'tabs',
-    component: TabsPage,
+    path: 'Demarrage',
+    component: DemarragePage,
     children: [
       {
         path: 'home',
@@ -26,7 +20,6 @@ const routes: Routes = [
         path: 'calendar',
         loadChildren: () => import('../calendar/calendar.module').then(m => m.CalendarPageModule)
       },
-
       {
         path: 'preche',
         loadChildren: () => import('../preche/preche.module').then(m => m.PrechePageModule)

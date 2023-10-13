@@ -14,6 +14,6 @@ export class DemarragePage implements OnInit {
     await SplashScreen.show({ showDuration: 12000, autoHide: true, });
 
     console.log(SplashScreen)
-    this.router.navigate(['/connexion']);
+    this.router.navigate(['/connection']);
   }
 }

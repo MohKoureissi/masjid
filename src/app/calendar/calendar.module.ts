@@ -8,7 +8,7 @@ import { CalendarPageRoutingModule } from './calendar-routing.module';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 
 import { NgxAngularMaterialHijriAdapterService, DateLocaleKeys, MOMENT_HIJRI_DATE_FORMATS } from 'ngx-angular-material-hijri-adapter';
-import { NgxAngularMaterialHijriAdapterModule } from 'ngx-angular-material-hijri-adapter';
+// import { NgxAngularMaterialHijriAdapterModule } from 'ngx-angular-material-hijri-adapter';
 import { CalendarPage } from './calendar.page';
 import {MatCardModule} from  '@angular/material/card' ;
 @NgModule({
@@ -19,7 +19,7 @@ import {MatCardModule} from  '@angular/material/card' ;
     FormsModule,
     IonicModule,
     CalendarPageRoutingModule,
-    NgxAngularMaterialHijriAdapterModule,
+    // NgxAngularMaterialHijriAdapterModule,
     MatCardModule
   ],
 

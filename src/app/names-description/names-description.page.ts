@@ -1,23 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+// import { Component, OnInit } from '@angular/core';
 
 
-@Component({
-  selector: 'app-names-description',
-  templateUrl: './names-description.page.html',
-  styleUrls: ['./names-description.page.scss'],
-})
-export class NamesDescriptionPage implements OnInit {
-  sname:any;
-  constructor() {}
+// @Component({
+//   selector: 'app-names-description',
+//   templateUrl: './names-description.page.html',
+//   styleUrls: ['./names-description.page.scss'],
+// })
+// export class NamesDescriptionPage implements OnInit {
+//   sname:any;
+//   constructor() {}
 
-  ngOnInit() {
+//   ngOnInit() {
     
-   // console.log(decodeURIComponent(this.sname.fr.desc));
-  }
+//    // console.log(decodeURIComponent(this.sname.fr.desc));
+//   }
 
-  utf8decode(text:string):string{
-    return decodeURIComponent(text).replace(/\\u(\w{4})/g,"é");
-  }
+//   utf8decode(text:string):string{
+//     return decodeURIComponent(text).replace(/\\u(\w{4})/g,"é");
+//   }
   
-}
+// }
 

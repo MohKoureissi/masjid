@@ -1,15 +1,15 @@
 import { Injectable, OnInit } from '@angular/core';
 import { getFirestore, doc, setDoc,getDocs,where, query, collection ,getDoc,updateDoc,deleteDoc,QuerySnapshot} from 'firebase/firestore';
 import { Mosque } from 'src/app/model/mosque.model';
-<<<<<<< HEAD
+
 import {TimeModel} from "../../app/model/time.model";
-import {from, Observable, of} from "rxjs";
+
 import { catchError, map } from 'rxjs/operators';
-=======
+
 import { Observable, of } from "rxjs";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
->>>>>>> 8777c620db4a8f523558f8854f3b33f6d259e58a
+
 
 @Injectable({
   providedIn: 'root'
@@ -40,17 +40,15 @@ export class MosqueService implements OnInit {
       const newMosqueRef = doc(mosqueCollectionRef);
       mosque.id = newMosqueRef.id;
       await setDoc(newMosqueRef, mosque);
-<<<<<<< HEAD
+
       updateDoc(
         newMosqueRef,
         {id: newMosqueRef.id}
       );
-=======
-      /*updateDoc(
-        newMosqueRef,
-        {id: newMosqueRef.id}
-      );*/
->>>>>>> 8777c620db4a8f523558f8854f3b33f6d259e58a
+
+    
+
+
 
       console.log(`Mosquée créée avec succès avec l'ID : ${mosque}`);
     } catch (error) {
@@ -206,8 +204,7 @@ async getDetailsMosque(mosqueId: string): Promise<Observable<Mosque | null>> {
       console.log('Fichier uploadé avec succès !');
     });
 
-<<<<<<< HEAD
-=======
+
     await getDownloadURL(mosquesRef).then((url) => {
         // `url` est l'URL de téléchargement de notre récitation
         imageUrl = url
@@ -217,6 +214,6 @@ async getDetailsMosque(mosqueId: string): Promise<Observable<Mosque | null>> {
       });
     return imageUrl;
   }
->>>>>>> 8777c620db4a8f523558f8854f3b33f6d259e58a
+
 
 }
