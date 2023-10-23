@@ -65,7 +65,8 @@ const routes: Routes = [
   {
     path: 'program-form',
     loadChildren: () => import('./masjid-admin/components/program-form/program-form.module').then( m => m.ProgramFormPageModule)
-  },  {
+  },
+  {
     path: 'admin-form',
     loadChildren: () => import('./masjid-admin/components/admin-form/admin-form.module').then( m => m.AdminFormPageModule)
   },

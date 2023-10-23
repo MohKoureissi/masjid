@@ -1,0 +1,59 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title><div id="about-song">
+      <h2 class="song-name">{{radio?.name}}</h2>
+      <h4 class="artist-name"></h4></div></ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="container">
+    <div id="music-player">
+      <div id="lyrics">
+        <h2 class="song-name"></h2><h4 class="artist-name"></h4>
+        <div id="lyrics-content">
+
+          <ion-card>
+            <ion-card-content class="player-card" [style.background-image]="'url(../../assets/illustrations/radio.jpg)'" >
+            </ion-card-content>
+          </ion-card>
+          <!--<ng-container *ngFor="let verset of getJsonFile(); index as i">
+            <h2 [ngClass]="{ 'current': activeElement === 'element'+(i+1), 'uncurrent': activeElement !== 'element'+(i+1) }">{{verset.text}}</h2>
+          </ng-container>-->
+
+        </div>
+      </div>
+      <audio #audiofile (ended)="lafin($event)" [src]="radio?.frequencyUrl" preload="true">
+
+      </audio>
+      <div id="player">
+        <h3 style="text-align: center">{{radio?.frequency}}</h3>
+        <div id="bar" class="">
+          <div id="currentTime">{{formatTime(currentTime)}}</div>
+          <div id="progress-bar">
+            <div id="progress" [style.width]="((currentTime/duration)*100)+'%'"><i id="progressButton" class="fa fa-circle"></i></div>
+          </div>
+          <div id="totalTime">00:00</div>
+        </div>
+        <div id="menu">
+          <!--<button (click)="previousAya()" id="prev"><i class="fa fa-step-backward"></i></button>-->
+          <button (click)="play()" id="play"><i class="fa fa-{{isPlaying ? 'pause' : 'play'}}"></i></button>
+          <!--<button (click)="nextAya()" id="next"><i class="fa fa-step-forward"></i></button>-->
+        </div>
+      </div>
+      <div id="playlist">
+        <div id="label">
+          <h1>Playlist</h1>
+          <input id="search" type="text" placeholder="&#xF002; Search from all songs">
+        </div>
+        <div id="show-box">
+          <div id="show-list">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</ion-content>

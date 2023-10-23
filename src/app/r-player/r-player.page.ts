@@ -1,49 +1,37 @@
-import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
-
+import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {RadioModel} from "../model/radio.model";
+import {RadioService} from "../../data/radio/radio.service";
 import {ActivatedRoute} from "@angular/router";
+
 import {HttpClient} from "@angular/common/http";
 import {PreacheModel} from "../model/preache.model";
 import {PreachService} from "../../data/preach/preach.service";
 
-
 @Component({
-  selector: 'app-p-player',
-  templateUrl: './p-player.page.html',
-  styleUrls: ['./p-player.page.scss'],
+  selector: 'app-r-player',
+  templateUrl: './r-player.page.html',
+  styleUrls: ['./r-player.page.scss'],
 })
-export class PPlayerPage implements OnInit {
+export class RPlayerPage implements OnInit {
+  radio!: RadioModel|null;
+  id: string|null=null;
 
-  precheurId!: string;
-  preachId!: string;
-  preach!: PreacheModel|null;
-  isPlay: boolean = false;
-  iconPlay: string = "play-outline";
-  currentTimeNumber: number = 0;
-  currentTimeText: string = "00:00";
-  //duration!: number;
-  durationText: string = "00:00";
-  audioInterval: any;
-
-  constructor(private route: ActivatedRoute, private preachService: PreachService, private http: HttpClient) {
-
-  }
+  constructor(private radioService: RadioService, private route: ActivatedRoute) { }
 
   async ngOnInit() {
-    this.route.queryParams.subscribe(params => {
-      this.precheurId = params['precheurId'];
-      this.preachId = params['preachId'];
+    await this.route.queryParams.subscribe(params => {
+      this.id = params['idRadio'];
     });
 
-    await this.preachService.getPreache(this.precheurId, this.preachId).then(
-      preach => {
-        this.preach = preach
-        console.log("==>1="+this.preach?.preacheUrl)
-      }
-    );
-    if (this.preach == null){
-      console.log("Erreur: Recitation introuvable");
+    await this.radioService.getRadio(this.id!).then(radio => this.radio = radio);
+    if(this.radio == null){
+      console.log("La radio récherché n'existe pas")
     }
   }
+
+
+
+
 
 
 
@@ -267,6 +255,5 @@ export class PPlayerPage implements OnInit {
 
     return `${formattedMinutes}:${formattedSeconds}`;
   }
-
 
 }

@@ -3,4 +3,5 @@ export interface RadioModel {
   name: string;
   frequency: number;
   city: string;
+  frequencyUrl: string;
 }
