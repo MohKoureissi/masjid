@@ -50,14 +50,15 @@ export class MosqueFormPage implements OnInit {
     const descDonationDefaultValue = this.navParams.get('descDonation');
     const locationDefaultValue = this.navParams.get('location');
     const quartierDefaultValue = this.navParams.get('quartier');
-    this.lat = this.navParams.get('lat');
-    this.lng = this.navParams.get('lng');
-    this.fajr = this.navParams.get('fajr');
-    this.dohr = this.navParams.get('dohr');
-    this.asr = this.navParams.get('asr');
-    this.maghreb = this.navParams.get('maghreb');
-    this.isha = this.navParams.get('isha');
-    this.djumha = this.navParams.get('djumha');
+    this.lat = (this.navParams.get('lat') != undefined)? this.navParams.get('lat'):0;
+    this.lng = (this.navParams.get('lng') != undefined)? this.navParams.get('lng'):0;
+    this.fajr = (this.navParams.get('fajr') != undefined)? this.navParams.get('fajr'):"05:30";
+    this.dohr = (this.navParams.get('dohr') != undefined)? this.navParams.get('dohr'):"13:30";
+    this.asr = (this.navParams.get('asr') != undefined)? this.navParams.get('asr'):"16:00";
+    this.maghreb = (this.navParams.get('maghreb') != undefined)? this.navParams.get('maghreb'):"19:00";
+    this.isha = (this.navParams.get('isha') != undefined)? this.navParams.get('isha'):"20:00";
+    this.djumha = (this.navParams.get('djumha') != undefined)? this.navParams.get('djumha'):"13:00";
+    console.log(this.fajr)
 
     this.mosqueForm = this.formBuilder.group({
       name: [nameDefaultValue, [Validators.required]],

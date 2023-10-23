@@ -18,7 +18,7 @@
                 <p>Infos & Horaires</p>
           </ion-card-content>
         </ion-card>
-        <ion-card routerLink="../list-programmes" [style.background-image]="'url(../../assets/illustrations/programme.webp)'">
+        <ion-card [routerLink]="['../list-programmes', mosque?.id]" [style.background-image]="'url(../../assets/illustrations/programme.webp)'">
           <ion-card-content class="radio-card">
                 <p>Programmes</p>
           </ion-card-content>

@@ -37,15 +37,66 @@ export class AdminProgramListPage implements OnInit {
     const programFormModal = this.modalCtrl.create({
       component: ProgramFormPage,
       backdropDismiss: false,
+      componentProps: {
+        mosqueId: this.mosque?.id
+      }
     });
     await programFormModal.then(m=> m.present());
   }
 
-  openModalWithUpdateMode(programme: Programme) {
+  async openModalWithUpdateMode(programme: Programme) {
+    const programFormModal = this.modalCtrl.create({
+      component: ProgramFormPage,
+      backdropDismiss: false,
+      componentProps: {
+        // Les valeurs par défaut du formulaire
+        id: programme.id,
+        title: programme.title,
+        organizer: programme.organizer,
+        daysTimes: programme.daysTimes, // Ex: Lundi à 14:00, Mardi à 19:00
+        description: programme.description,
+        mosqueId: programme.mosqueId
+      },
+    });
+    await programFormModal.then(m=> m.present());
 
   }
 
-  deleteProgramme(programId: string|null) {
+  async deleteProgram(mosqueId: string | null, programmeId: string | null) {
+    if (mosqueId !== null && programmeId !== null) {
+      const alert = await this.alertController.create({
+        header: 'Confirmation',
+        message: 'Voulez-vous vraiment supprimer cet programme ?',
+        buttons: [
+          {
+            text: 'Annuler',
+            role: 'cancel',
+            handler: () => {
+              console.log('Suppression annulée');
+            },
+          },
+          {
+            text: 'Supprimer',
+            handler: async () => {
+              try {
+                await this.programmeService.deleteProgram(mosqueId, programmeId);
 
+                console.log(`Le programme avec l'ID ${programmeId} a été supprimée avec succès`);
+
+
+                // Refresh the page to see the updated mosques.
+                window.location.reload();
+              } catch (error) {
+                console.error(`Erreur lors de la suppression du programme : ${error}`);
+              }
+            },
+          },
+        ],
+      });
+
+      await alert.present();
+    } else {
+      console.warn("ID de la mosquée est null.");
+    }
   }
 }
