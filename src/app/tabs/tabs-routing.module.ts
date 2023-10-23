@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
 import { ProfiladminPageModule } from '../profiluser/profiladmin.module';
+import * as path from "path";
 
 const routes: Routes = [
   {
@@ -102,7 +103,16 @@ const routes: Routes = [
 
           },{
             path: 'radio',
-            loadChildren: () => import('../radio/radio.module').then( m => m.RadioPageModule)
+            children:[
+              {
+                path: '',
+                loadChildren: () => import('../radio/radio.module').then( m => m.RadioPageModule)
+              },
+              {
+                path: 'r-player',
+                loadChildren: () => import('../r-player/r-player.module').then( m => m.RPlayerPageModule)
+              },
+            ]
           },
           {
             path: 'annonces',

@@ -11,7 +11,7 @@
    <h1>Radios</h1>
   </div>
       <div class="container">
-        <ion-card *ngFor="let radio of radios">
+        <ion-card *ngFor="let radio of radios" routerLink="r-player" [queryParams]="{idRadio: radio.id}">
           <ion-card-content class="radio-card">
             <div class="thumb">
               <ion-thumbnail>

@@ -1,14 +1,17 @@
 import { Injectable } from '@angular/core';
 import {RadioModel} from "../../app/model/radio.model";
-import {getFirestore, collection, doc, setDoc, getDocs, getDoc, deleteDoc} from "firebase/firestore";
+import {doc, Firestore, updateDoc, getDoc, deleteDoc} from '@angular/fire/firestore';
+import {addDoc, collection, getFirestore, getDocs, setDoc} from 'firebase/firestore';
 import {Observable, of} from "rxjs";
+import {RecitationModel} from "../../app/model/recitation.model";
 
 @Injectable({
   providedIn: 'root'
 })
 export class RadioService {
 
-  constructor() { }
+  COLLECTION_NAME  = "radios"
+  constructor(private firestore: Firestore) { }
 
   createRadio(radio: RadioModel) {
     const db = getFirestore();
@@ -41,16 +44,15 @@ export class RadioService {
     }
   }
 
-  async getRadio(radioId: string): Promise<Observable<RadioModel|null>>{
-    const db = getFirestore();
+  async getRadio(radioId: string) {
+    console.log(radioId)
     try {
-      const radioDocRef = doc(db, 'radios', radioId);
-      const radioDocSnap = await getDoc(radioDocRef);
-      const radio = radioDocSnap.data() as RadioModel;
-      return of(radio);
-    }catch (error){
-      console.log(error);
-      return of(null);
+      const radioDocRef = doc(this.firestore, `${this.COLLECTION_NAME}`, radioId);
+      const radioSnap = await getDoc(radioDocRef);
+      return radioSnap.data() as RadioModel;
+    }catch (erreor) {
+      console.log(erreor);
+      return null;
     }
   }
 
