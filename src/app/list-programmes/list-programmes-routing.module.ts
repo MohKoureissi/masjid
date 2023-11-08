@@ -5,7 +5,7 @@ import { ListProgrammesPage } from './list-programmes.page';
 
 const routes: Routes = [
   {
-    path: '',
+    path: ':id',
     component: ListProgrammesPage
   }
 ];
