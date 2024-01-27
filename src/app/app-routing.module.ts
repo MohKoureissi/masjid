@@ -33,10 +33,10 @@ const routes: Routes = [
     path: 'admin-page',
     loadChildren: () => import('./masjid-admin/admin-page/admin-page.module').then( m => m.AdminPagePageModule)
   },
-  {
-    path: 'admin-program',
-    loadChildren: () => import('./masjid-admin/admin-program/admin-program.module').then( m => m.AdminProgramPageModule)
-  },
+  // {
+  //   path: 'admin-program',
+  //   loadChildren: () => import('./masjid-admin/admin-program/admin-program.module').then( m => m.AdminProgramPageModule)
+  // },
   {
     path: 'list-mosquee',
     loadChildren: () => import('./masjid-admin/list-mosquee/list-mosquee.module').then( m => m.ListMosqueePageModule)
